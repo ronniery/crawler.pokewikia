@@ -1,32 +1,47 @@
 {
   "name": "crawler.pokewikia",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www"
   },
   "main": "app.js",
   "author": "Ronniery Borges Correa",
   "license": "ISC",
   "description": "Crawler to get all available information to a given pokemon name",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.2",
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
-    "express": "~4.16.0",
-    "hbs": "~4.0.1",
-    "http-errors": "~1.6.2",
-    "less-middleware": "~2.2.1",
-    "morgan": "~1.9.0",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.2"
+    "cheerio": "^1.0.0-rc.3",
+    "cookie-parser": "~1.4.5",
+    "debug": "~4.1.1",
+    "express": "~4.17.1",
+    "hbs": "~4.1.0",
+    "http-errors": "~1.7.3",
+    "iconv-lite": "^0.5.1",
+    "image-size": "^0.8.3",
+    "less-middleware": "~3.1.0",
+    "lodash": "^4.17.15",
+    "module-alias": "^2.2.2",
+    "morgan": "~1.10.0",
+    "nodemon": "^2.0.2",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5"
   },
   "devDependencies": {
     "@types/iconv-lite": "0.0.1",
-    "@types/image-size": "0.0.29",
-    "@types/lodash.first": "^3.0.4",
-    "iconv-lite": "^0.4.24",
-    "image-size": "^0.6.3",
-    "lodash.first": "^3.0.0"
-  }
+    "@types/image-size": "0.8.0",
+    "@types/lodash.first": "^3.0.6"
+  },
+  "_moduleAliases": {
+    "@interfaces": "interfaces/",
+    "@models": "models/",
+    "@utils": "utils/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ronniery/crawler.pokewikia.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ronniery/crawler.pokewikia/issues"
+  },
+  "homepage": "https://github.com/ronniery/crawler.pokewikia#readme"
 }

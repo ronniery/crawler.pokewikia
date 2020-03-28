@@ -1,6 +1,4 @@
-const _ = {
-    first: require('lodash.first')
-};
+const _ =  require('lodash.first')
 
 module.exports = ($) => {
     const pokeBox = $(".PokéBox");

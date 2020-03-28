@@ -3,9 +3,7 @@ const request = require('request-promise'),
     iconv = require('iconv-lite'),
     builder = require('./selectors'),
     sizeOf = require('image-size'),
-    _ = {
-        first: require('lodash.first')
-    };
+    _ = require('lodash');
 
 class Wikia {
 
