@@ -19,23 +19,9 @@ class Wikia {
     }
   }
 
-  async getPage(name) {
-    const { urls: { details } } = this;
+  async get
 
-    return request(details(name), {
-      method: 'GET',
-      headers: {
-        'User-Agen': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'
-      },
-      transform: html => {
-        return cheerio.load(
-          iconv.decode(Buffer.from(html), "utf-8")
-        );
-      }
-    });
-  }
-
-  async getPokemonInfo(name) {
+  async getAllPokemonInfo(name) {
     const $ = await this.getPage(name),
       selectors = builder($);
 
@@ -69,6 +55,22 @@ class Wikia {
     }
 
     return pokemon;
+  }
+
+  async getPage(name) {
+    const { urls: { details } } = this;
+
+    return request(details(name), {
+      method: 'GET',
+      headers: {
+        'User-Agen': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'
+      },
+      transform: html => {
+        return cheerio.load(
+          iconv.decode(Buffer.from(html), "utf-8")
+        );
+      }
+    });
   }
 
   async getSpriteMeta(nIndex) {

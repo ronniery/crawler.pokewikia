@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class Searcher extends React.Component {
+class Searcher extends Component {
 
   constructor() {
     super();
