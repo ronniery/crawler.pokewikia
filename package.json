@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "build": "webpack --mode production"
   },
   "main": "app.js",
   "author": "Ronniery Borges Correa",
@@ -23,13 +24,21 @@
     "module-alias": "^2.2.2",
     "morgan": "~1.10.0",
     "nodemon": "^2.0.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "request": "^2.88.2",
-    "request-promise": "^4.2.5"
+    "request-promise": "^4.2.5",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
   },
   "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
     "@types/iconv-lite": "0.0.1",
     "@types/image-size": "0.8.0",
-    "@types/lodash.first": "^3.0.6"
+    "@types/lodash.first": "^3.0.6",
+    "babel-loader": "^8.1.0"
   },
   "_moduleAliases": {
     "@interfaces": "interfaces/",
