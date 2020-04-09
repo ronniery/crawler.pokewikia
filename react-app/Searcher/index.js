@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import RecentItems from '../RecentItems'
 
 class Searcher extends Component {
 
@@ -55,12 +56,8 @@ class Searcher extends Component {
         isFetching: true
       })
 
-      fetch('/details', {
-        method: 'POST',
-        body: JSON.stringify({ name: value }),
-        headers: {
-          "Content-Type": "application/json; charset=utf-8"
-        }
+      fetch(`/pokemon/allinfos?name=${value}`, {
+        method: 'GET'
       }).then(resp => resp.json())
         .then(json => {
           this.setState({

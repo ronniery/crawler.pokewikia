@@ -1,3 +1,5 @@
+import React from 'react'
+
 const Header = () => (
   <div className="col-12 header">
     <h3>

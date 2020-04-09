@@ -1,6 +1,7 @@
-import React, { Component } from '../RecentItems'
+import React, { Component } from 'react'
 
 class RecentItems extends Component {
+  
   constructor() {
     super();
 

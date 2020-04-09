@@ -24,7 +24,7 @@ class Container extends Component {
   }
 
   componentWillMount() {
-    fetch('https://api.myjson.com/bins/g3x9g')
+    fetch('http://localhost:3002/pokemon/cards')
       .then(evo => evo.json())
       .then(json => {
         this.setState({

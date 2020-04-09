@@ -3,13 +3,17 @@ const request = require('request-promise'),
   iconv = require('iconv-lite'),
   builder = require('./selectors'),
   sizeOf = require('image-size'),
+  redis = require('memory-cache'),
   _ = require('lodash');
+
+const maxCacheTime = 60 * 60000 // 60 minutes
 
 class Wikia {
 
   constructor() {
     this.urls = {
       base: 'http://pokemon.wikia.com/wiki',
+      pokedex: 'https://pokemondb.net/pokedex/national',
       details: name => `${this.urls.base}/${name}`,
       sprite: nIndex => `https://sprites.pokecheck.org/i/${nIndex}.gif`,
       audio: {
@@ -19,10 +23,39 @@ class Wikia {
     }
   }
 
-  async get
+  async getAllCards() {
+    let cards = redis.get('cards')
+
+    if (!_.isEmpty(cards)) return cards
+
+    const $ = await this.getPage(this.urls.pokedex)
+
+    cards = $('.infocard')
+      .toArray()
+      .map(el => {
+        const $el = $(el)
+        const a = $el.find('small:last-child a')
+
+        return {
+          code: this.getText($el.find('small:first-child')),
+          name: this.getText($el.find('.ent-name')),
+          types: a.toArray().map(link => this.getText($(link)))
+        }
+      })
+
+    redis.put('cards', cards, maxCacheTime)
+
+    return cards
+  }
 
   async getAllPokemonInfo(name) {
-    const $ = await this.getPage(name),
+    let allPokemons = redis.get('pokemon') || []
+    let pokemon = allPokemons.find(poke => poke.name === name)
+
+    if (!_.isEmpty(pokemon)) return pokemon
+
+    const { urls: { details } } = this;
+    const $ = await this.getPage(details(name)),
       selectors = builder($);
 
     const {
@@ -31,20 +64,20 @@ class Wikia {
       nIndex
     } = selectors;
 
-    let pokemon = {
-      name: $(first).find("b").eq(0).text(),
+    pokemon = {
+      name: this.getText($(first).find("b").eq(0)),
       img: $(first).find("tr").eq(2).find("img").attr('data-src'),
       japanese: selectors.jp,
       nIndex: nIndex,
-      abilities: second.eq(3).find("td > a").map((idx, el) => $(el).text()).toArray(),
-      category: second.eq(2).find("td").text().trim(),
+      abilities: second.eq(3).find("td > a").map((_idx, el) => this.getText($(el))).toArray(),
+      category: this.getText(second.eq(2).find("td")),
       types: this.getTypes(second, $),
-      evolvesFrom: second.eq(10).find("td").text().trim(),
-      evolvesInto: second.eq(11).find("td").text().trim(),
+      evolvesFrom: this.getText(second.eq(10).find("td")),
+      evolvesInto: this.getText(second.eq(11).find("td")),
       genderRatio: selectors.genders,
       weight: selectors.weight,
       heigth: selectors.heigth,
-      dexColor: third.eq(5).find("td").eq(0).text().trim(),
+      dexColor: this.getText(third.eq(5).find("td").eq(0)),
       eggGroups: this.getEggGroup(third, $),
       shape: third.eq(7).find("td").eq(0).find('img').attr('data-src'),
       footprint: third.eq(7).find("td").eq(1).find("img").attr('data-src'),
@@ -54,13 +87,14 @@ class Wikia {
       sprite: await this.getSpriteMeta(nIndex)
     }
 
+    allPokemons.push(pokemon)
+    redis.put('pokemons', allPokemons, maxCacheTime)
+
     return pokemon;
   }
 
-  async getPage(name) {
-    const { urls: { details } } = this;
-
-    return request(details(name), {
+  async getPage(url) {
+    return request(url, {
       method: 'GET',
       headers: {
         'User-Agen': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'
@@ -90,32 +124,38 @@ class Wikia {
   }
 
   getStats($) {
-    return $("#mw-content-text > table").eq(4).find("tbody").map((idx, tbody) => {
-      let $tbody = $(tbody);
+    return $("#mw-content-text > table")
+      .eq(4)
+      .find("tbody")
+      .map((_idx, tbody) => {
+        let $tbody = $(tbody);
 
-      return {
-        hp: +$tbody.find("td").eq(1).text(),
-        attack: +$tbody.find("td").eq(3).text(),
-        defense: +$tbody.find("td").eq(5).text(),
-        spAtt: +$tbody.find("td").eq(7).text(),
-        spDef: +$tbody.find("td").eq(9).text(),
-        speed: +$tbody.find("td").eq(11).text(),
-        total: +$tbody.find("td").eq(13).text(),
-      }
-    }).toArray()
+        return {
+          hp: +this.getText($tbody.find("td").eq(1)),
+          attack: +this.getText($tbody.find("td").eq(3)),
+          defense: +this.getText($tbody.find("td").eq(5)),
+          spAtt: +this.getText($tbody.find("td").eq(7)),
+          spDef: +this.getText($tbody.find("td").eq(9)),
+          speed: +this.getText($tbody.find("td").eq(11)),
+          total: +this.getText($tbody.find("td").eq(13)),
+        }
+      }).toArray()
   }
 
   getLocations($) {
-    return $("#mw-content-text > table").eq(1).find("tr[style]").map((idx, tr) => {
-      let $tr = $(tr);
-      let $td = $tr.find("td")
+    return $("#mw-content-text > table")
+      .eq(1)
+      .find("tr[style]")
+      .map((_idx, tr) => {
+        let $tr = $(tr);
+        let $td = $tr.find("td")
 
-      return {
-        versions: $td.eq(0).find("span").map((idx, span) => $(span).text()).toArray(),
-        areas: $td.eq(1).text().trim(),
-        rarity: $td.eq(2).text().trim()
-      }
-    }).toArray()
+        return {
+          versions: $td.eq(0).find("span").map((_idx, span) => this.getText($(span))).toArray(),
+          areas: this.getText($td.eq(1)),
+          rarity: this.getText($td.eq(2))
+        }
+      }).toArray()
   }
 
   getCryUrl(nindex) {
@@ -136,9 +176,9 @@ class Wikia {
     const { urls } = this;
 
     return $tr.eq(5).find("td").eq(1)
-      .find('a').map((idx, el) => {
+      .find('a').map((_idx, el) => {
         return {
-          description: $(el).text(),
+          description: this.getText($(el)),
           link: `${urls.base}${$(el).attr('href')}`
         }
       }).toArray()
@@ -148,6 +188,10 @@ class Wikia {
     return $tr.eq(1).find("a").map((idx, el) =>
       _.first($(el).attr('title').split(" "))
     ).toArray()
+  }
+
+  getText($el) {
+    return $el.text().trim()
   }
 }
 
