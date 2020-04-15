@@ -8,7 +8,7 @@
       "type": "node",
       "request": "launch",
       "name": "Run Program",
-      "program": "${workspaceFolder}\\bin\\www",
+      "program": "${workspaceFolder}\\crawler\\pokemondb\\index.js",
       "outFiles": [
         "${workspaceFolder}/**/*.js"
       ]
