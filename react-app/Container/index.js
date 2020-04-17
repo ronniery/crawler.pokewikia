@@ -43,7 +43,7 @@ class Container extends Component {
 
   render() {
     const { suggestions, handlers } = this.state;
-    const isShown = suggestions.length != 0;
+    const isShown = suggestions.length !== 0;
 
     return (
       <div className="row">

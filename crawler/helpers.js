@@ -1,43 +1,43 @@
-const _ = require('lodash')
+const _ = require('lodash');
 
 class Helpers {
   static searchTableOnDocument(...args) {
-    const allElements = Helpers._getElementsAheadTextMatch(...args)
-    const foundTable = []
-    const $ = _.first(args)()
+    const allElements = Helpers._getElementsAheadTextMatch(...args);
+    const foundTable = [];
+    const $ = _.first(args)();
 
-    let workTable = {}
+    let workTable = {};
     for (const el of allElements) {
-      const withoutHead = _.isEmpty(workTable)
+      const withoutHead = _.isEmpty(workTable);
 
       if (el.tagName === 'h3' && withoutHead) {
-        workTable.title = $(el).text2()
+        workTable.title = $(el).text2();
       } else if (el.tagName === 'table') {
-        workTable.table = $(el)
-        foundTable.push(workTable)
-        workTable = {}
+        workTable.table = $(el);
+        foundTable.push(workTable);
+        workTable = {};
       } else if (el.tagName === 'h2') {
         break;
       }
     }
 
-    return foundTable
+    return foundTable;
   }
 
   static getPropertyWithMeta(cheerio, el) {
-    const $ = cheerio()
-    const $el = $(el)
-    const $small = $el.find('small')
+    const $ = cheerio();
+    const $el = $(el);
+    const $small = $el.find('small');
     const data = {
       text: $el.find('small').remove()
         .end().text2()
-    }
+    };
 
     if (_.some($small)) {
-      data.meta = $small.text2()
+      data.meta = $small.text2();
     }
 
-    return data
+    return data;
   }
 
   static loadPlugins($) {
@@ -45,43 +45,43 @@ class Helpers {
       return this
         .text()
         .trim()
-        .replace(/\n+/g, '')
-    }
+        .replace(/\n+/g, '');
+    };
 
     $.prototype.findArray = function (selector) {
-      return this.find(selector).toArray()
-    }
+      return this.find(selector).toArray();
+    };
 
     String.prototype.toCheerio = function() {
-      return $(this)
-    }
+      return $(this);
+    };
 
-    return $
+    return $;
   }
 
   static _getElementsAheadTextMatch(cheerio, { name, anchor }) {
-    const $ = cheerio()
+    const $ = cheerio();
     const getElements = selector => {
       let els = $(selector)
-        .toArray()
+        .toArray();
 
       if (_.some(anchor)) {
         els = $($(anchor).attr('href'))
-          .findArray(selector)
+          .findArray(selector);
       }
 
-      return els
-    }
+      return els;
+    };
 
-    const childrens = getElements('*')
+    const childrens = getElements('*');
     const h2Position = $(childrens).toArray()
       .findIndex(child => {
         return child.tagName === 'h2' &&
-          $(child).text2() === name
-      })
+          $(child).text2() === name;
+      });
 
-    return childrens.slice(h2Position + 1, childrens.length)
+    return childrens.slice(h2Position + 1, childrens.length);
   }
 }
 
-module.exports = Helpers
+module.exports = Helpers;
