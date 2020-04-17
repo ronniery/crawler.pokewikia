@@ -1,5 +1,6 @@
 const request = require('request-promise')
 const cheerio = require('cheerio')
+
 const Helpers = require('../helpers')
 
 class Sprites {

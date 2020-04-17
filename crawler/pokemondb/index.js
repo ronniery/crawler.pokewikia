@@ -105,44 +105,10 @@ const Defenses = require('./defenses')
 // }
 
 // /* OK */
-// var getEvoChart = () => {
-//   return $('.infocard-list-evo').toArray().map(listEvo => {
 
-//     return _.chunk($(listEvo).find('> *'), 2).map(([card, evo]) => {
-//       const $data = $(card).find('.infocard-lg-data')
-//       const condition = getText($(evo).find('small'))
-
-//       return {
-//         img: $(card).find('img').attr('src'),
-//         globalId: getText($data.find('small:first')),
-//         name: getText($data.find('a.ent-name')),
-//         types: $data.find('small:last a').map((idx, a) => getText($(a))).toArray(),
-//         evolveCondition: _.isEmpty(condition) ? null : condition.replace(/[\(|\)]/g, '').split(/\W\s/)
-//       }
-//     })
-//   })
-// }
 
 // /* OK */
-// var getPokedexEntries = () => {
-//   return getTable("Pokédex entries").map(({
-//     table,
-//     title
-//   }) => {
-//     const $table = $(table)
-//     const pokename = _.camelCase(_.isEmpty(title) ? $('main > h1').text() : title)
-//     return $table.find('tr').toArray().reduce((prev, tr) => {
-//       const $tr = $(tr)
-//       prev[pokename][_.camelCase(getText($tr.find('th')))] = {
-//         text: getText($tr.find('td')),
-//         originalTitle: _.compact($tr.find('th').html().split(/<[^>]*>/g))
-//       }
-//       return prev
-//     }, {
-//       [pokename]: {}
-//     })
-//   })
-// }
+
 
 // /* OK */
 // var getFooterTable = tableTitle => {
@@ -270,29 +236,29 @@ class PokemonDB {
     const { urls: { details } } = this
     const cheerio = await this._getParsedHtml(details(pokename))
     const $ = cheerio()
-    const anchor = $(`${this.tabSelector} > a.active`)
-    const pokedex = Pokedex.getPokedex(cheerio, anchor)
+    const notActiveTab = $(`${this.tabSelector} > a`).not('.active')
+    const pokedex = Pokedex.getPokedex(cheerio, $(`${this.tabSelector} > a.active`))
 
     const pokemon = Object.assign({
-      derivations: $(`${this.tabSelector} > a:not(.active)`).toArray().map(el => this._getDerivations(cheerio, el)),
+      derivations: notActiveTab.toArray().map(el => this._getDerivations(cheerio, el)),
       pokeCry: `https://pokemoncries.com/cries-old/${pokedex.nationalId}.mp3`
     }, {
       dexdata: pokedex
     }, {
       breeding: this._getBreeding(cheerio)
     }, {
-      baseStats: this._getBaseStats(cheerio, anchor)
+      baseStats: this._getBaseStats(cheerio, notActiveTab)
+    }, {
+      training: this._getTraining(cheerio)
+    }, {
+      //TODO : Bug daqui para baixo
+      evochart: this._getEvoChart(cheerio)
+    }, {
+      dexentries: this._getPokedexEntries(cheerio)
     })
 
     return pokemon
-    // }, {
-    //   training: getTraining()
-    // }, {
-    //   basestats: getBaseStats(anchor)
-    // }, {
-    //   evochart: getEvoChart()
-    // }, {
-    //   dexentries: getPokedexEntries()
+
     // }, {
     //   whereFind: getFooterTable(`Where to find ${$('main > h1').text()}`)
     // }, {
@@ -357,17 +323,85 @@ class PokemonDB {
     return $table
       .findArray('tr')
       .reduce((reducer, tr) => {
-        const getByIndex = idx => $(tr).find('th').eq(idx).text2()
+        const getByIndex = idx => $(tr).children().eq(idx).text2()
         const property = getByIndex(0)
 
         reducer[_.camelCase(property)] = {
-          base: +getByIndex(0),
-          max: +getByIndex(2),
-          min: +getByIndex(3)
+          base: +getByIndex(1),
+          max: +getByIndex(3),
+          min: +getByIndex(4)
         }
 
         return reducer
       }, {})
+  }
+
+  _getTraining(cheerio) {
+    const $ = cheerio()
+    const [{ table }] = Helpers.searchTableOnDocument(cheerio, { name: "Training" })
+    const $table = $(table)
+    const tds = $table.find('td')
+
+    return {
+      evYield: Helpers.getPropertyWithMeta(cheerio, tds.eq('0')),
+      catchRate: Helpers.getPropertyWithMeta(cheerio, tds.eq('1')),
+      baseFriendship: Helpers.getPropertyWithMeta(cheerio, tds.eq('2')),
+      baseExp: Helpers.getPropertyWithMeta(cheerio, tds.eq('3')),
+      growthRate: Helpers.getPropertyWithMeta(cheerio, tds.eq('4')),
+    }
+  }
+
+  _getEvoChart(cheerio) {
+    const $ = cheerio()
+
+    return $('.infocard-list-evo')
+      .toArray()
+      .map(listEvo => {
+        const chunks = _.chunk($(listEvo).find('> *'), 2)
+
+        return chunks.map(([card, evo]) => {
+          const $data = $(card).find('.infocard-lg-data')
+          const condition = $(evo).find('small').text2()
+
+          return {
+            img: $(card).find('img').attr('src'),
+            globalId: $data.find('small').first().text2(),
+            name: $data.find('a.ent-name').text2(),
+            types: $data.find('small').last().findArray('a').map((_idx, a) => $(a).text2()),
+            evolveCondition: _.isEmpty(condition) ? null : condition.replace(/[\(|\)]/g, '').split(/\W\s/)
+          }
+        })
+      })
+  }
+
+  _getPokedexEntries(cheerio) {
+    const tables = Helpers.searchTableOnDocument(cheerio, { name: "Pokédex entries" })
+    const $ = cheerio()
+
+    return tables
+      .map(({ table, title }) => {
+        const $table = $(table)
+        const rawName = _.isEmpty(title) ? $('main > h1').text2() : title
+        const pokename = _.camelCase(rawName)
+
+        return $table
+          .findArray('tr')
+          .reduce((prev, tr) => {
+            const $tr = $(tr)
+            const $th = $tr.find('th')
+            const property = _.camelCase($th.text2())
+            const originalTitleParts = $th.html().split(/<[^>]*>/g)
+
+            prev[pokename][property] = {
+              text: $tr.find('td').text2(),
+              originalTitle: _.compact(originalTitleParts)
+            }
+
+            return prev
+          }, {
+            [pokename]: {}
+          })
+      })
   }
 }
 

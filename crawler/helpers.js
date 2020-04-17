@@ -1,25 +1,22 @@
 const _ = require('lodash')
 
 class Helpers {
-  static searchTableOnDocument(cheerio, { name, anchor = null }) {
-    const allElements = Helpers._getElementsAheadTextMatch(cheerio, {
-      name, anchor
-    })
+  static searchTableOnDocument(...args) {
+    const allElements = Helpers._getElementsAheadTextMatch(...args)
     const foundTable = []
-    const $ = cheerio()
+    const $ = _.first(args)()
 
     let workTable = {}
     for (const el of allElements) {
       const withoutHead = _.isEmpty(workTable)
-      const $el = $(el)
 
-      if ($el.is('h3') && withoutHead) {
+      if (el.tagName === 'h3' && withoutHead) {
         workTable.title = $(el).text2()
-      } else if ($el.is('table')) {
-        workTable.table = $el
+      } else if (el.tagName === 'table') {
+        workTable.table = $(el)
         foundTable.push(workTable)
         workTable = {}
-      } else if ($el.is('h2')) {
+      } else if (el.tagName === 'h2') {
         break;
       }
     }
@@ -60,15 +57,20 @@ class Helpers {
 
   static _getElementsAheadTextMatch(cheerio, { name, anchor }) {
     const $ = cheerio()
-    const getElements = (target, selector) => {
-      return _.some(target.cheerio) ?
-        target.findArray(selector) :
-        target(selector).toArray()
+    const getElements = selector => {
+      let els = $(selector)
+        .toArray()
+
+      if (_.some(anchor)) {
+        els = $($(anchor).attr('href'))
+          .findArray(selector)
+      }
+
+      return els
     }
 
-    const $anchor = _.some(anchor) ? $($(anchor).attr('href')) : $
-    const childrens = getElements($anchor, '*')
-    const h2Position = getElements($anchor, 'h2')
+    const childrens = getElements('*')
+    const h2Position = $(childrens).toArray()
       .findIndex(h2 => $(h2).text2() === name)
 
     return childrens.slice(h2Position + 1, childrens.length)

@@ -1,41 +1,74 @@
-var getTable = name => {
-    const allTables = $('table')
+var x = document.createElement('script')
+x.src = "https://code.jquery.com/jquery-3.5.0.min.js"
+document.head.appendChild(x)
+var x = document.createElement('script')
+x.src = "https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"
+document.head.appendChild(x)
 
-    const table = {
-        "Pokédex data": allTables[0],
-        "Training": allTables[1],
-        "Breeding": allTables[2],
-        "Base stats": allTables[3],
-        "Type defenses": [allTables[4], allTables[5]],
-        "Pokédex entries": allTables[6],
-        "Where to find": allTables[7],
-        "Other languages": allTables[8]
-    } [name]
+var getTable = (name, anchor = null) => {
+    const $anchor = _.some(anchor) ? $($(anchor).attr('href')) : $(document)
+    const allEls = $anchor.find('*').toArray()
+    const currentH2 = $anchor.find('h2').toArray().find(h2 => $(h2).text().trim() === name)
+    const position = allEls.indexOf(currentH2)
+    const tables = []
+    let currentTable = {}
 
-    return $(table)
+    for (const el of allEls.slice(position + 1, allEls.length)) {
+        const withoutHead = _.isEmpty(currentTable)
+        const $el = $(el)
+
+        if ($el.is('h3') && withoutHead) {
+            currentTable.title = $(el).text()
+        } else if ($el.is('table')) {
+            currentTable.table = $el
+            tables.push(currentTable)
+            currentTable = {}
+        } else if ($el.is('h2')) {
+            break;
+        }
+    }
+
+    return tables
 }
 
 /* TODO */
-var getPokedex = () => {
-    const $table = getTable("Pokédex data")
-    const trs = $table.find('tr')
+var getPokedex = anchor => {
+    const [{
+        table
+    }] = getTable("Pokédex data", anchor)
+    const $table = $(table)
+    return $table.find('tr').toArray().reduce((prev, tr) => {
+        const $tr = $(tr)
+        const value = getText($tr.find('td'))
+        const property = _.camelCase(getText($tr.find('th')))
 
-    return {
-        globalId: getText(trs.eq(0).find('strong')),
-        types: trs.eq(1).find('a').toArray().map(a => getText($(a))),
-        species: getText(trs.eq(1).find('td')),
-        height: getText(trs.eq(2).find('td')),
-        width: getText(trs.eq(3).find('td')),
-        abilities: trs.eq(4).find('a').toArray().map(a => ({
-            name: getText($(a)),
-        }))
-    }
 
+        if (property === 'local№') {
+            const parts = value.split(/(\d{3})\s(\(.*?\))/g)
+            const chunks = _.chunk(_.compact(parts), 2)
+
+            prev['localizations'] = chunks.map(([route, game]) => ({
+                route,
+                game
+            }))
+        } else if (property === 'abilities') {
+            prev['abilities'] = $tr.find('a').toArray().map(el => $(el).text())
+        } else {
+            prev[property.replace('№', 'Id')] = value
+        }
+
+        return prev
+    }, {
+        name: $(anchor).text()
+    })
 }
 
 /* OK */
 var getBreeding = () => {
-    const $table = getTable("Breeding")
+    const [{
+        table
+    }] = getTable("Breeding")
+    const $table = $(table)
     const tds = $table.find('td')
 
     return {
@@ -43,12 +76,14 @@ var getBreeding = () => {
         gender: getPropertyWithMeta(tds.eq('1')),
         eggCycles: getPropertyWithMeta(tds.eq('2'))
     }
-
 }
 
 /* OK */
 var getTraining = () => {
-    const $table = getTable("Training")
+    const [{
+        table
+    }] = getTable("Training")
+    const $table = $(table)
     const tds = $table.find('td')
 
     return {
@@ -61,8 +96,11 @@ var getTraining = () => {
 }
 
 /* OK */
-var getBaseStats = () => {
-    const $table = getTable("Base stats")
+var getBaseStats = anchor => {
+    const [{
+        table
+    }] = getTable("Base stats", anchor)
+    const $table = $(table)
 
     return $table.find('tr').toArray().reduce((prev, tr) => {
         const $tr = $(tr)
@@ -79,45 +117,63 @@ var getBaseStats = () => {
 
 /* OK */
 var getEvoChart = () => {
-    const chunks = _.chunk($('.infocard-list-evo .infocard'), 2)
+    return $('.infocard-list-evo').toArray().map(listEvo => {
 
-    return chunks.map(([card, evo]) => {
-        const $data = $(card).find('.infocard-lg-data')
+        return _.chunk($(listEvo).find('> *'), 2).map(([card, evo]) => {
+            const $data = $(card).find('.infocard-lg-data')
+            const condition = getText($(evo).find('small'))
 
-        return {
-            img: $(card).find('img').attr('src'),
-            globalId: getText($data.find('small:first')),
-            name: getText($data.find('a.ent-name')),
-            types: $data.find('small:last a').map((idx, a) => getText($(a))).toArray(),
-            evolveCondition: getText($(evo).find('small'))
-        }
+            return {
+                img: $(card).find('img').attr('src'),
+                globalId: getText($data.find('small:first')),
+                name: getText($data.find('a.ent-name')),
+                types: $data.find('small:last a').map((idx, a) => getText($(a))).toArray(),
+                evolveCondition: _.isEmpty(condition) ? null : condition.replace(/[\(|\)]/g, '').split(/\W\s/)
+            }
+        })
     })
 }
 
 /* OK */
 var getPokedexEntries = () => {
-    const $table = getTable("Pokédex entries")
-
-    return $table.find('tr').toArray().reduce((prev, tr) => {
-        const $tr = $(tr)
-        prev[_.camelCase(getText($tr.find('th')))] = getText($tr.find('td'))
-        return prev
-    }, {})
+    return getTable("Pokédex entries").map(({
+        table,
+        title
+    }) => {
+        const $table = $(table)
+        const pokename = _.camelCase(_.isEmpty(title) ? $('main > h1').text() : title)
+        return $table.find('tr').toArray().reduce((prev, tr) => {
+            const $tr = $(tr)
+            prev[pokename][_.camelCase(getText($tr.find('th')))] = { 
+                text: getText($tr.find('td')),
+                originalTitle: _.compact($tr.find('th').html().split(/<[^>]*>/g))
+            }
+            return prev
+        }, {
+            [pokename]: {}
+        })
+    })
 }
 
 /* OK */
-var getFooterTable = (tableTitle) => {
-    const childrens = $('main').find('*')
-    const headTableIndex = childrens.toArray().findIndex(el => {
-        const regex = new RegExp(tableTitle)
-        const text = $(el).text().trim()
-        return _.some(text.match(regex))
-    })
-    const container = childrens[headTableIndex + 1]
+var getFooterTable = tableTitle => {
+    const [{
+        table
+    }] = getTable(tableTitle)
 
-    return $(container).find('table tr').toArray().reduce((prev, tr) => {
+    return $(table).find('tr').toArray().reduce((prev, tr) => {
         const $tr = $(tr)
-        prev[_.camelCase(getText($tr.find('th')))] = getText($tr.find('td'))
+
+        prev[_.camelCase(getText($tr.find('th')))] = {
+            text: getText($tr.find('td')),
+            links: $tr.find('td a').toArray().map(a => {
+                return {
+                    link: `https://pokemondb.net${$(a).attr('href')}`,
+                    text: $(a).text()
+                }
+            })
+        }
+
         return prev
     }, {})
 }
@@ -131,17 +187,36 @@ var getNameOrigin = () => {
 }
 
 /* OK */
-var getTypeDefenses = () => {
-    return $('.type-table-pokedex').toArray().reduce((prev, table) => {
-        const links = $(table).find('tr:first a').toArray()
-        const tds = $(table).find('tr:last td')
+var getTypeDefenses = anchor => {
+    const $anchor = $($(anchor).attr('href'))
+    const typecol = $anchor.find('.tabset-typedefcol')
+    const hasTypeCol = _.some(typecol)
+    let tables = [
+        [null, ..._.chunk($anchor.find('.type-table-pokedex'), 2)]
+    ]
+
+    if (hasTypeCol) {
+        tables = typecol.find('a.tabs-tab').toArray().map(a => {
+            return [_.camelCase($(a).text().replace(' ability', '')), $($(a).attr('href')).find('table').toArray()]
+        })
+    }
+
+
+    return tables.map(([ability, [desc, effect]]) => {
+        const data = {}
+
+        const links = $(desc).find('tr:first a').toArray()
+        const tds = $(effect).find('tr:last td')
 
         links.forEach((a, idx) => {
-            prev[_.camelCase($(a).attr('title'))] = $(tds[idx]).attr('title').split(/\s[→|=]\s/g)
+            data[_.camelCase($(a).attr('title'))] = $(tds[idx]).attr('title').split(/\s[→|=]\s/g)
         })
 
-        return prev
-    }, {})
+        data['ability'] = ability
+
+        return data
+
+    })
 }
 
 /* OK */
@@ -150,14 +225,17 @@ var getMoves = () => {
     const moviments = {}
 
     tabs.forEach(tab => {
-        const $where = $($(tab).attr('href'))
-        const all = $where.find('*').toArray()
-        const childrens = $where.find('h3').toArray()
+        const $where = $($(tab).attr('href')).clone()
+    $where.find('p').remove()
 
-        const tabmoves = childrens.map(el => {
+        const h3s = $where.find('h3').toArray()
+
+        const tabmoves = h3s.map(el => {
+debugger;const $el = $(el)
+
             return {
-                title: $(el).text(),
-                table: all[all.indexOf(el) + 4]
+                title: $el.text(),
+                table: $el.next().find('table')
             }
         }).reduce((prev, {
             title,
@@ -187,6 +265,79 @@ var getMoves = () => {
     return moviments
 }
 
+/* OK */
+var getDerivations = anchor => {
+    return Object.assign({
+        baseStats: getBaseStats(anchor),
+        dexdata: getPokedex(anchor),
+        defenses: getTypeDefenses(anchor)
+    }, getPokeImg(anchor))
+}
+
+var getPokeImg = anchor => {
+    return {
+        pokeImg: $($(anchor).attr('href')).find('a[rel="lightbox"] img').attr('src')
+    }
+}
+
+var getSprites = async () => {
+    const spriteUrl = `https://pokemondb.net/sprites/${$('main > h1').text().toLowerCase()}`
+    const html = await $.ajax({
+        url: spriteUrl,
+        method: 'GET'
+    })
+
+    const $html = $(html)
+    $html.find('p').remove()
+
+    const h2s = $html.find('h2')
+
+    return $(h2s).toArray().map(h2 => {
+        const table = $(h2).find('+ div > table')
+        const rawHeads = $(table).find('thead th').toArray()
+        const heads = rawHeads.slice(1, rawHeads.length)
+        const trs = $(table).find('tbody tr').toArray()
+
+        return {
+            section: $(h2).text(),
+            table: heads.map((head, idx) => {
+                const data = {
+                    name: $(head).text(),
+                    rows: trs.map(tr => {
+                        const tds = $(tr).find('td').toArray()
+                        const $td = $($(tds).eq(idx + 1))
+                        const spans = $td.find('> span').toArray()
+                        const as = $td.find('> a').toArray()
+
+                        const data = {
+                            captions: _.compact($(_.first(tds)).html().replace(/\n+/g, '').split(/<[^>]*>/g)),
+                            images: []
+                        }
+
+                        if (_.some(spans)) {
+                            data.images = spans.map(span => ({
+                                text: $(span).text(),
+                                image: $(span).find('img').attr('src')
+                            }))
+                        } else if (_.some(as)) {
+                            data.images = as.map(a => ({
+                                image: $(a).find('img').attr('src')
+                            }))
+                        } else {
+                            data.images = {
+                                text: '-'
+                            }
+                        }
+                        return data;
+                    })
+                }
+
+                return data;
+            })
+        }
+    })
+}
+
 var getPropertyWithMeta = el => {
     const $el = $(el)
     const $small = $el.find('small')
@@ -208,12 +359,12 @@ var getText = el => {
         .replace(/\n+/g, '')
 }
 
-var getPokemon = () => {
-    const pokedex = getPokedex()
+var getPokemon = async (anchor = $("#dex-basics + .tabset-basics > .tabs-tab-list > a.active")) => {
+    const pokedex = getPokedex(anchor)
 
     return Object.assign({
-        pokeImg: $('a[rel="lightbox"] img').attr('src'),
-        pokeCry: `https://pokemoncries.com/cries-old/${pokedex.globalId}.mp3`
+        derivations: $("#dex-basics + .tabset-basics > .tabs-tab-list > a:not(.active)").toArray().map(el => getDerivations(el)),
+        pokeCry: `https://pokemoncries.com/cries-old/${pokedex.nationalId}.mp3`
     }, {
         dexdata: pokedex
     }, {
@@ -221,18 +372,20 @@ var getPokemon = () => {
     }, {
         training: getTraining()
     }, {
-        basestats: getBaseStats()
+        basestats: getBaseStats(anchor)
     }, {
         evochart: getEvoChart()
     }, {
         dexentries: getPokedexEntries()
     }, {
-        whereFind: getFooterTable("Where to find Solosis")
+        whereFind: getFooterTable(`Where to find ${$('main > h1').text()}`)
     }, {
         otherLangs: getFooterTable("Other languages")
     }, {
         nameOrigin: getNameOrigin()
     }, {
-        defenses: getTypeDefenses()
+        defenses: getTypeDefenses(anchor)
+    }, {
+        sprites: await getSprites()
     })
 }

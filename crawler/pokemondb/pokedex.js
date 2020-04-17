@@ -20,6 +20,7 @@ class Pokedex {
     const value = $tr.find('td').text2()
     const property = _.camelCase($tr.find('th').text2())
 
+    // TODO: SPLIT THAT INTO METHODS
     if (property === 'local№') {
       const parts = value.split(/(\d{3})\s(\(.*?\))/g)
       const chunks = _.chunk(_.compact(parts), 2)
