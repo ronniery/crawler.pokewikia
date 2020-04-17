@@ -56,9 +56,10 @@ class PokemonDB {
     }, {
       defenses: Defenses.getDefenses(cheerio, allTabs)
     }, {
-      sprites: await Sprites.getSpritesFor(pokename)
+      sprites: await Sprites.getSpritesFor(pokename) // Refactored
     });
 
+    require('fs').writeFileSync('./poke.json', JSON.stringify(pokemon, null, 2))
     return pokemon;
   }
 

@@ -3,18 +3,19 @@ const cheerio = require('cheerio');
 const _ = require('lodash');
 
 const Helpers = require('../helpers');
-
+const getImgSrc = ($, el) => $(el).find('span').attr('data-src');
 class Sprites {
 
   static async getSpritesFor(pokename) {
-    const spriteUrl = Sprites._fullUrl(pokename);
-    const cheerio = await Sprites._getParsedHtml(spriteUrl);
+    const cheerio = await Sprites._getParsedHtml(pokename);
     return Sprites._extractAllSprites(cheerio);
   }
 
-  static async _getParsedHtml(url) {
+  static async _getParsedHtml(pokename) {
+    const url = Sprites._fullUrl(pokename);
+
     return request({
-      url: url,
+      url,
       method: 'GET',
       transform: html => {
         const $ = Helpers
@@ -36,13 +37,14 @@ class Sprites {
     return $('h2')
       .toArray()
       .map(h2 => {
-        const table = $(h2).next().find('table');
+        const $h2 = $(h2);
+        const table = $h2.next().find('table');
         const allHeads = $(table).findArray('thead th');
         const usableHeads = allHeads.slice(1, allHeads.length);
         const allTrs = $(table).findArray('tbody tr');
 
         return {
-          section: $(h2).text2(),
+          section: $h2.text2(),
           table: Sprites._parseAllSpriteTables(cheerio, usableHeads, allTrs)
         };
       });
@@ -57,15 +59,13 @@ class Sprites {
           name: $(head).text(),
           rows: allTs.map(tr => {
             const allTds = $(tr).findArray('td');
+            const $selectedTd = $($(allTds).eq(idx + 1));
+            const htmlContent = $(_.first(allTds)).html();
+            const captionParts = htmlContent.replace(/\n+/g, '')
+              .split(/<[^>]*>/g);
 
-            // TODO: Check if need $(allTds)
-            const $td = $($(allTds).eq(idx + 1));
-            // TODO: Refactor
-            return Sprites._parseTableRow(
-              cheerio,
-              allTds,
-              $td.findArray('> span'),
-              $td.findArray('> a')
+            return Sprites._getSpritesInTableRow(
+              cheerio, $selectedTd, captionParts
             );
           })
         };
@@ -74,39 +74,55 @@ class Sprites {
       });
   }
 
-  static _parseTableRow(cheerio, allTds, childSpans, childLinks) {
+  static _getSpritesInTableRow(cheerio, row, rowCaptionParts) {
     const $ = cheerio();
-    const htmlContent = $(_.first(allTds)).html();
-    const getImgSrc = el => $(el).find('img').attr('src');
-    const captionParts = htmlContent.replace(/\n+/g, '')
-      .split(/<[^>]*>/g);
+    const $row = $(row);
+    const labeledSprites = $row.findArray('> span');
+    const unlabeledSprites = $row.findArray('> a');
 
     const data = {
-      captions: _.compact(captionParts),
-      images: []
+      captions: _.compact(rowCaptionParts),
+      images: [{
+        description: '-',
+        image: null
+      }]
     };
 
-    // TODO: split into methods
-    if (_.some(childSpans)) {
-      data.images = childSpans.map(span =>
-        ({
-          text: $(span).text(),
-          image: getImgSrc(span)
-        })
-      );
-    } else if (_.some(childLinks)) {
-      data.images = childLinks.map(a =>
-        ({
-          image: getImgSrc(a)
-        })
-      );
-    } else {
-      data.images = {
-        text: '-'
-      };
-    }
+    Sprites._getLabeledSprites(cheerio, data, labeledSprites);
+    Sprites._getUnlabeledSprites(cheerio, data, unlabeledSprites);
 
     return data;
+  }
+
+
+  static _getLabeledSprites(cheerio, data, labeledSpriteList) {
+    const $ = cheerio();
+
+    if (_.isEmpty(labeledSpriteList)) return;
+
+    data.images = labeledSpriteList
+      .map(span => {
+        const desc = $(span).text();
+
+        return {
+          description: _.some(desc) ? desc : null,
+          image: getImgSrc($, span)
+        };
+      });
+  }
+
+  static _getUnlabeledSprites(cheerio, data, unlabeledSpriteList) {
+    const $ = cheerio();
+
+    if (_.isEmpty(unlabeledSpriteList)) return;
+
+    data.images = unlabeledSpriteList
+      .map(a => {
+        return {
+          description: null,
+          image: getImgSrc($, a)
+        };
+      });
   }
 }
 
