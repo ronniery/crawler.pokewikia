@@ -6,26 +6,17 @@ const Helpers = require('../helpers');
 const Pokedex = require('./pokedex');
 const Defenses = require('./defenses');
 const Sprites = require('./sprites');
+const Moves = require('./moves');
 
 class PokemonDB {
 
   constructor() {
-    this.urls = {
-      base: 'https://pokemondb.net/pokedex',
-      pokedex: 'https://pokemondb.net/pokedex/national',
-      details: name => `${this.urls.base}/${name}`,
-      sprite: nIndex => `https://sprites.pokecheck.org/i/${nIndex}.gif`,
-      audio: {
-        old: nindex => `https://pokemoncries.com/cries-old/${nindex}.mp3`,
-        newGen: nindex => `https://pokemoncries.com/cries/${nindex}.mp3`
-      }
-    };
-
+    this.details = name => `https://pokemondb.net/pokedex/${name}`;
     this.tabSelector = '#dex-basics + .tabset-basics > .tabs-tab-list';
   }
 
   async getPokemon(pokename) {
-    const { urls: { details } } = this;
+    const { details } = this;
     const detailsUrl = details(pokename);
     const cheerio = await this._getParsedHtml(detailsUrl);
     const $ = cheerio();
@@ -56,12 +47,18 @@ class PokemonDB {
     }, {
       defenses: Defenses.getDefenses(cheerio, allTabs)
     }, {
-      sprites: await Sprites.getSpritesFor(pokename) // Refactored
+      sprites: await Sprites.getSpritesFor(pokename)
+    }, {
+      moves: Moves.getMoves(cheerio)
+    }, {
+      cries: this._getPokeCry(pokedex.nationalId)
     });
 
     require('fs').writeFileSync('./poke.json', JSON.stringify(pokemon, null, 2))
     return pokemon;
   }
+
+  //#region Private methods  
 
   async _getParsedHtml(url) {
     return await request({
@@ -248,6 +245,21 @@ class PokemonDB {
         return reducer;
       }, {});
   }
+
+  _getPokeCry(nationalId) {
+    const nindex = +nationalId;
+    const cries = {
+      newGen: `https://pokemoncries.com/cries/${nindex}.mp3`
+    };
+
+    if (nindex <= 649) {
+      cries.old = `https://pokemoncries.com/cries-old/${nindex}.mp3`;
+    }
+
+    return cries;
+  }
+
+  //#region 
 }
 
 (async () => {

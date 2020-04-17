@@ -2,14 +2,15 @@ const _ = require('lodash');
 
 class Moves {
 
-  // TODO: check if crawer use that module
-  static getMoves($) {
+  // TODO: The module is broken and need refactor
+  static getMoves(cheerio) {
+    const $ = cheerio();
     const moviments = {};
     const allTabs = $('.tabset-moves-game .tabs-tab-list a')
       .toArray();
 
     allTabs.forEach(tab => {
-      const tabmoves = Moves._getTabMoves(tab);
+      const tabmoves = Moves._getTabMoves(cheerio, tab);
       const tabtext = $(tab).text();
       moviments[_.camelCase(tabtext)] = tabmoves;
     });
@@ -17,7 +18,8 @@ class Moves {
     return moviments;
   }
 
-  static _getTabMoves(tab) {
+  static _getTabMoves(cheerio, tab) {
+    const $ = cheerio();
     const $where = $($(tab).attr('href'));
     $where.find('p').remove();
 
@@ -31,11 +33,12 @@ class Moves {
           table: $el.next().find('table')
         };
       }).reduce((reducer, { title, table }) => {
-        return Moves._tableToMoves(reducer, title, table);
+        return Moves._tableToMoves(cheerio, reducer, title, table);
       }, {});
   }
 
-  static _tableToMoves(reducer, title, table) {
+  static _tableToMoves(cheerio, reducer, title, table) {
+    const $ = cheerio();
     const allMoves = $(table)
       .findArray('tbody tr')
       .map(tr => {
