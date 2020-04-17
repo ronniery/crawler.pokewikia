@@ -45,6 +45,8 @@
     "@types/image-size": "0.8.0",
     "@types/lodash.first": "^3.0.6",
     "babel-loader": "^8.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-google": "^0.14.0",
     "snyk": "^1.305.0"
   },
   "repository": {

@@ -1,71 +1,81 @@
 const request = require('request-promise')
 const cheerio = require('cheerio')
+const _ = require('lodash')
 
 const Helpers = require('../helpers')
 
 class Sprites {
-  
-  static getSpritesFor(pokename) {
-    const spriteUrl = Sprites.#fullUrl(pokename)
-    const $ = await Sprites.#getParsedHtml(spriteUrl)
-    return Sprites.#parse($)
+
+  static async getSpritesFor(pokename) {
+    const spriteUrl = Sprites._fullUrl(pokename)
+    const cheerio = await Sprites._getParsedHtml(spriteUrl)
+    return Sprites._extractAllSprites(cheerio)
   }
 
-  static async #getParsedHtml(url) {
+  static async _getParsedHtml(url) {
     return request({
       url: url,
       method: 'GET',
       transform: html => {
-        return Helpers.loadCheerioPlugins(cheerio.load(html))
+        const $ = Helpers
+          .loadPlugins(cheerio.load(html))
+
+        return () => $
       }
     })
   }
 
-  static #fullUrl(pokename) {
+  static _fullUrl(pokename) {
     return `https://pokemondb.net/sprites/${pokename.toLowerCase()}`
   }
 
-  static #parse($) {
+  static _extractAllSprites(cheerio) {
+    const $ = cheerio()
     $('p').remove()
 
     return $('h2')
       .toArray()
       .map(h2 => {
-        const table = $(h2).find('+ div > table')
+        const table = $(h2).next().find('table')
         const allHeads = $(table).findArray('thead th')
         const usableHeads = allHeads.slice(1, allHeads.length)
         const allTrs = $(table).findArray('tbody tr')
 
         return {
           section: $(h2).text2(),
-          table: Sprites.#parseAllSpriteTables(usableHeads, allTrs)
+          table: Sprites._parseAllSpriteTables(cheerio, usableHeads, allTrs)
         }
       })
   }
 
-  static #parseAllSpriteTables(usableHeads, allTs) {
-    return usableHeads.map((head, idx) => {
-      const data = {
-        name: $(head).text(),
-        rows: allTs.map(tr => {
-          const allTds = $(tr).findArray('td')
+  static _parseAllSpriteTables(cheerio, usableHeads, allTs) {
+    const $ = cheerio()
 
-          // Check if need $(allTds)
-          const $td = $($(allTds).eq(idx + 1))
+    return usableHeads
+      .map((head, idx) => {
+        const data = {
+          name: $(head).text(),
+          rows: allTs.map(tr => {
+            const allTds = $(tr).findArray('td')
 
-          return Sprites.#parseTableRow(
-            allTds,
-            $td.findArray('> span'),
-            $td.findArray('> a')
-          )
-        })
-      }
+            // TODO: Check if need $(allTds)
+            const $td = $($(allTds).eq(idx + 1))
+            // TODO: Refactor
+            return Sprites._parseTableRow(
+              cheerio,
+              allTds,
+              $td.findArray('> span'),
+              $td.findArray('> a')
+            )
+          })
+        }
 
-      return data
-    })
+        return data
+      })
   }
 
-  static #parseTableRow(allTds, childSpans, childAs) {
+  static _parseTableRow(cheerio, allTds, childSpans, childLinks) {
+    const $ = cheerio()
     const htmlContent = $(_.first(allTds)).html()
     const getImgSrc = el => $(el).find('img').attr('src')
     const captionParts = htmlContent.replace(/\n+/g, '')
@@ -76,6 +86,7 @@ class Sprites {
       images: []
     }
 
+    // TODO: split into methods
     if (_.some(childSpans)) {
       data.images = childSpans.map(span =>
         ({
@@ -83,8 +94,8 @@ class Sprites {
           image: getImgSrc(span)
         })
       )
-    } else if (_.some(childAs)) {
-      data.images = childAs.map(a =>
+    } else if (_.some(childLinks)) {
+      data.images = childLinks.map(a =>
         ({
           image: getImgSrc(a)
         })

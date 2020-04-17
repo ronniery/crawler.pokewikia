@@ -1,17 +1,21 @@
 {
   // Use IntelliSense to learn about possible attributes.
-  // Passe o mouse para ver as descrições dos atributos existentes.
-  // Para obter mais informações, visite: https://go.microsoft.com/fwlink/?linkid=830387
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
       "type": "node",
       "request": "launch",
-      "name": "Run Program",
-      "program": "${workspaceFolder}\\crawler\\pokemondb\\index.js",
+      "name": "Launch Program",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
       "outFiles": [
         "${workspaceFolder}/**/*.js"
-      ]
+      ],
+      "program": "${workspaceFolder}/crawler/pokemondb/index.js"
+      //"program": "${workspaceFolder}\\crawler\\pokemondb\\index.js",
     }
   ]
 }

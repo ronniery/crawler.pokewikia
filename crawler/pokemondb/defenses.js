@@ -2,8 +2,9 @@ const _ = require('lodash')
 
 class Defenses {
   static getDefenses(cheerio, anchor) {
+    // TODO: refactor
     const $ = cheerio()
-    const $anchor = $($(anchor).attr('href'))
+    const $anchor = $(anchor).attr('href').toCheerio()
     const $typecol = $anchor.find('.tabset-typedefcol')
     let tables = [
       [null, ..._.chunk($anchor.find('.type-table-pokedex'), 2)]
@@ -25,6 +26,7 @@ class Defenses {
   static _tableToDefenses(cheerio, tables) {
     const $ = cheerio()
 
+    //TODO: refactor
     return tables
       .map(([ability, [desc, effect]]) => {
         const defense = {}

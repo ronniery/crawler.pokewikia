@@ -40,7 +40,7 @@ class Helpers {
     return data
   }
 
-  static loadCheerioPlugins($) {
+  static loadPlugins($) {
     $.prototype.text2 = function () {
       return this
         .text()
@@ -50,6 +50,10 @@ class Helpers {
 
     $.prototype.findArray = function (selector) {
       return this.find(selector).toArray()
+    }
+
+    String.prototype.toCheerio = function() {
+      return $(this)
     }
 
     return $
@@ -71,7 +75,10 @@ class Helpers {
 
     const childrens = getElements('*')
     const h2Position = $(childrens).toArray()
-      .findIndex(h2 => $(h2).text2() === name)
+      .findIndex(child => {
+        return child.tagName === 'h2' &&
+          $(child).text2() === name
+      })
 
     return childrens.slice(h2Position + 1, childrens.length)
   }

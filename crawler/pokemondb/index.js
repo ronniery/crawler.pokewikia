@@ -5,6 +5,7 @@ const _ = require('lodash')
 const Helpers = require('../helpers')
 const Pokedex = require('./pokedex')
 const Defenses = require('./defenses')
+const Sprites = require('./sprites')
 
 // var getTable = (name, anchor = null) => {
 //   const $anchor = _.some(anchor) ? $($(anchor).attr('href')) : $(document)
@@ -111,35 +112,10 @@ const Defenses = require('./defenses')
 
 
 // /* OK */
-// var getFooterTable = tableTitle => {
-//   const [{
-//     table
-//   }] = getTable(tableTitle)
 
-//   return $(table).find('tr').toArray().reduce((prev, tr) => {
-//     const $tr = $(tr)
-
-//     prev[_.camelCase(getText($tr.find('th')))] = {
-//       text: getText($tr.find('td')),
-//       links: $tr.find('td a').toArray().map(a => {
-//         return {
-//           link: `https://pokemondb.net${$(a).attr('href')}`,
-//           text: $(a).text()
-//         }
-//       })
-//     }
-
-//     return prev
-//   }, {})
-// }
 
 // /* OK */
-// var getNameOrigin = () => {
-//   return _.chunk($('.etymology *'), 2).reduce((prev, [dt, dd]) => {
-//     prev[_.camelCase($(dt).text())] = $(dd).text()
-//     return prev
-//   }, {})
-// }
+// var 
 
 // /* OK */
 
@@ -213,8 +189,6 @@ const Defenses = require('./defenses')
 //   })
 // }
 
-const BASE_URL = path => `https://pokemondb.net/pokedex/${path}`
-
 class PokemonDB {
 
   constructor() {
@@ -236,38 +210,41 @@ class PokemonDB {
     const { urls: { details } } = this
     const cheerio = await this._getParsedHtml(details(pokename))
     const $ = cheerio()
-    const notActiveTab = $(`${this.tabSelector} > a`).not('.active')
+    const allTabs = $(`${this.tabSelector} > a`).not('.active')
     const pokedex = Pokedex.getPokedex(cheerio, $(`${this.tabSelector} > a.active`))
 
     const pokemon = Object.assign({
-      derivations: notActiveTab.toArray().map(el => this._getDerivations(cheerio, el)),
+      derivations: allTabs.toArray().map(tab => this._getDerivations(cheerio, tab)),
       pokeCry: `https://pokemoncries.com/cries-old/${pokedex.nationalId}.mp3`
     }, {
       dexdata: pokedex
     }, {
       breeding: this._getBreeding(cheerio)
     }, {
-      baseStats: this._getBaseStats(cheerio, notActiveTab)
+      baseStats: this._getBaseStats(cheerio, allTabs)
     }, {
       training: this._getTraining(cheerio)
     }, {
-      //TODO : Bug daqui para baixo
       evochart: this._getEvoChart(cheerio)
     }, {
       dexentries: this._getPokedexEntries(cheerio)
+    }, {
+      whereFind: this._getFooterTable(cheerio, `Where to find ${$('main > h1').text()}`)
+    }, {
+      otherLangs: this._getFooterTable(cheerio, 'Other languages')
+    }, {
+      nameOrigin: this._getNameOrigin(cheerio)
+    }, {
+      defenses: Defenses.getDefenses(cheerio, allTabs)
+    }, {
+      sprites: await Sprites.getSpritesFor(pokename)
     })
 
     return pokemon
 
-    // }, {
-    //   whereFind: getFooterTable(`Where to find ${$('main > h1').text()}`)
-    // }, {
-    //   otherLangs: getFooterTable("Other languages")
-    // }, {
-    //   nameOrigin: getNameOrigin()
-    // }, {
-    //   defenses: getTypeDefenses(anchor)
-    // }, {
+
+
+    //   , {
     //   sprites: await getSprites()
     // })
   }
@@ -278,7 +255,7 @@ class PokemonDB {
       method: 'GET',
       transform: html => {
         const $ = Helpers
-          .loadCheerioPlugins(cheerio.load(html))
+          .loadPlugins(cheerio.load(html))
 
         return () => $
       }
@@ -286,8 +263,11 @@ class PokemonDB {
   }
 
   _getBreeding(cheerio) {
+    const [{ table }] = Helpers.searchTableOnDocument(cheerio, {
+      name: "Breeding"
+    })
+
     const $ = cheerio()
-    const [{ table }] = Helpers.searchTableOnDocument(cheerio, { name: "Breeding" })
     const $table = $(table)
     const tds = $table.find('td')
 
@@ -316,8 +296,12 @@ class PokemonDB {
   }
 
   _getBaseStats(cheerio, anchor) {
+    const [{ table }] = Helpers.searchTableOnDocument(cheerio, {
+      name: "Base stats",
+      anchor
+    })
+
     const $ = cheerio()
-    const [{ table }] = Helpers.searchTableOnDocument(cheerio, { name: "Base stats", anchor })
     const $table = $(table)
 
     return $table
@@ -337,8 +321,11 @@ class PokemonDB {
   }
 
   _getTraining(cheerio) {
+    const [{ table }] = Helpers.searchTableOnDocument(cheerio, {
+      name: "Training"
+    })
+
     const $ = cheerio()
-    const [{ table }] = Helpers.searchTableOnDocument(cheerio, { name: "Training" })
     const $table = $(table)
     const tds = $table.find('td')
 
@@ -359,18 +346,20 @@ class PokemonDB {
       .map(listEvo => {
         const chunks = _.chunk($(listEvo).find('> *'), 2)
 
-        return chunks.map(([card, evo]) => {
-          const $data = $(card).find('.infocard-lg-data')
-          const condition = $(evo).find('small').text2()
+        return chunks
+          .map(([card, evo]) => {
+            const $data = $(card).find('.infocard-lg-data')
+            const condition = $(evo).find('small').text2()
+            const rawTypes = $data.find('small').last().findArray('a')
 
-          return {
-            img: $(card).find('img').attr('src'),
-            globalId: $data.find('small').first().text2(),
-            name: $data.find('a.ent-name').text2(),
-            types: $data.find('small').last().findArray('a').map((_idx, a) => $(a).text2()),
-            evolveCondition: _.isEmpty(condition) ? null : condition.replace(/[\(|\)]/g, '').split(/\W\s/)
-          }
-        })
+            return {
+              img: $(card).find('.img-fixed').attr('data-src'),
+              globalId: $data.find('small').first().text2(),
+              name: $data.find('a.ent-name').text2(),
+              types: rawTypes.map(a => $(a).text2()),
+              evolveCondition: _.isEmpty(condition) ? null : condition.replace(/[\(|\)]/g, '').split(/\W\s/)
+            }
+          })
       })
   }
 
@@ -402,6 +391,46 @@ class PokemonDB {
             [pokename]: {}
           })
       })
+  }
+
+  _getFooterTable(cheerio, tableHeader) {
+    const [{ table }] = Helpers.searchTableOnDocument(cheerio, { name: tableHeader })
+    const $ = cheerio()
+
+    return $(table)
+      .findArray('tr')
+      .reduce((reducer, tr) => {
+        const $tr = $(tr)
+        const $th = $tr.find('th')
+        const property = _.camelCase($th.text2())
+
+        reducer[property] = {
+          text: $tr.find('td').text2(),
+          links: $tr.findArray('td a').map(a => {
+            const $a = $(a)
+
+            return {
+              link: `https://pokemondb.net${$a.attr('href')}`,
+              text: $a.text2()
+            }
+          })
+        }
+
+        return reducer
+      }, {})
+  }
+
+  _getNameOrigin(cheerio) {
+    const $ = cheerio()
+    const $etymo = $('.etymology *')
+    const chunks = _.chunk($etymo, 2)
+
+    return chunks
+      .reduce((reducer, [dt, dd]) => {
+        const property = _.camelCase($(dt).text2())
+        reducer[property] = $(dd).text2()
+        return reducer
+      }, {})
   }
 }
 
