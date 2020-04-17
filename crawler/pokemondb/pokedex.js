@@ -3,6 +3,7 @@ const _ = require('lodash');
 const Helpers = require('../helpers');
 
 class Pokedex {
+
   static getPokedex(cheerio, anchor) {
     const $ = cheerio();
     const [{ table }] = Helpers.searchTableOnDocument(cheerio, { name: 'Pokédex data', anchor });
@@ -11,32 +12,57 @@ class Pokedex {
     return $table
       .findArray('tr')
       .reduce((reducer, tr) => {
-        return this._trToPokedex($, reducer, tr);
-      }, { name: $(anchor).text() });
+        return Object.assign(
+          reducer,
+          Pokedex._rowToPokedexLine(() => ({ $, tr }))
+        );
+      }, {
+        name: $(anchor).text()
+      });
   }
 
-  static _trToPokedex($, reducer, tr) {
-    const $tr = $(tr);
-    const value = $tr.find('td').text2();
-    const property = _.camelCase($tr.find('th').text2());
+  static _rowToPokedexLine(domHandlers) {
+    const data = {};
+    const { $, tr } = domHandlers();
+    const getValueFrom = selector => $(tr)
+      .find(selector).text2();
+    const tdText = getValueFrom('td');
+    const thText = getValueFrom('th');
+    const property = _.camelCase(thText);
 
-    // TODO: SPLIT THAT INTO METHODS
     if (property === 'local№') {
-      const parts = value.split(/(\d{3})\s(\(.*?\))/g);
-      const chunks = _.chunk(_.compact(parts), 2);
-
-      reducer['localizations'] = chunks
-        .map(([route, game]) => ({
-          route, game
-        }));
+      Pokedex._getLocalizations(data, property, tdText);
     } else if (property === 'abilities') {
-      reducer['abilities'] = $tr.findArray('a')
-        .map(el => $(el).text2());
+      Pokedex._getAbilities(domHandlers, data, property);
     } else {
-      reducer[property.replace('№', 'Id')] = value;
+      data[property.replace('№', 'Id')] = tdText;
     }
 
-    return reducer;
+    return data;
+  }
+
+  static _getLocalizations(reducer, property, rawValue) {
+    if (property === 'local№') {
+      const parts = rawValue.split(/(\d{3})\s(\(.*?\))/g);
+      const compacted = _.compact(parts);
+      const chunks = _.chunk(compacted, 2);
+
+      reducer.localizations = chunks
+        .map(([route, game]) => {
+          return {
+            route, game
+          };
+        });
+    }
+  }
+
+  static _getAbilities(domHandlers, reducer, property) {
+    const { $, tr } = domHandlers();
+
+    if (property === 'abilities') {
+      reducer.abilities = $(tr).findArray('a')
+        .map(el => $(el).text2());
+    }
   }
 }
 

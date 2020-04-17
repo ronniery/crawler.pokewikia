@@ -80,7 +80,7 @@ class Sprites {
     const labeledSprites = $row.findArray('> span');
     const unlabeledSprites = $row.findArray('> a');
 
-    const data = {
+    const table = {
       captions: _.compact(rowCaptionParts),
       images: [{
         description: '-',
@@ -88,19 +88,19 @@ class Sprites {
       }]
     };
 
-    Sprites._getLabeledSprites(cheerio, data, labeledSprites);
-    Sprites._getUnlabeledSprites(cheerio, data, unlabeledSprites);
+    Sprites._getLabeledSprites(cheerio, table, labeledSprites);
+    Sprites._getUnlabeledSprites(cheerio, table, unlabeledSprites);
 
-    return data;
+    return table;
   }
 
 
-  static _getLabeledSprites(cheerio, data, labeledSpriteList) {
+  static _getLabeledSprites(cheerio, table, labeledSpriteList) {
     const $ = cheerio();
 
     if (_.isEmpty(labeledSpriteList)) return;
 
-    data.images = labeledSpriteList
+    table.images = labeledSpriteList
       .map(span => {
         const desc = $(span).text();
 
@@ -111,12 +111,12 @@ class Sprites {
       });
   }
 
-  static _getUnlabeledSprites(cheerio, data, unlabeledSpriteList) {
+  static _getUnlabeledSprites(cheerio, table, unlabeledSpriteList) {
     const $ = cheerio();
 
     if (_.isEmpty(unlabeledSpriteList)) return;
 
-    data.images = unlabeledSpriteList
+    table.images = unlabeledSpriteList
       .map(a => {
         return {
           description: null,
