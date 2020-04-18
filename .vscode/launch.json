@@ -15,7 +15,6 @@
         "${workspaceFolder}/**/*.js"
       ],
       "program": "${workspaceFolder}/bin/www"
-      //"program": "${workspaceFolder}\\crawler\\pokemondb\\index.js",
     }
   ]
 }

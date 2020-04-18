@@ -40,10 +40,12 @@ class PokemonDataBase {
       .map(el => {
         const $el = $(el);
         const a = $el.find('small:last-child a');
+        const name = $el.find('.ent-name').text2();
 
         return {
           code: $el.find('small:first-child').text2(),
-          name: $el.find('.ent-name').text2(),
+          sprite: `https://img.pokemondb.net/artwork/large/${name.toLowerCase()}.jpg`,
+          name,
           types: a.toArray().map(link => $(link).text2())
         };
       });
