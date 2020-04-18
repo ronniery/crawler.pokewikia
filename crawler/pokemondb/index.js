@@ -60,19 +60,18 @@ class PokemonDataBase {
     const $ = cheerio();
 
     const allTabs = $(`${this.tabSelector} > a`).not('.active');
-    const pokedex = Pokedex.getPokedex(cheerio, $(`${this.tabSelector} > a.active`));
+    const activeTab = $(`${this.tabSelector} > a.active`);
+    const pokedex = Pokedex.getPokedex(cheerio, activeTab);
 
     let pokemon = Object.assign({
-      derivations: allTabs
-        .toArray().map(tab =>
-          this._getDerivations(cheerio, tab)
-        ),
+      pokeImg: await this._getPokeImg(cheerio, activeTab),
+      derivations: await this._getDerivations(cheerio, allTabs),
     }, {
       dexdata: pokedex
     }, {
       breeding: this._getBreeding(cheerio)
     }, {
-      baseStats: this._getBaseStats(cheerio, allTabs)
+      baseStats: this._getBaseStats(cheerio, activeTab)
     }, {
       training: this._getTraining(cheerio)
     }, {
@@ -86,7 +85,7 @@ class PokemonDataBase {
     }, {
       nameOrigin: this._getNameOrigin(cheerio)
     }, {
-      defenses: Defenses.getDefenses(cheerio, allTabs)
+      defenses: Defenses.getDefenses(cheerio, activeTab)
     }, {
       sprites: await Sprites.getSpritesFor(pokename)
     }, {
@@ -128,22 +127,37 @@ class PokemonDataBase {
     };
   }
 
-  _getDerivations(cheerio, anchor) {
-    return Object.assign({
-      baseStats: this._getBaseStats(cheerio, anchor),
-      dexdata: Pokedex.getPokedex(cheerio, anchor),
-      defenses: Defenses.getDefenses(cheerio, anchor)
-    }, this._getPokeImg(cheerio, anchor));
+  async _getDerivations(cheerio, tabs) {
+    const derivations = [];
+
+    for(const tab of tabs.toArray()) {
+      const processed = {};
+
+      Object.assign(processed, {
+        baseStats: this._getBaseStats(cheerio, tab),
+        dexdata: Pokedex.getPokedex(cheerio, tab),
+        defenses: Defenses.getDefenses(cheerio, tab),
+        pokeImg: await this._getPokeImg(cheerio, tab)
+      });
+
+      derivations.push(processed);
+    }
+
+    return derivations;
   }
 
-  _getPokeImg(cheerio, anchor) {
+  async _getPokeImg(cheerio, anchor) {
     const $ = cheerio();
     const anchorHref = $(anchor).attr('href');
     const boxImg = $(anchorHref).find('a[rel="lightbox"] img');
+    const pokeImg = boxImg.attr('src');
 
-    return {
-      pokeImg: boxImg.attr('src')
-    };
+    Sprites.createSpriteFile(pokeImg, {
+      baseName: $('h1').text2(),
+      spriteName: $(anchor).text2().replace(' ', '-')
+    });
+
+    return pokeImg;
   }
 
   _getBaseStats(cheerio, anchor) {
