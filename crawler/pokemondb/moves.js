@@ -1,24 +1,23 @@
 const _ = require('lodash');
 
+const tabSelector = '.tabset-moves-game .tabs-tab-list a';
+
 class Moves {
 
-  // TODO: The module is broken and need refactor
   static getMoves(cheerio) {
     const $ = cheerio();
-    const moviments = {};
-    const allTabs = $('.tabset-moves-game .tabs-tab-list a')
-      .toArray();
 
-    allTabs.forEach(tab => {
-      const tabmoves = Moves._getTabMoves(cheerio, tab);
-      const tabtext = $(tab).text();
-      moviments[_.camelCase(tabtext)] = tabmoves;
-    });
+    return $(tabSelector)
+      .toArray()
+      .reducer((moves, tab) => {
+        const allMoves = Moves._getAllMovesFromTab(cheerio, tab);
+        const tabName = $(tab).text();
 
-    return moviments;
+        moves[_.camelCase(tabName)] = allMoves;
+      }, {});
   }
 
-  static _getTabMoves(cheerio, tab) {
+  static _getAllMovesFromTab(cheerio, tab) {
     const $ = cheerio();
     const $where = $($(tab).attr('href'));
     $where.find('p').remove();
@@ -29,36 +28,34 @@ class Moves {
         const $el = $(el);
 
         return {
-          title: $el.text(),
+          title: $el.text2(),
           table: $el.next().find('table')
         };
-      }).reduce((reducer, { title, table }) => {
-        return Moves._tableToMoves(cheerio, reducer, title, table);
+      }).reduce((tabmoves, { title, table }) => {
+        tabmoves[_.camelCase(title)] = Moves._tableToMoves(cheerio, table);
       }, {});
   }
 
-  static _tableToMoves(cheerio, reducer, title, table) {
+  static _tableToMoves(cheerio, table) {
     const $ = cheerio();
-    const allMoves = $(table)
+
+    return $(table)
       .findArray('tbody tr')
       .map(tr => {
         const tds = $(tr).find('td');
 
         return {
-          level: +tds.eq(0).text(),
-          move: tds.eq(1).text(),
-          type: tds.eq(2).text(),
+          level: +tds.eq(0).text2(),
+          move: tds.eq(1).text2(),
+          type: tds.eq(2).text2(),
           category: {
             img: tds.eq(3).find('img').attr('src'),
             title: tds.eq(3).find('img').attr('title')
           },
-          power: tds.eq(4).text(),
-          accuracy: tds.eq(5).text()
+          power: tds.eq(4).text2(),
+          accuracy: tds.eq(5).text2()
         };
       });
-
-    reducer[_.camelCase(title)] = allMoves;
-    return reducer;
   }
 }
 
