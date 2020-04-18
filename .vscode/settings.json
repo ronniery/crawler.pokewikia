@@ -10,6 +10,6 @@
     "package-lock.json": true,
     "README.md": true,
     "yarn.lock": true,
-    ".gitignore": true
+    ".gitignore": false
   }
 }
