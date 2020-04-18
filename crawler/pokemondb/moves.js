@@ -9,11 +9,12 @@ class Moves {
 
     return $(tabSelector)
       .toArray()
-      .reducer((moves, tab) => {
+      .reduce((moves, tab) => {
         const allMoves = Moves._getAllMovesFromTab(cheerio, tab);
         const tabName = $(tab).text();
 
         moves[_.camelCase(tabName)] = allMoves;
+        return moves;
       }, {});
   }
 
@@ -33,6 +34,7 @@ class Moves {
         };
       }).reduce((tabmoves, { title, table }) => {
         tabmoves[_.camelCase(title)] = Moves._tableToMoves(cheerio, table);
+        return tabmoves;
       }, {});
   }
 

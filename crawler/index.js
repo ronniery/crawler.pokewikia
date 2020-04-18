@@ -1,3 +1,2 @@
-const PokemonDB = require('./pokemondb');
-
-module.exports = new PokemonDB();
+const PokemonDataBase = require('./pokemondb');
+module.exports = new PokemonDataBase();

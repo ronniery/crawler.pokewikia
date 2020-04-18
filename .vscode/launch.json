@@ -14,7 +14,7 @@
       "outFiles": [
         "${workspaceFolder}/**/*.js"
       ],
-      "program": "${workspaceFolder}/crawler/pokemondb/index.js"
+      "program": "${workspaceFolder}/bin/www"
       //"program": "${workspaceFolder}\\crawler\\pokemondb\\index.js",
     }
   ]

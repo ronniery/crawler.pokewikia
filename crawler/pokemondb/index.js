@@ -1,5 +1,6 @@
 const request = require('request-promise');
 const cheerio = require('cheerio');
+const NodeCache = require('node-cache');
 const _ = require('lodash');
 
 const Helpers = require('../helpers');
@@ -8,24 +9,62 @@ const Defenses = require('./defenses');
 const Sprites = require('./sprites');
 const Moves = require('./moves');
 
-class PokemonDB {
+class PokemonDataBase {
 
   constructor() {
     this.details = name => `https://pokemondb.net/pokedex/${name}`;
     this.tabSelector = '#dex-basics + .tabset-basics > .tabs-tab-list';
+    this.cache = new NodeCache({
+      stdTTL: 60 * 60 * 0.5
+    });
   }
 
   async getPokemon(pokename) {
+    let pokemon = this.cache.get(pokename);
+
+    if (_.some(pokemon)) {
+      return pokemon;
+    }
+
+    return this._createPokemon(pokename);
+  }
+
+  async getAllCards() {
+    const cheerio = await this._getParsedHtml(
+      'https://pokemondb.net/pokedex/national'
+    );
+    const $ = cheerio();
+
+    return $('.infocard')
+      .toArray()
+      .map(el => {
+        const $el = $(el);
+        const a = $el.find('small:last-child a');
+
+        return {
+          code: $el.find('small:first-child').text2(),
+          name: $el.find('.ent-name').text2(),
+          types: a.toArray().map(link => $(link).text2())
+        };
+      });
+  }
+
+  //#region Private methods  
+
+  async _createPokemon(pokename) {
     const { details } = this;
     const detailsUrl = details(pokename);
     const cheerio = await this._getParsedHtml(detailsUrl);
     const $ = cheerio();
+
     const allTabs = $(`${this.tabSelector} > a`).not('.active');
     const pokedex = Pokedex.getPokedex(cheerio, $(`${this.tabSelector} > a.active`));
 
-    const pokemon = Object.assign({
-      derivations: allTabs.toArray().map(tab => this._getDerivations(cheerio, tab)),
-      pokeCry: `https://pokemoncries.com/cries-old/${pokedex.nationalId}.mp3`
+    let pokemon = Object.assign({
+      derivations: allTabs
+        .toArray().map(tab =>
+          this._getDerivations(cheerio, tab)
+        ),
     }, {
       dexdata: pokedex
     }, {
@@ -54,11 +93,9 @@ class PokemonDB {
       cries: this._getPokeCry(pokedex.nationalId)
     });
 
-    require('fs').writeFileSync('./poke.json', JSON.stringify(pokemon, null, 2))
+    this.cache.set(pokename, pokemon);
     return pokemon;
   }
-
-  //#region Private methods  
 
   async _getParsedHtml(url) {
     return await request({
@@ -262,9 +299,4 @@ class PokemonDB {
   //#region 
 }
 
-(async () => {
-  'use strict';
-
-  await new PokemonDB()
-    .getPokemon('Rattata');
-})();
+module.exports = PokemonDataBase;

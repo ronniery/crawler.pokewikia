@@ -1,23 +1,35 @@
 const express = require('express');
-const wikia = require('../crawler/wikia');
+const crawler = require('../crawler');
 const router = express.Router();
 
 /* GET Pokemon details */
-router.get('/allinfos', (req, res) => {
+router.get('/', (req, res) => {
   'use strict';
 
-  wikia.getAllPokemonInfo(req.query.name).then(infos => {
-    res.json(infos);
-  });
+  crawler.getPokemon(req.query.name)
+    .then(details => {
+      res.json(details);
+    })
+    .catch(err => {
+      res
+        .status(err.statusCode || 500)
+        .send(err.error);
+    });
 });
 
-/* GET Pokemon card */
+/* GET Pokemon cards */
 router.get('/cards', (_req, res) => {
   'use strict';
 
-  wikia.getAllCards().then(card => {
-    res.json(card);
-  });
+  crawler.getAllCards()
+    .then(cards => {
+      res.json(cards);
+    })
+    .catch(err => {
+      res
+        .status(err.statusCode || 500)
+        .send(err.error);
+    });
 });
 
 module.exports = router;
