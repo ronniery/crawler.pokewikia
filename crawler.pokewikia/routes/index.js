@@ -5,9 +5,8 @@ const router = express.Router();
 router.get('/', (req, res) => {
   'use strict';
   
-  res.render('index', {
-    title: 'Express',
-    csrfToken: req.csrfToken()
+  res.json({
+    message: 'Hello world!'
   });
 });
 
