@@ -1,7 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+require('module-alias/register');
 
-import Container from './Container'
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import Container from '@pages/Container';
 
 ReactDOM.render(
   <Container />,
@@ -34,4 +36,4 @@ ReactDOM.render(
     e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
     a.dispatchEvent(e)
   }
-})(console)
+})(console);

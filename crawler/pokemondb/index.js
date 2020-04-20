@@ -40,12 +40,12 @@ class PokemonDataBase {
       .map(el => {
         const $el = $(el);
         const a = $el.find('small:last-child a');
-        const name = $el.find('.ent-name').text2();
+        const code = $el.find('small:first-child').text2();
 
         return {
-          code: $el.find('small:first-child').text2(),
-          sprite: `https://img.pokemondb.net/artwork/large/${name.toLowerCase()}.jpg`,
-          name,
+          internationalId: code,
+          sprite: `https://pokemoncries.com/pokemon-images/${code}.png`,
+          name: $el.find('.ent-name').text2(),
           types: a.toArray().map(link => $(link).text2())
         };
       });
@@ -85,7 +85,7 @@ class PokemonDataBase {
     }, {
       nameOrigin: this._getNameOrigin(cheerio)
     }, {
-      defenses: Defenses.getDefenses(cheerio, activeTab)
+      defenses: Defenses.getTypeDefenses(cheerio, activeTab)
     }, {
       sprites: await Sprites.getSpritesFor(pokename)
     }, {
@@ -136,7 +136,7 @@ class PokemonDataBase {
       Object.assign(processed, {
         baseStats: this._getBaseStats(cheerio, tab),
         dexdata: Pokedex.getPokedex(cheerio, tab),
-        defenses: Defenses.getDefenses(cheerio, tab),
+        defenses: Defenses.getTypeDefenses(cheerio, tab),
         pokeImg: await this._getPokeImg(cheerio, tab)
       });
 
