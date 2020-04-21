@@ -1,6 +1,5 @@
 const request = require('request-promise');
 const cheerio = require('cheerio');
-const NodeCache = require('node-cache');
 const _ = require('lodash');
 
 const Helpers = require('../helpers');
@@ -8,49 +7,63 @@ const Pokedex = require('./pokedex');
 const Defenses = require('./defenses');
 const Sprites = require('./sprites');
 const Moves = require('./moves');
+const Pokemon = require('../../models/pokemon');
+const Card = require('../../models/card');
+
+const POKEMONDB_BASE_URL = 'https://pokemondb.net'
+const POKECRIES_BASE_URL = 'https://pokemoncries.com'
 
 class PokemonDataBase {
 
   constructor() {
-    this.details = name => `https://pokemondb.net/pokedex/${name}`;
-    this.pokeCries = 'https://pokemoncries.com/cries'
+    this.model = new Pokemon();
+    this.details = name => `${POKEMONDB_BASE_URL}/pokedex/${name}`;
+    this.pokeCries = `${POKECRIES_BASE_URL}/cries`
     this.pokeSvgs = 'https://veekun.com/dex/media/pokemon/dream-world/'
     this.tabSelector = '#dex-basics + .tabset-basics > .tabs-tab-list';
-    this.cache = new NodeCache({
-      stdTTL: 60 * 60 * 0.5
-    });
   }
 
   async getPokemon(pokename) {
-    let pokemon = this.cache.get(pokename);
+    let pokemon = await this.model
+      .findOne({
+        'dexdata.name': pokename
+      });
 
     if (_.some(pokemon)) {
-      return pokemon;
+      return this._addBorderData(pokemon);
     }
 
     return this._createPokemon(pokename);
   }
 
-  async getAllCards() {
-    const cheerio = await this._getParsedHtml(
-      'https://pokemondb.net/pokedex/national'
-    );
-    const $ = cheerio();
+  async getAllCards(page, limit) {
+    const model = new Card()
+    const exists = await model.existsAny({})
 
-    return $('.infocard')
-      .toArray()
-      .map(el => {
-        const $el = $(el);
-        const a = $el.find('small:last-child a');
-        const code = $el.find('small:first-child').text2().replace('#', '');
+    if (!exists) {
+      const cheerio = await this._getParsedHtml(
+        `${POKEMONDB_BASE_URL}/pokedex/national`
+      );
+      const $ = cheerio();
+      const allcards = $('.infocard')
+        .toArray()
+        .map(el => {
+          const $el = $(el);
+          const a = $el.find('small:last-child a');
+          const code = $el.find('small:first-child').text2().replace('#', '');
 
-        return {
-          internationalId: code,
-          sprite: `https://pokemoncries.com/pokemon-images/${+code}.png`,
-          name: $el.find('.ent-name').text2(),
-          types: a.toArray().map(link => $(link).text2())
-        };
-      });
+          return {
+            internationalId: code,
+            sprite: `${POKECRIES_BASE_URL}/pokemon-images/${+code}.png`,
+            name: $el.find('.ent-name').text2(),
+            types: a.toArray().map(link => $(link).text2())
+          };
+        });
+
+      await model.save(allcards)
+    }
+
+    return await model.getAllPaginated(page, limit)
   }
 
   //#region Private methods  
@@ -66,20 +79,24 @@ class PokemonDataBase {
     const allTabs = $(`${this.tabSelector} > a`).not('.active');
     const activeTab = $(`${this.tabSelector} > a.active`);
     const pokedex = Pokedex.getPokedex(cheerio, activeTab);
+    const getBorder = (selector) => {
+      const $el = $(selector).first()
+      const fulltext = $el.text2()
+      const [, id, name] = fulltext.match(/#(\d+)\s(\w+)/)
 
-    let next, prev;
-    if (initBorders) {
-      [next, prev] = await Promise.all([
-        this._getPokemonAtBorders(cheerio, 'a[rel="next"]'),
-        this._getPokemonAtBorders(cheerio, 'a[rel="prev"]'),
-      ])
+      return {
+        fulltext,
+        nationalId: +id,
+        name
+      }
     }
 
     let pokemon = Object.assign({
       pokeImgs: await this._getPokeImg(cheerio, activeTab),
       derivations: await this._getDerivations(cheerio, allTabs),
       border: {
-        next, prev
+        next: getBorder('a[rel="next"]'),
+        prev: getBorder('a[rel="prev"]')
       }
     }, {
       dexdata: pokedex
@@ -109,7 +126,12 @@ class PokemonDataBase {
       cries: this._getPokeCry(pokedex.nationalId)
     });
 
-    this.cache.set(pokename, pokemon);
+    await this.model.saveIfNotExits(pokemon);
+
+    if (initBorders) {
+      await this._addBorderData(pokemon)
+    }
+
     return pokemon;
   }
 
@@ -126,22 +148,33 @@ class PokemonDataBase {
     });
   }
 
-  async _getPokemonAtBorders(cheerio, selector) {
-    const $ = cheerio()
-    const $el = $(selector).first()
+  async _addBorderData(pokemon) {
+    const { border } = pokemon
+    const [next, prev] = await Promise.all([
+      this._getPokemonAtBorders(border.next),
+      this._getPokemonAtBorders(border.prev),
+    ])
 
-    if (_.isEmpty($el)) return {}
+    Object.assign(pokemon.border.next, { pokemon: next })
+    Object.assign(pokemon.border.prev, { pokemon: prev })
+    return pokemon
+  }
 
-    const fulltext = $el.text2()
-    const [, id, name] = fulltext.match(/#(\d+)\s(\w+)/)
-    const pokemon = await this._createPokemon(name, false)
+  async _getPokemonAtBorders({ name, nationalId }) {
+    const { model } = this;
 
-    return {
-      fulltext,
-      nationalId: +id,
-      name,
-      pokemon
+    let pokemon = await model.findOne({
+      $or: [
+        { 'dexdata.name': name },
+        { 'dexdata.nationalId': nationalId }
+      ]
+    })
+
+    if (_.isEmpty(pokemon)) {
+      pokemon = await this._createPokemon(name, false)
     }
+
+    return pokemon
   }
 
   _getBreeding(cheerio) {
@@ -327,7 +360,7 @@ class PokemonDataBase {
             const $a = $(a);
 
             return {
-              link: `https://pokemondb.net${$a.attr('href')}`,
+              link: `${POKEMONDB_BASE_URL}${$a.attr('href')}`,
               text: $a.text2()
             };
           })

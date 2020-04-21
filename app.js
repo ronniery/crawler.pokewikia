@@ -10,6 +10,7 @@ const createError = require('http-errors'),
 
 const indexRouter = require('./routes/index');
 const pokeRouter = require('./routes/pokemon');
+const cardRouter = require('./routes/card');
 const app = express();
 
 // setup route middlewares
@@ -25,6 +26,7 @@ app.use(hpp())
 
 app.use('/', indexRouter);
 app.use('/pokemon', pokeRouter);
+app.use('/card', cardRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
