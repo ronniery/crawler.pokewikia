@@ -1,16 +1,15 @@
 const _ = require('lodash');
- 
+
 /**
  * 
  * 
  * @class Defenses
  */
 class Defenses {
-  static getDefenses(cheerio, anchor) {
+  static getTypeDefenses(cheerio, anchor) {
     const tables = Defenses._getTablesToParse(cheerio, anchor);
-    return Defenses._tableToDefenses(
-      cheerio, tables
-    );
+    const content = Defenses._tableToDefenses(cheerio, tables);
+    return content;
   }
 
   /**

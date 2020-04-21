@@ -40,12 +40,12 @@ class PokemonDataBase {
       .map(el => {
         const $el = $(el);
         const a = $el.find('small:last-child a');
-        const name = $el.find('.ent-name').text2();
+        const code = $el.find('small:first-child').text2();
 
         return {
-          code: $el.find('small:first-child').text2(),
-          sprite: `https://img.pokemondb.net/artwork/large/${name.toLowerCase()}.jpg`,
-          name,
+          internationalId: code,
+          sprite: `https://pokemoncries.com/pokemon-images/${code}.png`,
+          name: $el.find('.ent-name').text2(),
           types: a.toArray().map(link => $(link).text2())
         };
       });
@@ -66,6 +66,8 @@ class PokemonDataBase {
     let pokemon = Object.assign({
       pokeImg: await this._getPokeImg(cheerio, activeTab),
       derivations: await this._getDerivations(cheerio, allTabs),
+      borderNext: this._getPokemonAtBorders('a[rel="next"]'),
+      borderPrev: this._getPokemonAtBorders('a[rel="prev"]')
     }, {
       dexdata: pokedex
     }, {
@@ -85,7 +87,7 @@ class PokemonDataBase {
     }, {
       nameOrigin: this._getNameOrigin(cheerio)
     }, {
-      defenses: Defenses.getDefenses(cheerio, activeTab)
+      defenses: Defenses.getTypeDefenses(cheerio, activeTab)
     }, {
       sprites: await Sprites.getSpritesFor(pokename)
     }, {
@@ -111,6 +113,21 @@ class PokemonDataBase {
     });
   }
 
+  _getPokemonAtBorders = selector => {
+    const $el = $(selector)
+
+    if(_.isEmpty($el)) return {}
+
+    const fulltext = $el.text2()
+    const [, id, name] = fulltext.match(/#(\d+)\s(\w+)/)
+
+    return {
+      fulltext,
+      nationalId: +id,
+      name
+    }
+  }
+
   _getBreeding(cheerio) {
     const [{ table }] = Helpers.searchTableOnDocument(cheerio, {
       name: 'Breeding'
@@ -130,13 +147,13 @@ class PokemonDataBase {
   async _getDerivations(cheerio, tabs) {
     const derivations = [];
 
-    for(const tab of tabs.toArray()) {
+    for (const tab of tabs.toArray()) {
       const processed = {};
 
       Object.assign(processed, {
         baseStats: this._getBaseStats(cheerio, tab),
         dexdata: Pokedex.getPokedex(cheerio, tab),
-        defenses: Defenses.getDefenses(cheerio, tab),
+        defenses: Defenses.getTypeDefenses(cheerio, tab),
         pokeImg: await this._getPokeImg(cheerio, tab)
       });
 

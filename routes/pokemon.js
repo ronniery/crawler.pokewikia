@@ -5,8 +5,9 @@ const router = express.Router();
 /* GET Pokemon details */
 router.get('/', (req, res) => {
   'use strict';
+  const { name } = req.query
 
-  crawler.getPokemon(req.query.name)
+  crawler.getPokemon(name)
     .then(details => {
       res.json(details);
     })
