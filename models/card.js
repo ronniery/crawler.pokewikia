@@ -8,7 +8,7 @@ class Card extends Model {
     this.db.ensureIndex({ fieldName: 'internationalId', unique: true })
   }
 
-  async getAllPaginated(page, limit) {
+  async getPaginatedCards(page, limit) {
     return new Promise((resolve, reject) => {
       const { db } = this;
 
@@ -28,6 +28,32 @@ class Card extends Model {
               cardPages: docs
             })
           });
+      })
+    })
+  }
+
+  async getMatchCards(searchTerm, limit) {
+    return new Promise((resolve, reject) => {
+      const { db } = this;
+
+      db.find({}, function (err, allDocs) {
+        if (_.some(err)) reject(err)
+
+        resolve(
+          allDocs
+            .filter(({ name }) => {
+              return new RegExp(searchTerm, 'gi')
+                .test(name)
+            })
+            .sort((prev, next) =>
+              +prev.internationalId - +next.internationalId
+            )
+            .flatMap(item => {
+              delete item._id;
+              return item
+            })
+            .slice(0, limit)
+        )
       })
     })
   }

@@ -36,7 +36,7 @@ class PokemonDataBase {
     return this._createPokemon(pokename);
   }
 
-  async getAllCards(page, limit) {
+  async getPaginatedCards(page, limit) {
     const model = new Card()
     const exists = await model.existsAny({})
 
@@ -63,7 +63,18 @@ class PokemonDataBase {
       await model.save(allcards)
     }
 
-    return await model.getAllPaginated(page, limit)
+    return await model.getPaginatedCards(page, limit)
+  }
+
+  async getFilteredCards(searchTerm, limit) {
+    const model = new Card()
+    const exists = await model.existsAny({})
+
+    if (!exists) {
+      await this._getAllCards()
+    }
+
+    return await model.getMatchCards(searchTerm, limit)
   }
 
   //#region Private methods  
@@ -133,6 +144,30 @@ class PokemonDataBase {
     }
 
     return pokemon;
+  }
+
+  async _getAllCards() {
+    const model = new Card()
+    const cheerio = await this._getParsedHtml(
+      `${POKEMONDB_BASE_URL}/pokedex/national`
+    );
+    const $ = cheerio();
+    const allcards = $('.infocard')
+      .toArray()
+      .map(el => {
+        const $el = $(el);
+        const a = $el.find('small:last-child a');
+        const code = $el.find('small:first-child').text2().replace('#', '');
+
+        return {
+          internationalId: code,
+          sprite: `${POKECRIES_BASE_URL}/pokemon-images/${+code}.png`,
+          name: $el.find('.ent-name').text2(),
+          types: a.toArray().map(link => $(link).text2())
+        };
+      });
+
+    await model.save(allcards)
   }
 
   async _getParsedHtml(url) {
