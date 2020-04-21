@@ -13,6 +13,8 @@ class PokemonDataBase {
 
   constructor() {
     this.details = name => `https://pokemondb.net/pokedex/${name}`;
+    this.pokeCries = 'https://pokemoncries.com/cries'
+    this.pokeSvgs = 'https://veekun.com/dex/media/pokemon/dream-world/'
     this.tabSelector = '#dex-basics + .tabset-basics > .tabs-tab-list';
     this.cache = new NodeCache({
       stdTTL: 60 * 60 * 0.5
@@ -40,11 +42,11 @@ class PokemonDataBase {
       .map(el => {
         const $el = $(el);
         const a = $el.find('small:last-child a');
-        const code = $el.find('small:first-child').text2();
+        const code = $el.find('small:first-child').text2().replace('#', '');
 
         return {
           internationalId: code,
-          sprite: `https://pokemoncries.com/pokemon-images/${code}.png`,
+          sprite: `https://pokemoncries.com/pokemon-images/${+code}.png`,
           name: $el.find('.ent-name').text2(),
           types: a.toArray().map(link => $(link).text2())
         };
@@ -53,7 +55,9 @@ class PokemonDataBase {
 
   //#region Private methods  
 
-  async _createPokemon(pokename) {
+  async _createPokemon(pokename, initBorders = true) {
+    if (_.isEmpty(pokename)) return {}
+
     const { details } = this;
     const detailsUrl = details(pokename);
     const cheerio = await this._getParsedHtml(detailsUrl);
@@ -63,11 +67,20 @@ class PokemonDataBase {
     const activeTab = $(`${this.tabSelector} > a.active`);
     const pokedex = Pokedex.getPokedex(cheerio, activeTab);
 
+    let next, prev;
+    if (initBorders) {
+      [next, prev] = await Promise.all([
+        this._getPokemonAtBorders(cheerio, 'a[rel="next"]'),
+        this._getPokemonAtBorders(cheerio, 'a[rel="prev"]'),
+      ])
+    }
+
     let pokemon = Object.assign({
-      pokeImg: await this._getPokeImg(cheerio, activeTab),
+      pokeImgs: await this._getPokeImg(cheerio, activeTab),
       derivations: await this._getDerivations(cheerio, allTabs),
-      borderNext: this._getPokemonAtBorders('a[rel="next"]'),
-      borderPrev: this._getPokemonAtBorders('a[rel="prev"]')
+      border: {
+        next, prev
+      }
     }, {
       dexdata: pokedex
     }, {
@@ -113,18 +126,21 @@ class PokemonDataBase {
     });
   }
 
-  _getPokemonAtBorders = selector => {
-    const $el = $(selector)
+  async _getPokemonAtBorders(cheerio, selector) {
+    const $ = cheerio()
+    const $el = $(selector).first()
 
-    if(_.isEmpty($el)) return {}
+    if (_.isEmpty($el)) return {}
 
     const fulltext = $el.text2()
     const [, id, name] = fulltext.match(/#(\d+)\s(\w+)/)
+    const pokemon = await this._createPokemon(name, false)
 
     return {
       fulltext,
       nationalId: +id,
-      name
+      name,
+      pokemon
     }
   }
 
@@ -154,7 +170,7 @@ class PokemonDataBase {
         baseStats: this._getBaseStats(cheerio, tab),
         dexdata: Pokedex.getPokedex(cheerio, tab),
         defenses: Defenses.getTypeDefenses(cheerio, tab),
-        pokeImg: await this._getPokeImg(cheerio, tab)
+        pokeImgs: await this._getPokeImg(cheerio, tab)
       });
 
       derivations.push(processed);
@@ -163,18 +179,37 @@ class PokemonDataBase {
     return derivations;
   }
 
-  async _getPokeImg(cheerio, anchor) {
-    const $ = cheerio();
+  async _getPokeImg(cheerioRef, anchor) {
+    const $ = cheerioRef();
     const anchorHref = $(anchor).attr('href');
     const boxImg = $(anchorHref).find('a[rel="lightbox"] img');
     const pokeImg = boxImg.attr('src');
+    const [, pokeid] = $(anchorHref).html().match(/<strong>(\d+)<\/strong>/)
+    const getVectors = async () => {
+      return request(this.pokeSvgs, {
+        method: 'GET',
+        transform: html => {
+          const $ = cheerio.load(html)
 
-    Sprites.createSpriteFile(pokeImg, {
-      baseName: $('h1').text2(),
-      spriteName: $(anchor).text2().replace(' ', '-')
-    });
+          return $('a')
+            .toArray()
+            .slice(2)
+            .map(a => $(a).text())
+            .reduce((reducer, pokeid) => {
+              const id = pokeid.match(/\d+/)
+              reducer[id] = [...reducer[id] || [], pokeid]
+              return reducer
+            }, {})
+        }
+      })
+    }
 
-    return pokeImg;
+    const vectors = await getVectors()
+
+    return {
+      jpg: pokeImg,
+      svg: vectors[+pokeid].map(svg => `${this.pokeSvgs}${svg}`)
+    };
   }
 
   _getBaseStats(cheerio, anchor) {
@@ -319,11 +354,11 @@ class PokemonDataBase {
   _getPokeCry(nationalId) {
     const nindex = +nationalId;
     const cries = {
-      newGen: `https://pokemoncries.com/cries/${nindex}.mp3`
+      newGen: `${this.pokeCries}/${nindex}.mp3`
     };
 
     if (nindex <= 649) {
-      cries.old = `https://pokemoncries.com/cries-old/${nindex}.mp3`;
+      cries.old = `${this.pokeCries}-old/${nindex}.mp3`;
     }
 
     return cries;

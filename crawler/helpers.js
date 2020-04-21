@@ -52,10 +52,6 @@ class Helpers {
       return this.find(selector).toArray();
     };
 
-    String.prototype.toCheerio = function() {
-      return $(this);
-    };
-
     return $;
   }
 

@@ -22,7 +22,8 @@ class Defenses {
    */
   static _getTablesToParse(cheerio, anchor) {
     const $ = cheerio();
-    const $anchor = $(anchor).attr('href').toCheerio();
+    const anchorHref = $(anchor).attr('href')
+    const $anchor = $(anchorHref);
     const $typecol = $anchor.find('.tabset-typedefcol');
     let tables = [
       [null, ..._.chunk($anchor.find('.type-table-pokedex'), 2)]

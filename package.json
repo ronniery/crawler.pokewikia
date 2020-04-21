@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "Crawler to get all available information to a given pokemon name",
   "dependencies": {
+    "camo": "^0.12.3",
     "cheerio": "^1.0.0-rc.3",
     "cookie-parser": "~1.4.5",
     "cors": "^2.8.5",
@@ -19,14 +20,16 @@
     "dotenv": "^8.2.0",
     "express": "~4.17.1",
     "helmet": "^3.22.0",
+    "hpp": "^0.2.3",
     "http-errors": "~1.7.3",
     "iconv-lite": "^0.5.1",
     "lodash": "^4.17.15",
     "morgan": "~1.10.0",
+    "nedb": "^1.8.0",
     "node-cache": "^5.1.0",
     "nodemon": "^2.0.3",
     "request": "^2.88.2",
-    "request-promise": "^4.2.5",
+    "request-promise": "^4.2.5"
   },
   "devDependencies": {
     "@types/iconv-lite": "0.0.1",
