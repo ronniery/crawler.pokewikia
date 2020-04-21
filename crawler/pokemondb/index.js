@@ -66,6 +66,8 @@ class PokemonDataBase {
     let pokemon = Object.assign({
       pokeImg: await this._getPokeImg(cheerio, activeTab),
       derivations: await this._getDerivations(cheerio, allTabs),
+      borderNext: this._getPokemonAtBorders('a[rel="next"]'),
+      borderPrev: this._getPokemonAtBorders('a[rel="prev"]')
     }, {
       dexdata: pokedex
     }, {
@@ -111,6 +113,21 @@ class PokemonDataBase {
     });
   }
 
+  _getPokemonAtBorders = selector => {
+    const $el = $(selector)
+
+    if(_.isEmpty($el)) return {}
+
+    const fulltext = $el.text2()
+    const [, id, name] = fulltext.match(/#(\d+)\s(\w+)/)
+
+    return {
+      fulltext,
+      nationalId: +id,
+      name
+    }
+  }
+
   _getBreeding(cheerio) {
     const [{ table }] = Helpers.searchTableOnDocument(cheerio, {
       name: 'Breeding'
@@ -130,7 +147,7 @@ class PokemonDataBase {
   async _getDerivations(cheerio, tabs) {
     const derivations = [];
 
-    for(const tab of tabs.toArray()) {
+    for (const tab of tabs.toArray()) {
       const processed = {};
 
       Object.assign(processed, {
