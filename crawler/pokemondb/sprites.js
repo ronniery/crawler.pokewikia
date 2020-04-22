@@ -10,16 +10,14 @@ const getImgSrc = ($, el) => $(el).find('span').attr('data-src');
 
 class Sprites {
 
-  static async getSpritesFor(pokename) {
-    const cheerio = await Sprites._getParsedHtml(pokename);
+  static async getSpritesFor(spriteUrl) {
+    const cheerio = await Sprites._getParsedHtml(spriteUrl);
     return Sprites._extractAllSprites(cheerio);
   }
 
-  static async _getParsedHtml(pokename) {
-    const url = Sprites._fullUrl(pokename);
-
+  static async _getParsedHtml(spriteUrl) {
     return request({
-      url,
+      url: spriteUrl,
       method: 'GET',
       transform: html => {
         const $ = Helpers
@@ -28,10 +26,6 @@ class Sprites {
         return () => $;
       }
     });
-  }
-
-  static _fullUrl(pokename) {
-    return `https://pokemondb.net/sprites/${pokename.toLowerCase()}`;
   }
 
   static _extractAllSprites(cheerio) {

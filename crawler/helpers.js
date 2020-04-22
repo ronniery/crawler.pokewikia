@@ -4,7 +4,7 @@ class Helpers {
   static searchTableOnDocument(...args) {
     const allElements = Helpers._getElementsAheadTextMatch(...args);
     const foundTable = [];
-    const $ = _.first(args)();
+    const $ = _.first(args)();  
 
     let workTable = {};
     for (const el of allElements) {
@@ -21,7 +21,7 @@ class Helpers {
       }
     }
 
-    return foundTable;
+    return foundTable || [{}];
   }
 
   static getPropertyWithMeta(cheerio, el) {
@@ -73,10 +73,10 @@ class Helpers {
     const h2Position = $(childrens).toArray()
       .findIndex(child => {
         return child.tagName === 'h2' &&
-          $(child).text2() === name;
+          new RegExp(name).test($(child).text2());
       });
 
-    return childrens.slice(h2Position + 1, childrens.length);
+    return childrens.slice(h2Position + 1, childrens.length) || [{}];
   }
 }
 

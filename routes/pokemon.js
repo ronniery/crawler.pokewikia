@@ -6,6 +6,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
   const { name } = req.query
 
+  // Rapidash bug
   crawler.getPokemon(name)
     .then(details => {
       res.json(details);

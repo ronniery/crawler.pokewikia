@@ -79,12 +79,21 @@ class PokemonDataBase {
 
   //#region Private methods  
 
-  async _createPokemon(pokename, initBorders = true) {
+  async _createPokemon(pokename, { initBorders = true, borderUrl = null } = {}) {
     if (_.isEmpty(pokename)) return {}
 
+    const asLowerCase = pokename.toLowerCase()
+    const nameLower = (
+      {
+        'nidoran♀': 'nidoran-f',
+        'nidoran♂': 'nidoran-m'
+      }[asLowerCase] || asLowerCase
+    )
+      .replace(/\s+/g, '-')
+
     const { details } = this;
-    const detailsUrl = details(pokename);
-    const cheerio = await this._getParsedHtml(detailsUrl);
+    const fullUrl = _.isEmpty(borderUrl) ? details(nameLower) : borderUrl;
+    const cheerio = await this._getParsedHtml(fullUrl);
     const $ = cheerio();
 
     const allTabs = $(`${this.tabSelector} > a`).not('.active');
@@ -92,13 +101,17 @@ class PokemonDataBase {
     const pokedex = Pokedex.getPokedex(cheerio, activeTab);
     const getBorder = (selector) => {
       const $el = $(selector).first()
+
+      if (_.isEmpty($el)) return {}
+
       const fulltext = $el.text2()
-      const [, id, name] = fulltext.match(/#(\d+)\s(\w+)/)
+      const [id, name] = fulltext.split(' ')
 
       return {
         fulltext,
-        nationalId: +id,
-        name
+        nationalId: +id.replace('#', ''),
+        name,
+        borderUrl: `${POKEMONDB_BASE_URL}${$el.attr('href')}`
       }
     }
 
@@ -130,7 +143,7 @@ class PokemonDataBase {
     }, {
       defenses: Defenses.getTypeDefenses(cheerio, activeTab)
     }, {
-      sprites: await Sprites.getSpritesFor(pokename)
+      sprites: await Sprites.getSpritesFor(`${POKEMONDB_BASE_URL}${$('.list-focus li a').attr('href')}`)
     }, {
       moves: Moves.getMoves(cheerio)
     }, {
@@ -171,16 +184,21 @@ class PokemonDataBase {
   }
 
   async _getParsedHtml(url) {
-    return await request({
-      url: url,
-      method: 'GET',
-      transform: html => {
-        const $ = Helpers
-          .loadPlugins(cheerio.load(html));
+    try {
+      return await request({
+        url: url,
+        method: 'GET',
+        transform: html => {
+          const $ = Helpers
+            .loadPlugins(cheerio.load(html));
 
-        return () => $;
-      }
-    });
+          return () => $;
+        }
+      });
+    } catch (e) {
+      console.log(e)
+      return e
+    }
   }
 
   async _addBorderData(pokemon) {
@@ -195,7 +213,7 @@ class PokemonDataBase {
     return pokemon
   }
 
-  async _getPokemonAtBorders({ name, nationalId }) {
+  async _getPokemonAtBorders({ name, nationalId, borderUrl }) {
     const { model } = this;
 
     let pokemon = await model.findOne({
@@ -206,7 +224,10 @@ class PokemonDataBase {
     })
 
     if (_.isEmpty(pokemon)) {
-      pokemon = await this._createPokemon(name, false)
+      pokemon = await this._createPokemon(name, {
+        initBorders: false,
+        borderUrl
+      })
     }
 
     return pokemon
@@ -281,11 +302,14 @@ class PokemonDataBase {
   }
 
   _getBaseStats(cheerio, anchor) {
-    const [{ table }] = Helpers.searchTableOnDocument(cheerio, {
+    const foundEl = Helpers.searchTableOnDocument(cheerio, {
       name: 'Base stats',
       anchor
     });
 
+    if(_.isEmpty(foundEl)) return {}
+
+    const [{ table }] = foundEl
     const $ = cheerio();
     const $table = $(table);
 
@@ -294,12 +318,18 @@ class PokemonDataBase {
       .reduce((reducer, tr) => {
         const getByIndex = idx => $(tr).children().eq(idx).text2();
         const property = getByIndex(0);
+        const propCamel = _.camelCase(property)
 
-        reducer[_.camelCase(property)] = {
+        reducer[propCamel] = {
           base: +getByIndex(1),
           max: +getByIndex(3),
           min: +getByIndex(4)
         };
+
+        if(propCamel === "total") {
+          delete reducer.max
+          delete reducer.min
+        }
 
         return reducer;
       }, {});
