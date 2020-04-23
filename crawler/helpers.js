@@ -1,10 +1,24 @@
 const _ = require('lodash');
 
+/**
+ * Helpers and utilities to be used on the crawlers.
+ *
+ * @class Helpers
+ */
 class Helpers {
+
+  /**
+   * 
+   *
+   * @static
+   * @param {*} args
+   * @returns {{title: string, table: HTMLElement}}
+   * @memberof Helpers
+   */
   static searchTableOnDocument(...args) {
     const allElements = Helpers._getElementsAheadTextMatch(...args);
     const foundTable = [];
-    const $ = _.first(args)();  
+    const $ = _.first(args)();
 
     let workTable = {};
     for (const el of allElements) {

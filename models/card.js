@@ -2,18 +2,30 @@
 const Model = require('./model');
 const _ = require('lodash')
 
+/**
+ * Card model to handle all operations over the `cards` collection.
+ *
+ * @class Card
+ * @extends {Model} Base model from this application
+ */
 class Card extends Model {
+
+  /**
+   * Creates an instance of Card.
+   * @memberof Card
+   */
   constructor() {
     super('cards');
     this.db.ensureIndex({ fieldName: 'internationalId', unique: true })
   }
 
   /**
-   * 
+   * Get all cards inside db using the given configuration to limit
+   * and paginate the entire result.
    *
-   * @param {number} page
-   * @param {number} limit
-   * @returns
+   * @param {number} page Number of the desired page.
+   * @param {number} limit Limit of items to be returned on this request.
+   * @returns {Promise<Card[]>} A page of cards with limited items.
    * @memberof Card
    */
   async getPaginatedCards(page, limit) {
@@ -46,7 +58,7 @@ class Card extends Model {
    *
    * @param {string} searchTerm Term to search cards.
    * @param {string} limit Limit of items to be returned on query.
-   * @returns {Promise<Card>} List of cards found.
+   * @returns {Promise<Card[]>} List of cards found.
    * @memberof Card
    */
   async getMatchCards(searchTerm, limit) {

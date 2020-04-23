@@ -3,14 +3,32 @@ const Datastore = require('nedb');
 const _ = require('lodash');
 const path = require('path');
 
-module.exports = class Model {
-  constructor(dbname) {
+/**
+ * The main model application, that contains the generic methods to access data on db.
+ *
+ * @class Model
+ */
+class Model {
+
+  /**
+   * Creates an instance of Model.
+   * @param {string} collection Collection name to initialize dtabase
+   * @memberof Model
+   */
+  constructor(collection) {
     this.db = new Datastore({
-      filename: path.join(__dirname, `../db/${dbname}.db`),
+      filename: path.join(__dirname, `../db/${collection}.db`),
       autoload: true
     })
   }
 
+  /**
+   * Save the given document on database.
+   *
+   * @param {any} doc Document to be saved on db.
+   * @returns {Promise<void|Error>} Promise that resolve when the document is saved.
+   * @memberof Model
+   */
   async save(doc) {
     return new Promise((resolve, reject) => {
       this.db.insert(doc, function (err) {
@@ -20,6 +38,13 @@ module.exports = class Model {
     })
   }
 
+  /**
+   * Search one element that matches with the given filter
+   *
+   * @param {any} filter The filter to seach document.
+   * @returns {Promise<void|Error>} Promise that resolve when the document is searched.
+   * @memberof Model
+   */
   async findOne(filter) {
     return new Promise((resolve, reject) => {
       this.db.findOne(filter, function (err, doc) {
@@ -29,3 +54,5 @@ module.exports = class Model {
     })
   }
 }
+
+module.exports = Model;

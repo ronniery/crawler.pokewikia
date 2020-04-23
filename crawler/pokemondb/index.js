@@ -12,16 +12,17 @@ const Card = require('../../models/card');
 
 const POKEMONDB_BASE_URL = 'https://pokemondb.net'
 const POKECRIES_BASE_URL = 'https://pokemoncries.com'
+const POKEZUKAN_BASE_URL = 'https://zukan.pokemon.co.jp'
 
-class PokemonDataBase {
+class PokemonDB {
 
   constructor() {
     this.model = new Pokemon();
     this.details = name => `${POKEMONDB_BASE_URL}/pokedex/${name}`;
     this.pokeCries = `${POKECRIES_BASE_URL}/cries`
-    this.pokeImgs = 'https://veekun.com/dex/media/pokemon/global-link/'
+    this.pokeZukanImgs = `${POKEZUKAN_BASE_URL}/zukan-api/api/search/?limit=1055&page=1`
+    this.zukanImgs = []
     this.tabSelector = '#dex-basics + .tabset-basics > .tabs-tab-list';
-    this.vectors = []
   }
 
   async getPokemon(pokename) {
@@ -293,40 +294,24 @@ class PokemonDataBase {
     const pokeImg = boxImg.attr('src');
     const [, pokeid] = $(anchorHref).html().match(/<strong>(\d+)<\/strong>/)
 
-    
-
-    // TODO: There is a bug here, with pokemon > Genesect
-
     return {
       jpg: pokeImg,
-      svg: await this._resolveAllSvg(pokeid),
-      png:
+      png: await this._resolveAllPngs(pokeid)
     };
   }
 
   async _resolveAllPngs(pokeid) {
-    if (_.isEmpty(this.vectors)) {
-      await request(this.pokeImgs, {
+    if (_.isEmpty(this.zukanImgs)) {
+      await request(this.pokeZukanImgs, {
         method: 'GET',
-        transform: html => {
-          const $ = cheerio.load(html)
-
-          return this.vectors = $('a')
-            .toArray()
-            .slice(2)
-            .map(a => $(a).text())
-            .reduce((reducer, subPokeId) => {
-              const id = subPokeId.match(/\d+/)
-              reducer[id] = [...reducer[id] || [], subPokeId]
-
-              return reducer
-            }, {})
-        }
+        json: true,
+        transform: ({ results }) => this.zukanImgs =
+          _.groupBy(results, 'no')
       })
     }
 
-    const found = this.vectors[+pokeid]
-    return (_.some(found) ? found : []).map(svg => `${this.pokeImgs}${svg}`)
+    const found = this.zukanImgs[pokeid]
+    return _.some(found) ? found : []
   }
 
   _getBaseStats(cheerio, anchor) {
@@ -437,7 +422,11 @@ class PokemonDataBase {
   }
 
   _getFooterTable(cheerio, tableHeader) {
-    const [{ table }] = Helpers.searchTableOnDocument(cheerio, { name: tableHeader });
+    const foundEl = Helpers.searchTableOnDocument(cheerio, { name: tableHeader });
+
+    if (_.isEmpty(foundEl)) return {}
+
+    const [{ table }] = foundEl
     const $ = cheerio();
 
     return $(table)
@@ -493,4 +482,4 @@ class PokemonDataBase {
   //#region 
 }
 
-module.exports = PokemonDataBase;
+module.exports = new PokemonDB();
