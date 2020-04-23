@@ -14,10 +14,18 @@ const POKEMONDB_BASE_URL = 'https://pokemondb.net'
 const POKECRIES_BASE_URL = 'https://pokemoncries.com'
 const POKEZUKAN_BASE_URL = 'https://zukan.pokemon.co.jp'
 
+/**
+ * 
+ *
+ * @class PokemonDB
+ */
 class PokemonDB {
 
+  /**
+   * Creates an instance of PokemonDB.
+   * @memberof PokemonDB
+   */
   constructor() {
-    this.model = new Pokemon();
     this.details = name => `${POKEMONDB_BASE_URL}/pokedex/${name}`;
     this.pokeCries = `${POKECRIES_BASE_URL}/cries`
     this.pokeZukanImgs = `${POKEZUKAN_BASE_URL}/zukan-api/api/search/?limit=1055&page=1`
@@ -25,14 +33,21 @@ class PokemonDB {
     this.tabSelector = '#dex-basics + .tabset-basics > .tabs-tab-list';
   }
 
+  /**
+   * 
+   *
+   * @param {string} pokename
+   * @returns
+   * @memberof PokemonDB
+   */
   async getPokemon(pokename) {
-    let pokemon = await this.model
+    let pokemon = await Pokemon
       .findOne({
         'dexdata.name': pokename
       });
 
     if (_.some(pokemon)) {
-      return this._addBorderData(pokemon);
+      return this._addBorderData(pokemon.toJSON());
     }
 
     return this._createPokemon(pokename);
@@ -47,11 +62,8 @@ class PokemonDB {
    * @memberof PokemonDataBase
    */
   async getPaginatedCards(page, limit) {
-    const model = new Card()
-    // Check if any item exists inside db
-    const exists = await model.existsAny({})
-
-    if (!exists) {
+    // Check if any item exists inside db   
+    if (!await Card.exists({})) {
       const cheerio = await this._getParsedHtml(
         `${POKEMONDB_BASE_URL}/pokedex/national`
       );
@@ -71,29 +83,19 @@ class PokemonDB {
           };
         });
 
-      await model.save(allcards)
+      await Card
+        .insertMany(allcards)
     }
 
-    return await model.getPaginatedCards(page, limit)
+    return await Card.getPaginatedCards(page, limit)
   }
 
-  /**
-   *
-   *
-   * @param {*} searchTerm
-   * @param {*} limit
-   * @returns
-   * @memberof PokemonDataBase
-   */
   async getFilteredCards(searchTerm, limit) {
-    const model = new Card()
-    const exists = await model.existsAny({})
-
-    if (!exists) {
+    if (!await Card.exists({})) {
       await this._getAllCards()
     }
 
-    return await model.getMatchCards(searchTerm, limit)
+    return await Card.getMatchCards(searchTerm, limit)
   }
 
   //#region Private methods  
@@ -169,7 +171,7 @@ class PokemonDB {
       cries: this._getPokeCry(pokedex.nationalId)
     });
 
-    await this.model.saveIfNotExits(pokemon);
+    await Pokemon.saveIfNotExits(pokemon);
 
     if (initBorders) {
       await this._addBorderData(pokemon)
@@ -222,20 +224,27 @@ class PokemonDB {
 
   async _addBorderData(pokemon) {
     const { border } = pokemon
-    const [next, prev] = await Promise.all([
-      this._getPokemonAtBorders(border.next),
-      this._getPokemonAtBorders(border.prev),
+    const { next, prev } = border
+    const [nextBorder, prevBorder] = await Promise.all([
+      this._getPokemonAtBorders(border.next || {}),
+      this._getPokemonAtBorders(border.prev || {}),
     ])
 
-    Object.assign(pokemon.border.next, { pokemon: next })
-    Object.assign(pokemon.border.prev, { pokemon: prev })
+    if (_.some(next)) {
+      Object.assign(pokemon.border.next, { pokemon: nextBorder })
+    }
+
+    if (_.some(prev)) {
+      Object.assign(pokemon.border.prev, { pokemon: prevBorder })
+    }
+
     return pokemon
   }
 
   async _getPokemonAtBorders({ name, nationalId, borderUrl }) {
-    const { model } = this;
+    if (_.isEmpty(name) && _.isEmpty(nationalId)) return {}
 
-    let pokemon = await model.findOne({
+    let pokemon = await Pokemon.findOne({
       $or: [
         { 'dexdata.name': name },
         { 'dexdata.nationalId': nationalId }
@@ -295,8 +304,8 @@ class PokemonDB {
     const [, pokeid] = $(anchorHref).html().match(/<strong>(\d+)<\/strong>/)
 
     return {
-      jpg: pokeImg,
-      png: await this._resolveAllPngs(pokeid)
+      pokedb: pokeImg,
+      zucan: await this._resolveAllPngs(pokeid)
     };
   }
 

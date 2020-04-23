@@ -12,6 +12,8 @@ router.get('/', (req, res) => {
       res.json(details);
     })
     .catch(err => {
+      console.log(err.stack)
+
       res
         .status(err.statusCode || 500)
         .send(err.error);

@@ -1,11 +1,21 @@
 /* eslint-disable no-undef */
+require('dotenv').config()
+
 const express = require('express'),
+  mongoose = require('mongoose'),
   path = require('path'),
   cookieParser = require('cookie-parser'),
   logger = require('morgan'),
   helmet = require('helmet'),
   cors = require('cors'),
   hpp = require('hpp');
+
+const { env } = process;
+mongoose.connect(`mongodb://${env.DB_USER}:${env.DB_PASS}@${env.DB_HOST}:${env.DB_PORT}/${env.DB_NAME}`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true
+});
 
 const indexRouter = require('./routes/index');
 const pokeRouter = require('./routes/pokemon');
