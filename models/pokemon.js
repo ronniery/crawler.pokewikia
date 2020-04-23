@@ -3,8 +3,8 @@ const _ = require('lodash')
 
 class Pokemon extends Model {
   constructor() {
-    super('pokemons');
-    this.db.ensureIndex({ fieldName: 'dexdata.name' })
+    super('monsters');
+    this.db.ensureIndex({ fieldName: 'dexdata.name', unique: true })
   }
 
   async saveIfNotExits(doc) {

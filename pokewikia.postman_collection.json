@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "1815acec-96d6-43ca-a58b-641dc72dbd09",
+		"name": "pokewikia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetPokemon",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3002/pokemon?name=Genesect",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"pokemon"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Genesect"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPokeCards",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3002/pokemon/cards",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"pokemon",
+						"cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCards",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3002/card?page=1&limit=45",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"card"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "45"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchCards",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3002/card/search?term=al",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"card",
+						"search"
+					],
+					"query": [
+						{
+							"key": "term",
+							"value": "al"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

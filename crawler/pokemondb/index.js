@@ -19,8 +19,9 @@ class PokemonDataBase {
     this.model = new Pokemon();
     this.details = name => `${POKEMONDB_BASE_URL}/pokedex/${name}`;
     this.pokeCries = `${POKECRIES_BASE_URL}/cries`
-    this.pokeSvgs = 'https://veekun.com/dex/media/pokemon/dream-world/'
+    this.pokeImgs = 'https://veekun.com/dex/media/pokemon/global-link/'
     this.tabSelector = '#dex-basics + .tabset-basics > .tabs-tab-list';
+    this.vectors = []
   }
 
   async getPokemon(pokename) {
@@ -36,8 +37,17 @@ class PokemonDataBase {
     return this._createPokemon(pokename);
   }
 
+  /**
+   * Get all cards with given pagination configuration.
+   *
+   * @param {number} page Card page to be loaded.
+   * @param {number} limit Limit of cards in current page.
+   * @returns {Promise<Card>} Loaded cards on current page.
+   * @memberof PokemonDataBase
+   */
   async getPaginatedCards(page, limit) {
     const model = new Card()
+    // Check if any item exists inside db
     const exists = await model.existsAny({})
 
     if (!exists) {
@@ -66,6 +76,14 @@ class PokemonDataBase {
     return await model.getPaginatedCards(page, limit)
   }
 
+  /**
+   *
+   *
+   * @param {*} searchTerm
+   * @param {*} limit
+   * @returns
+   * @memberof PokemonDataBase
+   */
   async getFilteredCards(searchTerm, limit) {
     const model = new Card()
     const exists = await model.existsAny({})
@@ -105,12 +123,12 @@ class PokemonDataBase {
       if (_.isEmpty($el)) return {}
 
       const fulltext = $el.text2()
-      const [id, name] = fulltext.split(' ')
+      const [id, name, left] = fulltext.split(' ')
 
       return {
         fulltext,
         nationalId: +id.replace('#', ''),
-        name,
+        name: _.some(left) ? `${name} ${left}` : name,
         borderUrl: `${POKEMONDB_BASE_URL}${$el.attr('href')}`
       }
     }
@@ -274,31 +292,41 @@ class PokemonDataBase {
     const boxImg = $(anchorHref).find('a[rel="lightbox"] img');
     const pokeImg = boxImg.attr('src');
     const [, pokeid] = $(anchorHref).html().match(/<strong>(\d+)<\/strong>/)
-    const getVectors = async () => {
-      return request(this.pokeSvgs, {
+
+    
+
+    // TODO: There is a bug here, with pokemon > Genesect
+
+    return {
+      jpg: pokeImg,
+      svg: await this._resolveAllSvg(pokeid),
+      png:
+    };
+  }
+
+  async _resolveAllPngs(pokeid) {
+    if (_.isEmpty(this.vectors)) {
+      await request(this.pokeImgs, {
         method: 'GET',
         transform: html => {
           const $ = cheerio.load(html)
 
-          return $('a')
+          return this.vectors = $('a')
             .toArray()
             .slice(2)
             .map(a => $(a).text())
-            .reduce((reducer, pokeid) => {
-              const id = pokeid.match(/\d+/)
-              reducer[id] = [...reducer[id] || [], pokeid]
+            .reduce((reducer, subPokeId) => {
+              const id = subPokeId.match(/\d+/)
+              reducer[id] = [...reducer[id] || [], subPokeId]
+
               return reducer
             }, {})
         }
       })
     }
 
-    const vectors = await getVectors()
-
-    return {
-      jpg: pokeImg,
-      svg: vectors[+pokeid].map(svg => `${this.pokeSvgs}${svg}`)
-    };
+    const found = this.vectors[+pokeid]
+    return (_.some(found) ? found : []).map(svg => `${this.pokeImgs}${svg}`)
   }
 
   _getBaseStats(cheerio, anchor) {
@@ -307,7 +335,7 @@ class PokemonDataBase {
       anchor
     });
 
-    if(_.isEmpty(foundEl)) return {}
+    if (_.isEmpty(foundEl)) return {}
 
     const [{ table }] = foundEl
     const $ = cheerio();
@@ -326,7 +354,7 @@ class PokemonDataBase {
           min: +getByIndex(4)
         };
 
-        if(propCamel === "total") {
+        if (propCamel === "total") {
           delete reducer.max
           delete reducer.min
         }

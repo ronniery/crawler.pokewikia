@@ -28,9 +28,4 @@ module.exports = class Model {
       })
     })
   }
-
-  async existsAny(filter) {
-    const found = await this.findOne(filter);
-    return _.some(found)
-  }
 }
