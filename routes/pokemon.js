@@ -1,5 +1,5 @@
 const express = require('express');
-const crawler = require('../crawler/pokemondb');
+const crawler = require('@crawlers/pokemondb');
 const router = express.Router();
 
 /* GET Pokemon details */

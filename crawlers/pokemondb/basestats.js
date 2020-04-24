@@ -1,6 +1,6 @@
 const _ = require('lodash')
 
-const Helpers = require('../helpers')
+const Helpers = require('@crawlers/helpers')
 
 class BaseStats {
   static getBaseStats(cheerio, anchor) {

@@ -22,9 +22,9 @@
     "hpp": "^0.2.3",
     "iconv-lite": "^0.5.1",
     "lodash": "^4.17.15",
+    "module-alias": "^2.2.2",
     "mongoose": "^5.9.10",
     "morgan": "~1.10.0",
-    "nedb": "^1.8.0",
     "nodemon": "^2.0.3",
     "request": "^2.88.2",
     "request-promise": "^4.2.5"
@@ -40,6 +40,11 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "snyk": "^1.305.1"
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@crawlers": "./crawlers",
+    "@models": "./models"
   },
   "repository": {
     "type": "git",

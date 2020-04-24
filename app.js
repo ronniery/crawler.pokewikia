@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
-require('dotenv').config()
+require('dotenv').config();
+require('module-alias/register');
 
 const express = require('express'),
   mongoose = require('mongoose'),
