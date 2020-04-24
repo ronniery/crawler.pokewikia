@@ -22,6 +22,21 @@ class Pokedex {
   }
 
   static _rowToPokedexLine(domHandlers) {
+    const { property, data, tdText } = Pokedex._createParseableElements(
+      domHandlers
+    );
+
+    // It will parse the other properties
+    data[property.replace('№', 'Id')] = tdText;
+
+    // TODO: Check if the code was broken after changes - and that will override properly
+    Pokedex._getLocalizations(data, property, tdText);
+    Pokedex._getAbilities(data, domHandlers, property);
+
+    return data;
+  }
+
+  static _createParseableElements(domHandlers) {
     const data = {};
     const { $, tr } = domHandlers();
     const getValueFrom = selector => $(tr)
@@ -30,15 +45,7 @@ class Pokedex {
     const thText = getValueFrom('th');
     const property = _.camelCase(thText);
 
-    if (property === 'local№') {
-      Pokedex._getLocalizations(data, property, tdText);
-    } else if (property === 'abilities') {
-      Pokedex._getAbilities(domHandlers, data, property);
-    } else {
-      data[property.replace('№', 'Id')] = tdText;
-    }
-
-    return data;
+    return { property, data, tdText };
   }
 
   static _getLocalizations(reducer, property, rawValue) {
@@ -54,15 +61,19 @@ class Pokedex {
           };
         });
     }
+
+    return reducer;
   }
 
-  static _getAbilities(domHandlers, reducer, property) {
+  static _getAbilities(reducer, domHandlers, property) {
     const { $, tr } = domHandlers();
 
     if (property === 'abilities') {
       reducer.abilities = $(tr).findArray('a')
         .map(el => $(el).text2());
     }
+
+    return reducer;
   }
 }
 

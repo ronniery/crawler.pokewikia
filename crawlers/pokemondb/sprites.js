@@ -55,21 +55,22 @@ class Sprites {
       .map((head, idx) => {
         const data = {
           name: $(head).text(),
-          rows: allTs.map(tr => {
-            const allTds = $(tr).findArray('td');
-            const $selectedTd = $($(allTds).eq(idx + 1));
-            const htmlContent = $(_.first(allTds)).html();
-            const captionParts = htmlContent.replace(/\n+/g, '')
-              .split(/<[^>]*>/g);
-
-            return Sprites._getSpritesInTableRow(
-              cheerio, $selectedTd, captionParts
-            );
-          })
+          rows: allTs.map(tr => Sprites._trToSpriteRow(cheerio, tr, idx))
         };
 
         return data;
       });
+  }
+
+  static _trToSpriteRow(cheerio, spriteTr, headIdx) {
+    const $ = cheerio();
+    const allTds = $(spriteTr).findArray('td');
+    const $selectedTd = $($(allTds).eq(headIdx + 1));
+    const htmlContent = $(_.first(allTds)).html();
+    const captionParts = htmlContent.replace(/\n+/g, '')
+      .split(/<[^>]*>/g);
+
+    return Sprites._getSpritesInTableRow(cheerio, $selectedTd, captionParts);
   }
 
   static _getSpritesInTableRow(cheerio, row, rowCaptionParts) {
@@ -94,19 +95,23 @@ class Sprites {
 
 
   static _getLabeledSprites(cheerio, table, labeledSpriteList) {
-    const $ = cheerio();
-
     if (_.isEmpty(labeledSpriteList)) return;
 
     table.images = labeledSpriteList
       .map(span => {
-        const desc = $(span).text();
-
-        return {
-          description: _.some(desc) ? desc : null,
-          image: getImgSrc($, span)
-        };
+        return Sprites._createLabeledSpriteLine(cheerio, span);
       });
+  }
+  
+
+  static _createLabeledSpriteLine(cheerio, span) {
+    const $ = cheerio()
+    const spanText = $(span).text();
+
+    return {
+      description: _.some(spanText) ? spanText : null,
+      image: getImgSrc($, span)
+    };
   }
 
   static _getUnlabeledSprites(cheerio, table, unlabeledSpriteList) {

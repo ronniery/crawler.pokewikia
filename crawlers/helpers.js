@@ -1,5 +1,14 @@
 const _ = require('lodash');
 
+const text2 = function () {
+  return this.text().trim()
+    .replace(/\n+/g, '');
+};
+
+const findArray = function (selector) {
+  return this.find(selector).toArray();
+}
+
 /**
  * Helpers and utilities to be used on the crawlers.
  *
@@ -23,14 +32,15 @@ class Helpers {
     let workTable = {};
     for (const el of allElements) {
       const withoutHead = _.isEmpty(workTable);
+      const { tagName } = el
 
-      if (el.tagName === 'h3' && withoutHead) {
+      if (tagName === 'h3' && withoutHead) {
         workTable.title = $(el).text2();
-      } else if (el.tagName === 'table') {
+      } else if (tagName === 'table') {
         workTable.table = $(el);
         foundTable.push(workTable);
         workTable = {};
-      } else if (el.tagName === 'h2') {
+      } else if (tagName === 'h2') {
         break;
       }
     }
@@ -55,42 +65,43 @@ class Helpers {
   }
 
   static loadPlugins($) {
-    $.prototype.text2 = function () {
-      return this
-        .text()
-        .trim()
-        .replace(/\n+/g, '');
-    };
-
-    $.prototype.findArray = function (selector) {
-      return this.find(selector).toArray();
+    $.prototype = {
+      text2,
+      findArray,
     };
 
     return $;
   }
 
-  static _getElementsAheadTextMatch(cheerio, { name, anchor }) {
+  static _getElementsAheadTextMatch(cheerio, { text, anchor }) {
+    const elements = Helpers._getElementsFrom(cheerio, anchor, '*');
+    const h2Position = Helpers._findHeadPosition(cheerio, text, elements);
+    return elements.slice(h2Position + 1, elements.length) || [{}];
+  }
+
+  static _findHeadPosition(cheerio, elements, textToMatch) {
     const $ = cheerio();
-    const getElements = selector => {
-      let els = $(selector)
-        .toArray();
-
-      if (_.some(anchor)) {
-        els = $($(anchor).attr('href'))
-          .findArray(selector);
-      }
-
-      return els;
-    };
-
-    const childrens = getElements('*');
-    const h2Position = $(childrens).toArray()
+    
+    return $(elements)
+      .toArray()
       .findIndex(child => {
         return child.tagName === 'h2' &&
-          new RegExp(name).test($(child).text2());
+          new RegExp(textToMatch).test($(child).text2());
       });
+  }
 
-    return childrens.slice(h2Position + 1, childrens.length) || [{}];
+  static _getElementsFrom(cheerio, anchor, selector) {
+    const $ = cheerio();
+
+    let els = $(selector)
+      .toArray();
+
+    if (_.some(anchor)) {
+      els = $($(anchor).attr('href'))
+        .findArray(selector);
+    }
+
+    return els;
   }
 }
 
