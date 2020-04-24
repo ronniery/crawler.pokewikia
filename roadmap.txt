@@ -1,0 +1,10 @@
+[ ] reduce complexity (with extensions)
+[ ] add tests
+[ ] up on heroku
+[ ] up on travis
+[ ] up on code climate
+[ ] refactor/clean code
+[ ] search better practices to apply on code
+[ ] search better packages to add security on code
+[ ] add coments on all code
+[ ] create a powerfull README.md

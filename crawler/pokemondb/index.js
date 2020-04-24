@@ -7,12 +7,16 @@ const Pokedex = require('./pokedex');
 const Defenses = require('./defenses');
 const Sprites = require('./sprites');
 const Moves = require('./moves');
+const BaseStats = require('./basestats');
+
 const Pokemon = require('../../models/pokemon');
 const Card = require('../../models/card');
 
-const POKEMONDB_BASE_URL = 'https://pokemondb.net'
-const POKECRIES_BASE_URL = 'https://pokemoncries.com'
-const POKEZUKAN_BASE_URL = 'https://zukan.pokemon.co.jp'
+const baseUrl = {
+  POKEMONDB: 'https://pokemondb.net',
+  POKECRIES: 'https://pokemoncries.com',
+  POKEZUKAN: 'https://zukan.pokemon.co.jp'
+}
 
 /**
  * 
@@ -26,9 +30,9 @@ class PokemonDB {
    * @memberof PokemonDB
    */
   constructor() {
-    this.details = name => `${POKEMONDB_BASE_URL}/pokedex/${name}`;
-    this.pokeCries = `${POKECRIES_BASE_URL}/cries`
-    this.pokeZukanImgs = `${POKEZUKAN_BASE_URL}/zukan-api/api/search/?limit=1055&page=1`
+    this.details = name => `${baseUrl.POKEMONDB}/pokedex/${name}`;
+    this.pokeCries = `${baseUrl.POKECRIES}/cries`
+    this.pokeZukanImgs = `${baseUrl.POKEZUKAN}/zukan-api/api/search/?limit=1055&page=1`
     this.zukanImgs = []
     this.tabSelector = '#dex-basics + .tabset-basics > .tabs-tab-list';
   }
@@ -65,7 +69,7 @@ class PokemonDB {
     // Check if any item exists inside db   
     if (!await Card.exists({})) {
       const cheerio = await this._getParsedHtml(
-        `${POKEMONDB_BASE_URL}/pokedex/national`
+        `${baseUrl.POKEMONDB}/pokedex/national`
       );
       const $ = cheerio();
       const allcards = $('.infocard')
@@ -77,7 +81,7 @@ class PokemonDB {
 
           return {
             internationalId: code,
-            sprite: `${POKECRIES_BASE_URL}/pokemon-images/${+code}.png`,
+            sprite: `${baseUrl.POKECRIES}/pokemon-images/${+code}.png`,
             name: $el.find('.ent-name').text2(),
             types: a.toArray().map(link => $(link).text2())
           };
@@ -132,7 +136,7 @@ class PokemonDB {
         fulltext,
         nationalId: +id.replace('#', ''),
         name: _.some(left) ? `${name} ${left}` : name,
-        borderUrl: `${POKEMONDB_BASE_URL}${$el.attr('href')}`
+        borderUrl: `${baseUrl.POKEMONDB}${$el.attr('href')}`
       }
     }
 
@@ -164,7 +168,7 @@ class PokemonDB {
     }, {
       defenses: Defenses.getTypeDefenses(cheerio, activeTab)
     }, {
-      sprites: await Sprites.getSpritesFor(`${POKEMONDB_BASE_URL}${$('.list-focus li a').attr('href')}`)
+      sprites: await Sprites.getSpritesFor(`${baseUrl.POKEMONDB}${$('.list-focus li a').attr('href')}`)
     }, {
       moves: Moves.getMoves(cheerio)
     }, {
@@ -183,7 +187,7 @@ class PokemonDB {
   async _getAllCards() {
     const model = new Card()
     const cheerio = await this._getParsedHtml(
-      `${POKEMONDB_BASE_URL}/pokedex/national`
+      `${baseUrl.POKEMONDB}/pokedex/national`
     );
     const $ = cheerio();
     const allcards = $('.infocard')
@@ -195,7 +199,7 @@ class PokemonDB {
 
         return {
           internationalId: code,
-          sprite: `${POKECRIES_BASE_URL}/pokemon-images/${+code}.png`,
+          sprite: `${baseUrl.POKECRIES}/pokemon-images/${+code}.png`,
           name: $el.find('.ent-name').text2(),
           types: a.toArray().map(link => $(link).text2())
         };
@@ -205,29 +209,24 @@ class PokemonDB {
   }
 
   async _getParsedHtml(url) {
-    try {
-      return await request({
-        url: url,
-        method: 'GET',
-        transform: html => {
-          const $ = Helpers
-            .loadPlugins(cheerio.load(html));
+    return await request({
+      url: url,
+      method: 'GET',
+      transform: html => {
+        const $ = Helpers
+          .loadPlugins(cheerio.load(html));
 
-          return () => $;
-        }
-      });
-    } catch (e) {
-      console.log(e)
-      return e
-    }
+        return () => $;
+      }
+    });
   }
 
   async _addBorderData(pokemon) {
     const { border } = pokemon
     const { next, prev } = border
     const [nextBorder, prevBorder] = await Promise.all([
-      this._getPokemonAtBorders(border.next || {}),
-      this._getPokemonAtBorders(border.prev || {}),
+      this._getPokemonAtBorders(border.next),
+      this._getPokemonAtBorders(border.prev),
     ])
 
     if (_.some(next)) {
@@ -241,7 +240,7 @@ class PokemonDB {
     return pokemon
   }
 
-  async _getPokemonAtBorders({ name, nationalId, borderUrl }) {
+  async _getPokemonAtBorders({ name, nationalId, borderUrl } = {}) {
     if (_.isEmpty(name) && _.isEmpty(nationalId)) return {}
 
     let pokemon = await Pokemon.findOne({
@@ -321,40 +320,6 @@ class PokemonDB {
 
     const found = this.zukanImgs[pokeid]
     return _.some(found) ? found : []
-  }
-
-  _getBaseStats(cheerio, anchor) {
-    const foundEl = Helpers.searchTableOnDocument(cheerio, {
-      name: 'Base stats',
-      anchor
-    });
-
-    if (_.isEmpty(foundEl)) return {}
-
-    const [{ table }] = foundEl
-    const $ = cheerio();
-    const $table = $(table);
-
-    return $table
-      .findArray('tr')
-      .reduce((reducer, tr) => {
-        const getByIndex = idx => $(tr).children().eq(idx).text2();
-        const property = getByIndex(0);
-        const propCamel = _.camelCase(property)
-
-        reducer[propCamel] = {
-          base: +getByIndex(1),
-          max: +getByIndex(3),
-          min: +getByIndex(4)
-        };
-
-        if (propCamel === "total") {
-          delete reducer.max
-          delete reducer.min
-        }
-
-        return reducer;
-      }, {});
   }
 
   _getTraining(cheerio) {
@@ -451,7 +416,7 @@ class PokemonDB {
             const $a = $(a);
 
             return {
-              link: `${POKEMONDB_BASE_URL}${$a.attr('href')}`,
+              link: `${baseUrl.POKEMONDB}${$a.attr('href')}`,
               text: $a.text2()
             };
           })
