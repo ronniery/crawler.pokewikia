@@ -9,6 +9,8 @@ const Sprites = require('./sprites');
 const Moves = require('./moves');
 const BaseStats = require('./basestats');
 const EvoChart = require('./evochart');
+const DexEntries = require('./dexentries');
+const FooterTable = require('./footertable')
 
 const Pokemon = require('../../models/pokemon');
 const Card = require('../../models/card');
@@ -159,11 +161,11 @@ class PokemonDB {
     }, {
       evochart: EvoChart.getEvoChart(cheerio)
     }, {
-      dexentries: this._getPokedexEntries(cheerio)
+      dexentries: DexEntries.getPokedexEntries(cheerio)
     }, {
-      whereFind: this._getFooterTable(cheerio, `Where to find ${$('main > h1').text()}`)
+      whereFind: FooterTable.getFooterTable(cheerio, `Where to find ${$('main > h1').text()}`, baseUrl.POKEMONDB)
     }, {
-      otherLangs: this._getFooterTable(cheerio, 'Other languages')
+      otherLangs: FooterTable.getFooterTable(cheerio, 'Other languages', baseUrl.POKEMONDB)
     }, {
       nameOrigin: this._getNameOrigin(cheerio)
     }, {
@@ -339,67 +341,6 @@ class PokemonDB {
       baseExp: Helpers.getPropertyWithMeta(cheerio, tds.eq('3')),
       growthRate: Helpers.getPropertyWithMeta(cheerio, tds.eq('4')),
     };
-  }
-
-  _getPokedexEntries(cheerio) {
-    const tables = Helpers.searchTableOnDocument(cheerio, { name: 'Pokédex entries' });
-    const $ = cheerio();
-
-    return tables
-      .map(({ table, title }) => {
-        const $table = $(table);
-        const rawName = _.isEmpty(title) ? $('main > h1').text2() : title;
-        const pokename = _.camelCase(rawName);
-
-        return $table
-          .findArray('tr')
-          .reduce((reducer, tr) => {
-            const $tr = $(tr);
-            const $th = $tr.find('th');
-            const property = _.camelCase($th.text2());
-            const originalTitleParts = $th.html().split(/<[^>]*>/g);
-
-            reducer[pokename][property] = {
-              text: $tr.find('td').text2(),
-              originalTitle: _.compact(originalTitleParts)
-            };
-
-            return reducer;
-          }, {
-            [pokename]: {}
-          });
-      });
-  }
-
-  _getFooterTable(cheerio, tableHeader) {
-    const foundEl = Helpers.searchTableOnDocument(cheerio, { name: tableHeader });
-
-    if (_.isEmpty(foundEl)) return {}
-
-    const [{ table }] = foundEl
-    const $ = cheerio();
-
-    return $(table)
-      .findArray('tr')
-      .reduce((reducer, tr) => {
-        const $tr = $(tr);
-        const $th = $tr.find('th');
-        const property = _.camelCase($th.text2());
-
-        reducer[property] = {
-          text: $tr.find('td').text2(),
-          links: $tr.findArray('td a').map(a => {
-            const $a = $(a);
-
-            return {
-              link: `${baseUrl.POKEMONDB}${$a.attr('href')}`,
-              text: $a.text2()
-            };
-          })
-        };
-
-        return reducer;
-      }, {});
   }
 
   _getNameOrigin(cheerio) {

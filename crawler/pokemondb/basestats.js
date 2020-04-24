@@ -12,19 +12,21 @@ class BaseStats {
     if (_.isEmpty(foundEl)) return {}
 
     const [{ table }] = foundEl
-    const $ = cheerio();
-    const $table = $(table);
 
-    return $table
+    return BaseStats._tableToBaseStats(cheerio, table)
+  }
+
+  static _tableToBaseStats(cheerio, table) {
+    const $ = cheerio();
+
+    return $(table)
       .findArray('tr')
       .reduce((reducer, tr) => {
-        return BaseStats._trToBaseStats(
-          cheerio, reducer, tr
-        )
+        return BaseStats._createBaseStats(cheerio, reducer, tr)
       }, {});
   }
 
-  static _trToBaseStats(cheerio, reducer, tr) {
+  static _createBaseStats(cheerio, reducer, tr) {
     const $ = cheerio();
     const getByIndex = idx => $(tr).children().eq(idx).text2();
     const property = getByIndex(0);
