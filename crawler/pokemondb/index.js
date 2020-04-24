@@ -8,6 +8,7 @@ const Defenses = require('./defenses');
 const Sprites = require('./sprites');
 const Moves = require('./moves');
 const BaseStats = require('./basestats');
+const EvoChart = require('./evochart');
 
 const Pokemon = require('../../models/pokemon');
 const Card = require('../../models/card');
@@ -152,11 +153,11 @@ class PokemonDB {
     }, {
       breeding: this._getBreeding(cheerio)
     }, {
-      baseStats: this._getBaseStats(cheerio, activeTab)
+      baseStats: BaseStats.getBaseStats(cheerio, activeTab)
     }, {
       training: this._getTraining(cheerio)
     }, {
-      evochart: this._getEvoChart(cheerio)
+      evochart: EvoChart.getEvoChart(cheerio)
     }, {
       dexentries: this._getPokedexEntries(cheerio)
     }, {
@@ -283,7 +284,7 @@ class PokemonDB {
       const processed = {};
 
       Object.assign(processed, {
-        baseStats: this._getBaseStats(cheerio, tab),
+        baseStats: BaseStats.getBaseStats(cheerio, tab),
         dexdata: Pokedex.getPokedex(cheerio, tab),
         defenses: Defenses.getTypeDefenses(cheerio, tab),
         pokeImgs: await this._getPokeImg(cheerio, tab)
@@ -338,31 +339,6 @@ class PokemonDB {
       baseExp: Helpers.getPropertyWithMeta(cheerio, tds.eq('3')),
       growthRate: Helpers.getPropertyWithMeta(cheerio, tds.eq('4')),
     };
-  }
-
-  _getEvoChart(cheerio) {
-    const $ = cheerio();
-
-    return $('.infocard-list-evo')
-      .toArray()
-      .map(listEvo => {
-        const chunks = _.chunk($(listEvo).find('> *'), 2);
-
-        return chunks
-          .map(([card, evo]) => {
-            const $data = $(card).find('.infocard-lg-data');
-            const condition = $(evo).find('small').text2();
-            const rawTypes = $data.find('small').last().findArray('a');
-
-            return {
-              img: $(card).find('.img-fixed').attr('data-src'),
-              globalId: $data.find('small').first().text2(),
-              name: $data.find('a.ent-name').text2(),
-              types: rawTypes.map(a => $(a).text2()),
-              evolveCondition: _.isEmpty(condition) ? null : condition.replace(/[(|)]/g, '').split(/\W\s/)
-            };
-          });
-      });
   }
 
   _getPokedexEntries(cheerio) {
