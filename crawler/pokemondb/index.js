@@ -71,24 +71,7 @@ class PokemonDB {
   async getPaginatedCards(page, limit) {
     // Check if any item exists inside db   
     if (!await Card.exists({})) {
-      const cheerio = await this._getParsedHtml(
-        `${baseUrl.POKEMONDB}/pokedex/national`
-      );
-      const $ = cheerio();
-      const allcards = $('.infocard')
-        .toArray()
-        .map(el => {
-          const $el = $(el);
-          const a = $el.find('small:last-child a');
-          const code = $el.find('small:first-child').text2().replace('#', '');
-
-          return {
-            internationalId: code,
-            sprite: `${baseUrl.POKECRIES}/pokemon-images/${+code}.png`,
-            name: $el.find('.ent-name').text2(),
-            types: a.toArray().map(link => $(link).text2())
-          };
-        });
+      const allcards = await this._initCards();
 
       await Card
         .insertMany(allcards)
@@ -110,45 +93,21 @@ class PokemonDB {
   async _createPokemon(pokename, { initBorders = true, borderUrl = null } = {}) {
     if (_.isEmpty(pokename)) return {}
 
-    const asLowerCase = pokename.toLowerCase()
-    const nameLower = (
-      {
-        'nidoran♀': 'nidoran-f',
-        'nidoran♂': 'nidoran-m'
-      }[asLowerCase] || asLowerCase
-    )
-      .replace(/\s+/g, '-')
+    const {
+      cheerio,
+      activeTab,
+      allTabs
+    } = await this._createParseableElements(pokename, borderUrl);
 
-    const { details } = this;
-    const fullUrl = _.isEmpty(borderUrl) ? details(nameLower) : borderUrl;
-    const cheerio = await this._getParsedHtml(fullUrl);
-    const $ = cheerio();
-
-    const allTabs = $(`${this.tabSelector} > a`).not('.active');
-    const activeTab = $(`${this.tabSelector} > a.active`);
     const pokedex = Pokedex.getPokedex(cheerio, activeTab);
-    const getBorder = (selector) => {
-      const $el = $(selector).first()
-
-      if (_.isEmpty($el)) return {}
-
-      const fulltext = $el.text2()
-      const [id, name, left] = fulltext.split(' ')
-
-      return {
-        fulltext,
-        nationalId: +id.replace('#', ''),
-        name: _.some(left) ? `${name} ${left}` : name,
-        borderUrl: `${baseUrl.POKEMONDB}${$el.attr('href')}`
-      }
-    }
+    const $ = cheerio();
 
     let pokemon = Object.assign({
       pokeImgs: await this._getPokeImg(cheerio, activeTab),
       derivations: await this._getDerivations(cheerio, allTabs),
       border: {
-        next: getBorder('a[rel="next"]'),
-        prev: getBorder('a[rel="prev"]')
+        next: this._getBorder(cheerio, 'a[rel="next"]'),
+        prev: this._getBorder(cheerio, 'a[rel="prev"]')
       }
     }, {
       dexdata: pokedex
@@ -185,6 +144,46 @@ class PokemonDB {
     }
 
     return pokemon;
+  }
+
+  async _createParseableElements(pokename, borderUrl) {
+    const asLowerCase = pokename.toLowerCase();
+
+    const nameLower = ({
+      'nidoran♀': 'nidoran-f',
+      'nidoran♂': 'nidoran-m'
+    }[asLowerCase] || asLowerCase)
+      .replace(/\s+/g, '-');
+
+    const { details } = this;
+    const fullUrl = _.isEmpty(borderUrl) ? details(nameLower) : borderUrl;
+    const cheerio = await this._getParsedHtml(fullUrl);
+    const $ = cheerio();
+    const allTabs = $(`${this.tabSelector} > a`).not('.active');
+    const activeTab = $(`${this.tabSelector} > a.active`);
+
+    return { cheerio, activeTab, allTabs };
+  }
+
+  async _initCards() {
+    const cheerio = await this._getParsedHtml(`${baseUrl.POKEMONDB}/pokedex/national`);
+    const $ = cheerio();
+
+    const allcards = $('.infocard')
+      .toArray()
+      .map(el => {
+        const $el = $(el);
+        const a = $el.find('small:last-child a');
+        const code = $el.find('small:first-child').text2().replace('#', '');
+        return {
+          internationalId: code,
+          sprite: `${baseUrl.POKECRIES}/pokemon-images/${+code}.png`,
+          name: $el.find('.ent-name').text2(),
+          types: a.toArray().map(link => $(link).text2())
+        };
+      });
+
+    return allcards;
   }
 
   async _getAllCards() {
@@ -243,9 +242,7 @@ class PokemonDB {
     return pokemon
   }
 
-  async _getPokemonAtBorders({ name, nationalId, borderUrl } = {}) {
-    if (_.isEmpty(name) && _.isEmpty(nationalId)) return {}
-
+  async _getPokemonAtBorders({ name = '', nationalId = '', borderUrl } = {}) {
     let pokemon = await Pokemon.findOne({
       $or: [
         { 'dexdata.name': name },
@@ -260,23 +257,7 @@ class PokemonDB {
       })
     }
 
-    return pokemon
-  }
-
-  _getBreeding(cheerio) {
-    const [{ table }] = Helpers.searchTableOnDocument(cheerio, {
-      name: 'Breeding'
-    });
-
-    const $ = cheerio();
-    const $table = $(table);
-    const tds = $table.find('td');
-
-    return {
-      eggGroups: Helpers.getPropertyWithMeta(cheerio, tds.eq('0')),
-      gender: Helpers.getPropertyWithMeta(cheerio, tds.eq('1')),
-      eggCycles: Helpers.getPropertyWithMeta(cheerio, tds.eq('2'))
-    };
+    return pokemon || {}
   }
 
   async _getDerivations(cheerio, tabs) {
@@ -325,6 +306,22 @@ class PokemonDB {
     return _.some(found) ? found : []
   }
 
+  _getBreeding(cheerio) {
+    const [{ table }] = Helpers.searchTableOnDocument(cheerio, {
+      name: 'Breeding'
+    });
+
+    const $ = cheerio();
+    const $table = $(table);
+    const tds = $table.find('td');
+
+    return {
+      eggGroups: Helpers.getPropertyWithMeta(cheerio, tds.eq('0')),
+      gender: Helpers.getPropertyWithMeta(cheerio, tds.eq('1')),
+      eggCycles: Helpers.getPropertyWithMeta(cheerio, tds.eq('2'))
+    };
+  }
+
   _getTraining(cheerio) {
     const [{ table }] = Helpers.searchTableOnDocument(cheerio, {
       name: 'Training'
@@ -368,6 +365,23 @@ class PokemonDB {
     }
 
     return cries;
+  }
+
+  _getBorder(cheerio, selector) {
+    const $ = cheerio();
+    const $el = $(selector).first()
+
+    if (_.isEmpty($el)) return {}
+
+    const fulltext = $el.text2()
+    const [id, name, left] = fulltext.split(' ')
+
+    return {
+      fulltext,
+      nationalId: +id.replace('#', ''),
+      name: _.some(left) ? `${name} ${left}` : name,
+      borderUrl: `${baseUrl.POKEMONDB}${$el.attr('href')}`
+    }
   }
 
   //#region 
