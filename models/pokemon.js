@@ -2,38 +2,59 @@
 const _ = require('lodash')
 const mongoose = require('mongoose');
 
-const pokemonSchema = mongoose.Schema({
-  dexdata: {
-    name: { type: String, unique: true, index: true }
+class PokeSchema {
+
+  create() {
+    const schema = mongoose.Schema({
+      dexdata: {
+        name: { type: String, unique: true, index: true }
+      }
+    }, {
+      collection: 'pokemons',
+      strict: false,
+      timestamps: true
+    })
+
+    this.setStatics(schema)
+    this.setMethods(schema)
+    return schema
   }
-}, {
-  collection: 'pokemons',
-  strict: false,
-  timestamps: true
-})
 
-pokemonSchema.statics.saveIfNotExits = async function (doc) {
-  const Model = this.model('Pokemon')
-  const copy = _.cloneDeep(doc)
+  async saveIfNotExits(doc) {
+    const Model = this.model('Pokemon')
+    const copy = _.cloneDeep(doc)
 
-  delete copy.border.next.pokemon;
-  delete copy.border.prev.pokemon;
+    delete copy.border.next.pokemon;
+    delete copy.border.prev.pokemon;
 
-  return Model.findOne({
-    'dexdata.name': copy.dexdata.name
-  }).then(async found => {
-    if (_.isEmpty(found)) {
-      await new Model(doc).save();
-    }
-  })
+    return Model.findOne({
+      'dexdata.name': copy.dexdata.name
+    }).then(async found => {
+      if (_.isEmpty(found)) {
+        await new Model(doc).save();
+      }
+    })
+  }
+
+  toJSON() {
+    const obj = this.toObject()
+    delete obj.__v
+    delete obj.createdAt
+    delete obj.updatedAt
+    return obj
+  }
+
+  setMethods(schema) {
+    const { methods } = schema
+    methods.toJSON = this.toJSON
+    return schema
+  }
+
+  setStatics(schema) {
+    const { statics } = schema
+    statics.saveIfNotExits = this.saveIfNotExits
+    return schema
+  }
 }
 
-pokemonSchema.methods.toJSON = function () {
-  const obj = this.toObject()
-  delete obj.__v
-  delete obj.createdAt
-  delete obj.updatedAt
-  return obj
-}
-
-module.exports = mongoose.model('Pokemon', pokemonSchema);
+module.exports = mongoose.model('Pokemon', new PokeSchema().create());
