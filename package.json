@@ -20,7 +20,6 @@
     "express": "~4.17.1",
     "helmet": "^3.22.0",
     "hpp": "^0.2.3",
-    "iconv-lite": "^0.5.1",
     "lodash": "^4.17.15",
     "module-alias": "^2.2.2",
     "mongoose": "^5.9.10",
@@ -30,7 +29,6 @@
     "request-promise": "^4.2.5"
   },
   "devDependencies": {
-    "@types/iconv-lite": "0.0.1",
     "@types/lodash.first": "^3.0.6",
     "eslint": "^6.8.0",
     "eslint-config-google": "^0.14.0",
@@ -39,7 +37,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "snyk": "^1.305.1"
+    "snyk": "^1.311.0"
   },
   "_moduleAliases": {
     "@root": ".",

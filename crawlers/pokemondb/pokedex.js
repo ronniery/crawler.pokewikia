@@ -1,6 +1,6 @@
 const _ = require('lodash');
 
-const Helpers = require('../helpers');
+const Helpers = require('@crawlers/helpers')
 
 class Pokedex {
 
@@ -22,39 +22,47 @@ class Pokedex {
   }
 
   static _rowToPokedexLine(domHandlers) {
-    const { property, data, tdText } = Pokedex._createParseableElements(
+    const dexline = {}
+    const { nextProp, nextValue } = Pokedex._createParseableElements(
       domHandlers
     );
 
     // It will parse the other properties
-    data[property.replace('№', 'Id')] = tdText;
+    dexline[nextProp.replace('№', 'Id')] = nextValue;
 
     // TODO: Check if the code was broken after changes - and that will override properly
-    Pokedex._getLocalizations(data, property, tdText);
-    Pokedex._getAbilities(data, domHandlers, property);
+    Pokedex._getLocalizations(dexline, nextProp, nextValue);
+    Pokedex._getAbilities(dexline, nextProp, domHandlers);
 
-    return data;
+    return dexline;
   }
 
   static _createParseableElements(domHandlers) {
-    const data = {};
-    const { $, tr } = domHandlers();
-    const getValueFrom = selector => $(tr)
-      .find(selector).text2();
-    const tdText = getValueFrom('td');
-    const thText = getValueFrom('th');
-    const property = _.camelCase(thText);
+    const getValueFrom = selector => {
+      const { $, tr } = domHandlers();
 
-    return { property, data, tdText };
+      return $(tr)
+        .find(selector).text2();
+    }
+
+    const thText = getValueFrom('th');
+
+    return {
+      nextProp: _.camelCase(thText),
+      nextValue: getValueFrom('td')
+    };
   }
 
-  static _getLocalizations(reducer, property, rawValue) {
-    if (property === 'local№') {
-      const parts = rawValue.split(/(\d{3})\s(\(.*?\))/g);
+  static _getLocalizations(dexline, nextProperty, nextValue) {
+    if (nextProperty === 'local№') {
+      // Prevent useless property on dexline
+      delete dexline['localId']
+
+      const parts = nextValue.split(/(\d{3})\s(\(.*?\))/g);
       const compacted = _.compact(parts);
       const chunks = _.chunk(compacted, 2);
 
-      reducer.localizations = chunks
+      dexline.localizations = chunks
         .map(([route, game]) => {
           return {
             route, game
@@ -62,18 +70,18 @@ class Pokedex {
         });
     }
 
-    return reducer;
+    return dexline;
   }
 
-  static _getAbilities(reducer, domHandlers, property) {
+  static _getAbilities(dexline, nextProperty, domHandlers) {
     const { $, tr } = domHandlers();
 
-    if (property === 'abilities') {
-      reducer.abilities = $(tr).findArray('a')
+    if (nextProperty === 'abilities') {
+      dexline.abilities = $(tr).findArray('a')
         .map(el => $(el).text2());
     }
 
-    return reducer;
+    return dexline;
   }
 }
 

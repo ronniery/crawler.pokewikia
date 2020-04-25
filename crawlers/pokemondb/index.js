@@ -102,40 +102,27 @@ class PokemonDB {
     const pokedex = Pokedex.getPokedex(cheerio, activeTab);
     const $ = cheerio();
 
-    let pokemon = Object.assign({
+    let pokemon = {
+      dexdata: pokedex,
+      sprites: await Sprites.getSpritesFor(`${baseUrl.POKEMONDB}${$('.list-focus li a').attr('href')}`),
       pokeImgs: await this._getPokeImg(cheerio, activeTab),
       derivations: await this._getDerivations(cheerio, allTabs),
       border: {
         next: this._getBorder(cheerio, 'a[rel="next"]'),
         prev: this._getBorder(cheerio, 'a[rel="prev"]')
-      }
-    }, {
-      dexdata: pokedex
-    }, {
-      breeding: this._getBreeding(cheerio)
-    }, {
-      baseStats: BaseStats.getBaseStats(cheerio, activeTab)
-    }, {
-      training: this._getTraining(cheerio)
-    }, {
-      evochart: EvoChart.getEvoChart(cheerio)
-    }, {
-      dexentries: DexEntries.getPokedexEntries(cheerio)
-    }, {
-      whereFind: FooterTable.getFooterTable(cheerio, `Where to find ${$('main > h1').text()}`, baseUrl.POKEMONDB)
-    }, {
-      otherLangs: FooterTable.getFooterTable(cheerio, 'Other languages', baseUrl.POKEMONDB)
-    }, {
-      nameOrigin: this._getNameOrigin(cheerio)
-    }, {
-      defenses: Defenses.getTypeDefenses(cheerio, activeTab)
-    }, {
-      sprites: await Sprites.getSpritesFor(`${baseUrl.POKEMONDB}${$('.list-focus li a').attr('href')}`)
-    }, {
-      moves: Moves.getMoves(cheerio)
-    }, {
-      cries: this._getPokeCry(pokedex.nationalId)
-    });
+      },
+      breeding: this._getBreeding(cheerio),
+      cries: this._getPokeCry(pokedex.nationalId),
+      training: this._getTraining(cheerio),
+      nameOrigin: this._getNameOrigin(cheerio),
+      evochart: EvoChart.getEvoChart(cheerio),
+      dexentries: DexEntries.getPokedexEntries(cheerio),
+      whereFind: FooterTable.getFooterTable(cheerio, `Where to find ${$('main > h1').text()}`, baseUrl.POKEMONDB),
+      otherLangs: FooterTable.getFooterTable(cheerio, 'Other languages', baseUrl.POKEMONDB),
+      defenses: Defenses.getTypeDefenses(cheerio, activeTab),
+      baseStats: BaseStats.getBaseStats(cheerio, activeTab),
+      moves: Moves.getMoves(cheerio),
+    };
 
     await Pokemon.saveIfNotExits(pokemon);
 

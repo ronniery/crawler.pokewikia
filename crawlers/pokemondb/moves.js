@@ -19,14 +19,12 @@ class Moves {
   }
 
   static _getAllMovesFromTab(cheerio, tab) {
-    const $ = cheerio();
-    const $where = $($(tab).attr('href'));
-    $where.find('p').remove();
+    const $ = cheerio()
+    const $content = Moves._findTabContent(cheerio, tab)
 
-    return $where
-      .findArray('h3')
-      .map(el => {
-        const $el = $(el);
+    $content
+      .map(elContent => {
+        const $el = $(elContent);
 
         return {
           title: $el.text2(),
@@ -58,6 +56,15 @@ class Moves {
           accuracy: tds.eq(5).text2()
         };
       });
+  }
+
+  static _findTabContent(cheerio, tab) {
+    const $ = cheerio();
+    const $where = $($(tab).attr('href'));
+
+    return $where
+      .find('p').remove()
+      .end().findArray('h3')
   }
 }
 

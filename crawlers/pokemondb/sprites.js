@@ -6,7 +6,18 @@ const cheerio = require('cheerio');
 const _ = require('lodash');
 
 const Helpers = require('@crawlers/helpers');
-const getImgSrc = ($, el) => $(el).find('span').attr('data-src');
+const getImgSrc = ($, el) => {
+  const $span = $(el).find('span')
+
+  // Try get img from lazy loading
+  if (_.some($span)) {
+    return $span.attr('data-src');
+  }
+
+  // Fallback to default <img> tag
+  return $(el).find('img')
+    .attr('src')
+}
 
 class Sprites {
 
@@ -28,6 +39,25 @@ class Sprites {
     });
   }
 
+  /**
+   * This will extract all sprites from the passed cheerio reference. But the html
+   * of that page is a complicated situation, the table that contains all sprites
+   * the following structure:
+   * 
+   * | (empty) | Gen 1 | Gen 2      | ... |
+   * |  :---:  | ---   | ---        | --- |
+   * |  type   |  img  | img + desc | ... |
+   * |  type   |  img  | no img/desc| ... |
+   * 
+   * The row can has cells with images + description, that isn't obrigatory any of 
+   * those items, to handle that the code is divided to parse the expected 
+   * structure on separete methods, combining the head title content with row content.   
+   *
+   * @static
+   * @param {() => Cheerio} cheerio Referente to sprite html page already parsed with `cheerio.load`.
+   * @returns {{ section: string, table: any[] }[]} The list of entire sprites inside the cheerio reference.
+   * @memberof Sprites
+   */
   static _extractAllSprites(cheerio) {
     const $ = cheerio();
     $('p').remove();
@@ -83,7 +113,7 @@ class Sprites {
       captions: _.compact(rowCaptionParts),
       images: [{
         description: '-',
-        image: null
+        image: undefined
       }]
     };
 
@@ -102,14 +132,14 @@ class Sprites {
         return Sprites._createLabeledSpriteLine(cheerio, span);
       });
   }
-  
+
 
   static _createLabeledSpriteLine(cheerio, span) {
     const $ = cheerio()
     const spanText = $(span).text();
 
     return {
-      description: _.some(spanText) ? spanText : null,
+      description: _.some(spanText) ? spanText : undefined,
       image: getImgSrc($, span)
     };
   }
@@ -122,7 +152,7 @@ class Sprites {
     table.images = unlabeledSpriteList
       .map(a => {
         return {
-          description: null,
+          description: undefined,
           image: getImgSrc($, a)
         };
       });

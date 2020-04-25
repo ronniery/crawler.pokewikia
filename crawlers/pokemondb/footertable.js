@@ -4,12 +4,11 @@ const Helpers = require('@crawlers/helpers')
 
 class FooterTable {
   static getFooterTable(cheerio, tableHeader, baseUrl) {
-    const foundEl = Helpers.searchTableOnDocument(cheerio, { name: tableHeader });
+    const foundEl = Helpers.searchTableOnDocument(cheerio, { tableHeader });
 
     if (_.isEmpty(foundEl)) return {}
 
     const [{ table }] = foundEl
-
     return FooterTable._tableToFooter(cheerio, table, baseUrl)
   }
 

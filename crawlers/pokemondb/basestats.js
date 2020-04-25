@@ -12,7 +12,6 @@ class BaseStats {
     if (_.isEmpty(foundEl)) return {}
 
     const [{ table }] = foundEl
-
     return BaseStats._tableToBaseStats(cheerio, table)
   }
 

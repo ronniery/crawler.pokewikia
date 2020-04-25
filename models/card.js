@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 /**
- * Specifies allowed fields
+ * Specifies allowed fields for some queries.
  */
 const allowedFields = {
   types: 1,
@@ -15,7 +15,7 @@ const allowedFields = {
 }
 
 /**
- * Card schema generator to create the schema and set the custom static methods
+ * Card schema generator to create the schema and set the custom static methods.
  *
  * @class CardSchema
  */
@@ -24,7 +24,7 @@ class CardSchema {
   /**
    * Create and prepare the card schema to be used.
    *
-   * @returns {Schema<Card>} Prepared card schema
+   * @returns {Schema<Card>} Prepared card schema.
    * @memberof CardSchema
    */
   create() {
@@ -46,7 +46,7 @@ class CardSchema {
   }
 
   /**
-   *
+   * 
    *
    * @param {string} searchTerm
    * @param {number} limit

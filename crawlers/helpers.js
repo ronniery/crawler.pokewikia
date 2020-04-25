@@ -65,17 +65,14 @@ class Helpers {
   }
 
   static loadPlugins($) {
-    $.prototype = {
-      text2,
-      findArray,
-    };
-
+    $.prototype.text2 = text2
+    $.prototype.findArray = findArray
     return $;
   }
 
-  static _getElementsAheadTextMatch(cheerio, { text, anchor }) {
-    const elements = Helpers._getElementsFrom(cheerio, anchor, '*');
-    const h2Position = Helpers._findHeadPosition(cheerio, text, elements);
+  static _getElementsAheadTextMatch(cheerio, { tableHeader, anchor }) {
+    const elements = Helpers._getElementsFrom(cheerio, anchor);
+    const h2Position = Helpers._findHeadPosition(cheerio, elements, tableHeader);
     return elements.slice(h2Position + 1, elements.length) || [{}];
   }
 
@@ -90,8 +87,9 @@ class Helpers {
       });
   }
 
-  static _getElementsFrom(cheerio, anchor, selector) {
+  static _getElementsFrom(cheerio, anchor) {
     const $ = cheerio();
+    const selector = '*';
 
     let els = $(selector)
       .toArray();
