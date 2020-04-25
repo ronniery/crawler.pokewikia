@@ -6,7 +6,7 @@ class Pokedex {
 
   static getPokedex(cheerio, anchor) {
     const $ = cheerio();
-    const [{ table }] = Helpers.searchTableOnDocument(cheerio, { name: 'Pokédex data', anchor });
+    const [{ table }] = Helpers.searchTableOnDocument(cheerio, { tableHeader: 'Pokédex data', anchor });
     const $table = $(table);
 
     return $table
@@ -29,8 +29,6 @@ class Pokedex {
 
     // It will parse the other properties
     dexline[nextProp.replace('№', 'Id')] = nextValue;
-
-    // TODO: Check if the code was broken after changes - and that will override properly
     Pokedex._getLocalizations(dexline, nextProp, nextValue);
     Pokedex._getAbilities(dexline, nextProp, domHandlers);
 

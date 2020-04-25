@@ -28,7 +28,6 @@ pokemonSchema.statics.saveIfNotExits = async function (doc) {
   })
 }
 
-// TODO: maybe useless
 pokemonSchema.methods.toJSON = function () {
   const obj = this.toObject()
   delete obj.__v

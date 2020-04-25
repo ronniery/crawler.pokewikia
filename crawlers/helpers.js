@@ -78,6 +78,19 @@ class Helpers {
     return decoder.decode(text)
   }
 
+  static getImgSrc($, el) {
+    const $span = $(el).find('span')
+
+    // Try get img from lazy loading
+    if (_.some($span)) {
+      return $span.attr('data-src');
+    }
+
+    // Fallback to default <img> tag
+    return $(el).find('img')
+      .attr('src')
+  }
+
   static _getElementsAheadTextMatch(cheerio, { tableHeader, anchor }) {
     const elements = Helpers._getElementsFrom(cheerio, anchor);
     const h2Position = Helpers._findHeadPosition(cheerio, elements, tableHeader);

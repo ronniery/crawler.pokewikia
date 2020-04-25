@@ -28,7 +28,7 @@ class EvoChart {
       globalId: $data.find('small').first().text2(),
       name: $data.find('a.ent-name').text2(),
       types: rawTypes.map(a => $(a).text2()),
-      evolveCondition: _.isEmpty(condition) ? null : condition.replace(/[(|)]/g, '').split(/\W\s/)
+      evolveCondition: _.isEmpty(condition) ? undefined : condition.replace(/[(|)]/g, '').split(/\W\s/)
     }
   }
 }

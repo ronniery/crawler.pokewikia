@@ -295,7 +295,7 @@ class PokemonDB {
 
   _getBreeding(cheerio) {
     const [{ table }] = Helpers.searchTableOnDocument(cheerio, {
-      name: 'Breeding'
+      tableHeader: 'Breeding'
     });
 
     const $ = cheerio();
@@ -311,7 +311,7 @@ class PokemonDB {
 
   _getTraining(cheerio) {
     const [{ table }] = Helpers.searchTableOnDocument(cheerio, {
-      name: 'Training'
+      tableHeader: 'Training'
     });
 
     const $ = cheerio();

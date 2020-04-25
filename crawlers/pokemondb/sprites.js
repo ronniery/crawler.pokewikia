@@ -6,18 +6,6 @@ const cheerio = require('cheerio');
 const _ = require('lodash');
 
 const Helpers = require('@crawlers/helpers');
-const getImgSrc = ($, el) => {
-  const $span = $(el).find('span')
-
-  // Try get img from lazy loading
-  if (_.some($span)) {
-    return $span.attr('data-src');
-  }
-
-  // Fallback to default <img> tag
-  return $(el).find('img')
-    .attr('src')
-}
 
 class Sprites {
 
@@ -140,7 +128,7 @@ class Sprites {
 
     return {
       description: _.some(spanText) ? spanText : undefined,
-      image: getImgSrc($, span)
+      image: Helpers.getImgSrc($, span)
     };
   }
 
@@ -153,7 +141,7 @@ class Sprites {
       .map(a => {
         return {
           description: undefined,
-          image: getImgSrc($, a)
+          image: Helpers.getImgSrc($, a)
         };
       });
   }

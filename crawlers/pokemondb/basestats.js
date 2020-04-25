@@ -5,7 +5,7 @@ const Helpers = require('@crawlers/helpers')
 class BaseStats {
   static getBaseStats(cheerio, anchor) {
     const foundEl = Helpers.searchTableOnDocument(cheerio, {
-      name: 'Base stats',
+      tableHeader: 'Base stats',
       anchor
     });
 
@@ -36,11 +36,6 @@ class BaseStats {
       max: +getByIndex(3),
       min: +getByIndex(4)
     };
-
-    if (propCamel === "total") {
-      delete reducer.max
-      delete reducer.min
-    }
 
     return reducer;
   }
