@@ -1,8 +1,12 @@
 const _ = require('lodash');
+const Entities = require('html-entities').AllHtmlEntities;
+const decoder = new Entities()
 
 const text2 = function () {
-  return this.text().trim()
+  const bruteText = this.text().trim()
     .replace(/\n+/g, '');
+
+  return Helpers.decodeEntities(bruteText)
 };
 
 const findArray = function (selector) {
@@ -70,6 +74,10 @@ class Helpers {
     return $;
   }
 
+  static decodeEntities(text) {
+    return decoder.decode(text)
+  }
+
   static _getElementsAheadTextMatch(cheerio, { tableHeader, anchor }) {
     const elements = Helpers._getElementsFrom(cheerio, anchor);
     const h2Position = Helpers._findHeadPosition(cheerio, elements, tableHeader);
@@ -78,7 +86,7 @@ class Helpers {
 
   static _findHeadPosition(cheerio, elements, textToMatch) {
     const $ = cheerio();
-    
+
     return $(elements)
       .toArray()
       .findIndex(child => {

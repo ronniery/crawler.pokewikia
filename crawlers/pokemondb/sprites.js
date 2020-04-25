@@ -110,7 +110,7 @@ class Sprites {
     const unlabeledSprites = $row.findArray('> a');
 
     const table = {
-      captions: _.compact(rowCaptionParts),
+      captions: _.compact(rowCaptionParts).map(caption => Helpers.decodeEntities(caption)),
       images: [{
         description: '-',
         image: undefined

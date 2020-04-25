@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
       res
         .status(err.statusCode || 500)
-        .send(err.error);
+        .send(err.error || err.message);
     });
 });
 

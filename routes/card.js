@@ -10,7 +10,7 @@ const tryAction = (res, action) => {
   } catch (err) {
     res
       .status(err.statusCode || 500)
-      .send(err.error);
+      .send(err.error || err.message);
   }
 }
 

@@ -142,6 +142,13 @@
     temp-dir "^2.0.0"
     tslib "^1.9.3"
 
+"@snyk/ruby-semver@2.1.2":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@snyk/ruby-semver/-/ruby-semver-2.1.2.tgz#5c85a388d927a86c6ea3022b02ba77c4cac1098b"
+  integrity sha512-hYiNnwzNJ5DYM9JydeK3d2rd0lupgB/r5Nh154uazsV6EJn+lcba49X8+pdMMQIBhGQNvLtWLqYpeGfG07WcGQ==
+  dependencies:
+    lodash "^4.17.14"
+
 "@snyk/ruby-semver@^2.0.4":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@snyk/ruby-semver/-/ruby-semver-2.1.0.tgz#d76cc02fc20860c224da2646fe9cc1bb0b0d1d15"
@@ -212,13 +219,6 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/events/-/events-3.0.0.tgz#2862f3f58a9a7f7c3e78d79f130dd4d71c25c2a7"
   integrity sha512-EaObqwIvayI5a8dCzhFrjKzVwKLxjoG9T6Ppd5CEo07LRKfQ8Yokw54r5+Wq7FaBQ+yXRvQAYPrHwya1/UFt9g==
-
-"@types/iconv-lite@0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@types/iconv-lite/-/iconv-lite-0.0.1.tgz#aa3b8bda2be512b1ae0a057b942e869c370a5569"
-  integrity sha1-qjuL2ivlErGuCgV7lC6GnDcKVWk=
-  dependencies:
-    "@types/node" "*"
 
 "@types/js-yaml@^3.12.1":
   version "3.12.3"
@@ -465,11 +465,6 @@ astral-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/astral-regex/-/astral-regex-1.0.0.tgz#6c8c3fb827dd43ee3918f27b82782ab7658a6fd9"
   integrity sha512-+Ryf6g3BKoRc7jfp7ad8tM4TtMiaWvbF/1/sQcZPkkS7ag3D5nMBCe2UfOTONtAkaG0tO0ij3C5Lwmf1EiyjHg==
 
-async@0.2.10:
-  version "0.2.10"
-  resolved "https://registry.yarnpkg.com/async/-/async-0.2.10.tgz#b6bbe0b0674b9d719708ca38de8c237cb526c3d1"
-  integrity sha1-trvgsGdLnXGXCMo43owjfLUmw9E=
-
 async@^1.4.0:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
@@ -518,13 +513,6 @@ binary-extensions@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.0.0.tgz#23c0df14f6a88077f5f986c0d167ec03c3d5537c"
   integrity sha512-Phlt0plgpIIBOGTT/ehfFnbNlfsDEiqmzE2KRXoX1bLIlir4X/MR+zSyBEkL05ffWgnRSf/DXv+WrUAVr93/ow==
-
-binary-search-tree@0.2.5:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/binary-search-tree/-/binary-search-tree-0.2.5.tgz#7dbb3b210fdca082450dad2334c304af39bdc784"
-  integrity sha1-fbs7IQ/coIJFDa0jNMMErzm9x4Q=
-  dependencies:
-    underscore "~1.4.4"
 
 bl@^2.2.0:
   version "2.2.0"
@@ -2007,6 +1995,11 @@ hsts@2.2.0:
   dependencies:
     depd "2.0.0"
 
+html-entities@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-1.3.1.tgz#fb9a1a4b5b14c5daba82d3e34c6ae4fe701a0e44"
+  integrity sha512-rhE/4Z3hIhzHAUKbW8jVcCyuT5oJCXXqhN/6mXXVCpzTmvJnoH2HL/bt3EZ6p55jbFJBeAe1ZNpL5BugLujxNA==
+
 htmlparser2@^3.9.1:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-3.10.1.tgz#bd679dc3f59897b6a34bb10749c855bb53a9392f"
@@ -2075,13 +2068,6 @@ iconv-lite@0.4.24, iconv-lite@^0.4.24, iconv-lite@^0.4.4:
   version "0.4.24"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
   integrity sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==
-  dependencies:
-    safer-buffer ">= 2.1.2 < 3"
-
-iconv-lite@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.5.1.tgz#b2425d3c7b18f7219f2ca663d103bddb91718d64"
-  integrity sha512-ONHr16SQvKZNSqjQT9gy5z24Jw+uqfO02/ngBSBoqChZ+W8qXX7GPRa1RoUnzGADw8K63R1BXUMzarCVQBpY8Q==
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
 
@@ -2517,13 +2503,6 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-lie@3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/lie/-/lie-3.1.1.tgz#9a436b2cc7746ca59de7a41fa469b3efb76bd87e"
-  integrity sha1-mkNrLMd0bKWd56QfpGmz77dr2H4=
-  dependencies:
-    immediate "~3.0.5"
-
 lie@~3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/lie/-/lie-3.3.0.tgz#dcf82dee545f46074daf200c7c1c5a08e0f40f6a"
@@ -2540,13 +2519,6 @@ load-json-file@^2.0.0:
     parse-json "^2.2.0"
     pify "^2.0.0"
     strip-bom "^3.0.0"
-
-localforage@^1.3.0:
-  version "1.7.3"
-  resolved "https://registry.yarnpkg.com/localforage/-/localforage-1.7.3.tgz#0082b3ca9734679e1bd534995bdd3b24cf10f204"
-  integrity sha512-1TulyYfc4udS7ECSBT2vwJksWbkwwTX8BzeUIiq8Y07Riy7bDAAnxDaPU/tWyOVmQAcWJIEIFP9lPfBGqVoPgQ==
-  dependencies:
-    lie "3.1.1"
 
 locate-path@^2.0.0:
   version "2.0.0"
@@ -2704,7 +2676,7 @@ minimist@^1.2.0, minimist@^1.2.5:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
 
-mkdirp@^0.5.1, mkdirp@~0.5.1:
+mkdirp@^0.5.1:
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.5.tgz#d91cefd62d1436ca0f41620e251288d420099def"
   integrity sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==
@@ -2817,17 +2789,6 @@ nconf@^0.10.0:
     ini "^1.3.0"
     secure-keys "^1.0.0"
     yargs "^3.19.0"
-
-nedb@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/nedb/-/nedb-1.8.0.tgz#0e3502cd82c004d5355a43c9e55577bd7bd91d88"
-  integrity sha1-DjUCzYLABNU1WkPJ5VV3vXvZHYg=
-  dependencies:
-    async "0.2.10"
-    binary-search-tree "0.2.5"
-    localforage "^1.3.0"
-    mkdirp "~0.5.1"
-    underscore "~1.4.4"
 
 needle@^2.2.4, needle@^2.3.3, needle@^2.4.0:
   version "2.4.1"
@@ -3820,15 +3781,17 @@ snyk-mvn-plugin@2.10.0:
     tmp "^0.1.0"
     tslib "1.11.0"
 
-snyk-nodejs-lockfile-parser@1.18.0:
-  version "1.18.0"
-  resolved "https://registry.yarnpkg.com/snyk-nodejs-lockfile-parser/-/snyk-nodejs-lockfile-parser-1.18.0.tgz#be049a89514795dacb0b7058668b74253f58f663"
-  integrity sha512-QGb6HBtnqefbVtrDyUqA3vXGo2DZJAlDxrsgIpKxFalhxmxmWQE3Fxx44V3aRq9H8iZ1eXb7s/drTsa/s9qGJQ==
+snyk-nodejs-lockfile-parser@1.21.0:
+  version "1.21.0"
+  resolved "https://registry.yarnpkg.com/snyk-nodejs-lockfile-parser/-/snyk-nodejs-lockfile-parser-1.21.0.tgz#231b360726dbcb0246050a1c912c597abbf9debd"
+  integrity sha512-U9uCMqA8+72KHD4/ONaAIvmb27C3J927Jtirda8dOkoxpS7Wy6ubsz4kl+rNkeJXfkLV1H7E8n52pzPH2bjXZA==
   dependencies:
     "@yarnpkg/lockfile" "^1.0.2"
+    event-loop-spinner "^1.1.0"
     graphlib "^2.1.5"
     lodash "^4.17.14"
     p-map "2.1.0"
+    snyk-config "^3.0.0"
     source-map-support "^0.5.7"
     tslib "^1.9.3"
     uuid "^3.3.2"
@@ -3944,15 +3907,16 @@ snyk-try-require@1.3.1, snyk-try-require@^1.1.1, snyk-try-require@^1.3.1:
     lru-cache "^4.0.0"
     then-fs "^2.0.0"
 
-snyk@^1.305.1:
-  version "1.307.0"
-  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.307.0.tgz#964caf02204ad4d45bdce1208cabd9081c9e38a8"
-  integrity sha512-8kyYedgbA+Umf4qO7TyLD1sIZbN4zNvylvXlWJYk8sTPoww9mP4tTvTZcrmYkOCI84npG20tMRXOr5GIy9vcTg==
+snyk@^1.311.0:
+  version "1.311.0"
+  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.311.0.tgz#644f2d12b95bf628a6e02e9a702354bb92af2c62"
+  integrity sha512-eH+JFzgCU4qqmEeY9CXJq+XUtlOAVuXv0XtzRnIhWloBX9HaXDALsIjGyR87UPj0PpARrwkXd0uIwsSYM9x2mg==
   dependencies:
     "@snyk/cli-interface" "^2.4.0"
     "@snyk/configstore" "^3.2.0-rc1"
     "@snyk/dep-graph" "1.16.1"
     "@snyk/gemfile" "1.2.0"
+    "@snyk/ruby-semver" "2.1.2"
     "@snyk/snyk-cocoapods-plugin" "2.1.1"
     "@snyk/update-notifier" "^2.5.1-rc2"
     "@types/agent-base" "^4.2.0"
@@ -3980,7 +3944,7 @@ snyk@^1.305.1:
     snyk-gradle-plugin "3.2.5"
     snyk-module "1.9.1"
     snyk-mvn-plugin "2.10.0"
-    snyk-nodejs-lockfile-parser "1.18.0"
+    snyk-nodejs-lockfile-parser "1.21.0"
     snyk-nuget-plugin "1.16.0"
     snyk-php-plugin "1.7.0"
     snyk-policy "1.13.5"
@@ -4438,11 +4402,6 @@ undefsafe@^2.0.2:
   integrity sha512-nrXZwwXrD/T/JXeygJqdCO6NZZ1L66HrxM/Z7mIq2oPanoN0F1nLx3lwJMu6AwJY69hdixaFQOuoYsMjE5/C2A==
   dependencies:
     debug "^2.2.0"
-
-underscore@~1.4.4:
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.4.4.tgz#61a6a32010622afa07963bf325203cf12239d604"
-  integrity sha1-YaajIBBiKvoHljvzJSA88SI51gQ=
 
 unique-string@^1.0.0:
   version "1.0.0"
