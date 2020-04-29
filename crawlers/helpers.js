@@ -33,6 +33,7 @@ class Helpers {
     const foundTable = [];
     const $ = _.first(args)();
 
+    // TODO: refactor that, but how?
     let workTable = {};
     for (const el of allElements) {
       const withoutHead = _.isEmpty(workTable);

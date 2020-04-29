@@ -34,7 +34,10 @@ class CardSchema {
         unique: true, 
         index: true 
       },
-      sprite: { type: String },
+      sprite: {
+        small: { type: String },
+        big: { type: String }
+      },
       name: { type: String },
       types: [{ type: String }]
     }, {

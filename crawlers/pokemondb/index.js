@@ -18,7 +18,8 @@ const Card = require('@models/card');
 const baseUrl = {
   POKEMONDB: 'https://pokemondb.net',
   POKECRIES: 'https://pokemoncries.com',
-  POKEZUKAN: 'https://zukan.pokemon.co.jp'
+  POKEZUKAN: 'https://zukan.pokemon.co.jp',
+  POKEASSETS: 'https://assets.pokemon.com'
 }
 
 /**
@@ -71,10 +72,7 @@ class PokemonDB {
   async getPaginatedCards(page, limit) {
     // Check if any item exists inside db   
     if (!await Card.exists({})) {
-      const allcards = await this._initCards();
-
-      await Card
-        .insertMany(allcards)
+      await this._initCards();
     }
 
     return await Card.getPaginatedCards(page, limit)
@@ -82,7 +80,7 @@ class PokemonDB {
 
   async getFilteredCards(searchTerm, limit) {
     if (!await Card.exists({})) {
-      await this._getAllCards()
+      await this._initCards()
     }
 
     return await Card.getMatchCards(searchTerm, limit)
@@ -153,32 +151,11 @@ class PokemonDB {
   }
 
   async _initCards() {
-    const cheerio = await this._getParsedHtml(`${baseUrl.POKEMONDB}/pokedex/national`);
-    const $ = cheerio();
-
-    const allcards = $('.infocard')
-      .toArray()
-      .map(el => {
-        const $el = $(el);
-        const a = $el.find('small:last-child a');
-        const code = $el.find('small:first-child').text2().replace('#', '');
-        return {
-          internationalId: code,
-          sprite: `${baseUrl.POKECRIES}/pokemon-images/${+code}.png`,
-          name: $el.find('.ent-name').text2(),
-          types: a.toArray().map(link => $(link).text2())
-        };
-      });
-
-    return allcards;
-  }
-
-  async _getAllCards() {
-    const model = new Card()
     const cheerio = await this._getParsedHtml(
       `${baseUrl.POKEMONDB}/pokedex/national`
     );
     const $ = cheerio();
+
     const allcards = $('.infocard')
       .toArray()
       .map(el => {
@@ -188,13 +165,19 @@ class PokemonDB {
 
         return {
           internationalId: code,
-          sprite: `${baseUrl.POKECRIES}/pokemon-images/${+code}.png`,
+          sprite: {
+            small: `${baseUrl.POKECRIES}/pokemon-images/${+code}.png`,
+            big: `${baseUrl.POKEASSETS}/assets/cms2/img/pokedex/full/${code}.png`
+          },
           name: $el.find('.ent-name').text2(),
           types: a.toArray().map(link => $(link).text2())
         };
       });
 
-    await model.save(allcards)
+    await Card
+      .insertMany(allcards)
+
+    return allcards
   }
 
   async _getParsedHtml(url) {
