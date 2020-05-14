@@ -18,6 +18,22 @@ router.get('/', (req, res) => {
         .status(err.statusCode || 500)
         .send(err.error || err.message);
     });
-});
+}).descriptor({
+  description: 'Get all pokemon details.',
+  params: [
+    {
+      on: 'query',
+      name: 'name',
+      description: 'The pokemon name to be searched.',
+      isMandatory: true
+    }
+  ],
+  response: {
+    type: 'json',
+    body: {
+      description: `The matched pokemon and his left and right near neighbors.`
+    }
+  }
+})
 
 module.exports = router;

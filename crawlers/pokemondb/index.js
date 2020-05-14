@@ -49,6 +49,10 @@ class PokemonDB {
    * @memberof PokemonDB
    */
   async getPokemon(pokename) {
+    if (_.isEmpty(pokename)) {
+      throw new Error('Empty pokemon name, check it and try again.')
+    }
+
     let pokemon = await Pokemon
       .findOne({
         'dexdata.name': pokename
@@ -79,6 +83,10 @@ class PokemonDB {
   }
 
   async getFilteredCards(searchTerm, limit) {
+    if (_.isEmpty(searchTerm)) {
+      throw new Error('Empty searchTerm, check it and try again.')
+    }
+
     if (!await Card.exists({})) {
       await this._initCards()
     }
