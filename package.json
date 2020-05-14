@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "nodemon --config ./nodemon.json ./bin/www",
     "build": "webpack --mode production",
     "test": "snyk test"
   },
