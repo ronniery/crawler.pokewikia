@@ -5,7 +5,9 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "build": "webpack --mode production",
-    "test": "snyk test"
+    "test": "snyk test",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "main": "app.js",
   "author": "Ronniery Borges Correa",
@@ -28,7 +30,8 @@
     "morgan": "~1.10.0",
     "nodemon": "^2.0.4",
     "request": "^2.88.2",
-    "request-promise": "^4.2.5"
+    "request-promise": "^4.2.5",
+    "snyk": "^1.320.5"
   },
   "devDependencies": {
     "@types/lodash.first": "^3.0.6",
@@ -38,8 +41,7 @@
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
-    "snyk": "^1.320.5"
+    "eslint-plugin-standard": "^4.0.1"
   },
   "_moduleAliases": {
     "@root": ".",
@@ -53,5 +55,6 @@
   "bugs": {
     "url": "https://github.com/ronniery/crawler.pokewikia/issues"
   },
-  "homepage": "https://github.com/ronniery/crawler.pokewikia#readme"
+  "homepage": "https://github.com/ronniery/crawler.pokewikia#readme",
+  "snyk": true
 }
