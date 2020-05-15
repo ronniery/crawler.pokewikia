@@ -1,0 +1,387 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "redBlueYellow": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "links": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "link",
+              "text"
+            ],
+            "properties": {
+              "link": {
+                "type": "string",
+                "minLength": 1
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "text",
+        "links"
+      ]
+    },
+    "goldSilverCrystal": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "required": [],
+            "properties": {}
+          }
+        }
+      },
+      "required": [
+        "text",
+        "links"
+      ]
+    },
+    "rubySapphire": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "required": [],
+            "properties": {}
+          }
+        }
+      },
+      "required": [
+        "text",
+        "links"
+      ]
+    },
+    "fireRedLeafGreen": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "links": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "link",
+              "text"
+            ],
+            "properties": {
+              "link": {
+                "type": "string",
+                "minLength": 1
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "text",
+        "links"
+      ]
+    },
+    "emerald": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "required": [],
+            "properties": {}
+          }
+        }
+      },
+      "required": [
+        "text",
+        "links"
+      ]
+    },
+    "diamondPearlPlatinum": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "required": [],
+            "properties": {}
+          }
+        }
+      },
+      "required": [
+        "text",
+        "links"
+      ]
+    },
+    "heartGoldSoulSilver": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "links": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "link",
+              "text"
+            ],
+            "properties": {
+              "link": {
+                "type": "string",
+                "minLength": 1
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "text",
+        "links"
+      ]
+    },
+    "blackWhiteBlack2White2": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "required": [],
+            "properties": {}
+          }
+        }
+      },
+      "required": [
+        "text",
+        "links"
+      ]
+    },
+    "xy": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "links": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "link",
+              "text"
+            ],
+            "properties": {
+              "link": {
+                "type": "string",
+                "minLength": 1
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "text",
+        "links"
+      ]
+    },
+    "omegaRubyAlphaSapphire": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "required": [],
+            "properties": {}
+          }
+        }
+      },
+      "required": [
+        "text",
+        "links"
+      ]
+    },
+    "sunMoon": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "required": [],
+            "properties": {}
+          }
+        }
+      },
+      "required": [
+        "text",
+        "links"
+      ]
+    },
+    "ultraSunUltraMoon": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "links": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "link",
+              "text"
+            ],
+            "properties": {
+              "link": {
+                "type": "string",
+                "minLength": 1
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "text",
+        "links"
+      ]
+    },
+    "letsGoPikachuLetsGoEevee": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "links": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "link",
+              "text"
+            ],
+            "properties": {
+              "link": {
+                "type": "string",
+                "minLength": 1
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "text",
+        "links"
+      ]
+    },
+    "swordShield": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "links": {
+          "type": "array",
+          "items": {
+            "required": [],
+            "properties": {}
+          }
+        }
+      },
+      "required": [
+        "text",
+        "links"
+      ]
+    }
+  },
+  "required": [
+    "redBlueYellow",
+    "goldSilverCrystal",
+    "rubySapphire",
+    "fireRedLeafGreen",
+    "emerald",
+    "diamondPearlPlatinum",
+    "heartGoldSoulSilver",
+    "blackWhiteBlack2White2",
+    "xy",
+    "omegaRubyAlphaSapphire",
+    "sunMoon",
+    "ultraSunUltraMoon",
+    "letsGoPikachuLetsGoEevee",
+    "swordShield"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "eggGroups": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "gender": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "eggCycles": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "meta": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "text",
+        "meta"
+      ]
+    }
+  },
+  "required": [
+    "eggGroups",
+    "gender",
+    "eggCycles"
+  ]
+}

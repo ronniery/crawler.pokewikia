@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "evYield": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "catchRate": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "meta": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "text",
+        "meta"
+      ]
+    },
+    "baseFriendship": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "meta": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "text",
+        "meta"
+      ]
+    },
+    "baseExp": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "text"
+      ]
+    },
+    "growthRate": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "text"
+      ]
+    }
+  },
+  "required": [
+    "evYield",
+    "catchRate",
+    "baseFriendship",
+    "baseExp",
+    "growthRate"
+  ]
+}

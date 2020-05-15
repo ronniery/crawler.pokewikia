@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "hp": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "min": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "base",
+        "max",
+        "min"
+      ]
+    },
+    "attack": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "min": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "base",
+        "max",
+        "min"
+      ]
+    },
+    "defense": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "min": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "base",
+        "max",
+        "min"
+      ]
+    },
+    "spAtk": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "min": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "base",
+        "max",
+        "min"
+      ]
+    },
+    "spDef": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "min": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "base",
+        "max",
+        "min"
+      ]
+    },
+    "speed": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "min": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "base",
+        "max",
+        "min"
+      ]
+    },
+    "total": {
+      "type": "object",
+      "properties": {
+        "base": {
+          "type": "number"
+        },
+        "max": {},
+        "min": {}
+      },
+      "required": [
+        "base"
+      ]
+    }
+  },
+  "required": [
+    "hp",
+    "attack",
+    "defense",
+    "spAtk",
+    "spDef",
+    "speed",
+    "total"
+  ]
+}

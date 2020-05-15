@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nationalId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "species": {
+      "type": "string",
+      "minLength": 1
+    },
+    "height": {
+      "type": "string",
+      "minLength": 1
+    },
+    "weight": {
+      "type": "string",
+      "minLength": 1
+    },
+    "abilities": {
+      "type": "array",
+      "items": {
+        "required": [],
+        "properties": {}
+      }
+    },
+    "localizations": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": {
+        "required": [
+          "route",
+          "game"
+        ],
+        "properties": {
+          "route": {
+            "type": "string",
+            "minLength": 1
+          },
+          "game": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "name",
+    "nationalId",
+    "type",
+    "species",
+    "height",
+    "weight",
+    "abilities",
+    "localizations"
+  ]
+}

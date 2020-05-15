@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "newGen": {
+      "type": "string",
+      "minLength": 1
+    },
+    "old": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "newGen",
+    "old"
+  ]
+}

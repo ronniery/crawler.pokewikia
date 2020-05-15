@@ -1,0 +1,373 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "swordShield": {
+      "type": "object",
+      "properties": {
+        "movesLearntByLevelUp": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "level",
+              "move",
+              "type",
+              "power",
+              "accuracy"
+            ],
+            "properties": {
+              "level": {
+                "type": "number"
+              },
+              "move": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "category": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "title"
+                ]
+              },
+              "power": {
+                "type": "string",
+                "minLength": 1
+              },
+              "accuracy": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "movesLearntOnEvolution": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "move",
+              "type",
+              "power",
+              "accuracy"
+            ],
+            "properties": {
+              "level": {},
+              "move": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "type": "string"
+              },
+              "category": {
+                "type": "object",
+                "properties": {},
+                "required": []
+              },
+              "power": {
+                "type": "string",
+                "minLength": 1
+              },
+              "accuracy": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "eggMoves": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "move",
+              "type",
+              "power",
+              "accuracy"
+            ],
+            "properties": {
+              "level": {},
+              "move": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "type": "string"
+              },
+              "category": {
+                "type": "object",
+                "properties": {},
+                "required": []
+              },
+              "power": {
+                "type": "string",
+                "minLength": 1
+              },
+              "accuracy": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "movesLearntByTm": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "level",
+              "move",
+              "type",
+              "power",
+              "accuracy"
+            ],
+            "properties": {
+              "level": {
+                "type": "number"
+              },
+              "move": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "category": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "title"
+                ]
+              },
+              "power": {
+                "type": "string",
+                "minLength": 1
+              },
+              "accuracy": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "movesLearntByTr": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "level",
+              "move",
+              "type",
+              "power",
+              "accuracy"
+            ],
+            "properties": {
+              "level": {
+                "type": "number"
+              },
+              "move": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "category": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "title"
+                ]
+              },
+              "power": {
+                "type": "string",
+                "minLength": 1
+              },
+              "accuracy": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "movesLearntByLevelUp",
+        "movesLearntOnEvolution",
+        "eggMoves",
+        "movesLearntByTm",
+        "movesLearntByTr"
+      ]
+    },
+    "letsGoPikachuLetsGoEevee": {
+      "type": "object",
+      "properties": {
+        "movesLearntByLevelUp": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "level",
+              "move",
+              "type",
+              "power",
+              "accuracy"
+            ],
+            "properties": {
+              "level": {
+                "type": "number"
+              },
+              "move": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "category": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "title"
+                ]
+              },
+              "power": {
+                "type": "string",
+                "minLength": 1
+              },
+              "accuracy": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "movesLearntOnEvolution": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "move",
+              "type",
+              "power",
+              "accuracy"
+            ],
+            "properties": {
+              "level": {},
+              "move": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "type": "string"
+              },
+              "category": {
+                "type": "object",
+                "properties": {},
+                "required": []
+              },
+              "power": {
+                "type": "string",
+                "minLength": 1
+              },
+              "accuracy": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "movesLearntByTm": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "required": [
+              "level",
+              "move",
+              "type",
+              "power",
+              "accuracy"
+            ],
+            "properties": {
+              "level": {
+                "type": "number"
+              },
+              "move": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "category": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "title"
+                ]
+              },
+              "power": {
+                "type": "string",
+                "minLength": 1
+              },
+              "accuracy": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "movesLearntByLevelUp",
+        "movesLearntOnEvolution",
+        "movesLearntByTm"
+      ]
+    }
+  },
+  "required": [
+    "swordShield",
+    "letsGoPikachuLetsGoEevee"
+  ]
+}
