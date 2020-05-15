@@ -1,4 +1,9 @@
 {
   "verbose": true,
-  "ignore": ["node_modules/*", "dump/*", "route-list.json"]
+  "ignore": [
+    "node_modules/*", 
+    "dump/*", 
+    "route-list.json", 
+    "test/*"
+  ]
 }
