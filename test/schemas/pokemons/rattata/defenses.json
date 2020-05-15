@@ -1,0 +1,87 @@
+{
+  "type": "array",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "",
+  "minItems": 1,
+  "uniqueItems": true,
+  "items": {
+    "type": "object",
+    "required": [
+      "normal",
+      "fire",
+      "water",
+      "electric",
+      "grass",
+      "ice",
+      "fighting",
+      "poison",
+      "ground"
+    ],
+    "properties": {
+      "normal": {
+        "type": "array",
+        "items": {
+          "required": [],
+          "properties": {}
+        }
+      },
+      "fire": {
+        "type": "array",
+        "items": {
+          "required": [],
+          "properties": {}
+        }
+      },
+      "water": {
+        "type": "array",
+        "items": {
+          "required": [],
+          "properties": {}
+        }
+      },
+      "electric": {
+        "type": "array",
+        "items": {
+          "required": [],
+          "properties": {}
+        }
+      },
+      "grass": {
+        "type": "array",
+        "items": {
+          "required": [],
+          "properties": {}
+        }
+      },
+      "ice": {
+        "type": "array",
+        "items": {
+          "required": [],
+          "properties": {}
+        }
+      },
+      "fighting": {
+        "type": "array",
+        "items": {
+          "required": [],
+          "properties": {}
+        }
+      },
+      "poison": {
+        "type": "array",
+        "items": {
+          "required": [],
+          "properties": {}
+        }
+      },
+      "ground": {
+        "type": "array",
+        "items": {
+          "required": [],
+          "properties": {}
+        }
+      },
+      "ability": {}
+    }
+  }
+}

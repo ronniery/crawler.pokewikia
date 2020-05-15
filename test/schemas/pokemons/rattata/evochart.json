@@ -1,0 +1,96 @@
+{
+  "type": "array",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "",
+  "minItems": 1,
+  "uniqueItems": true,
+  "items": {
+    "type": "object",
+    "required": [
+      "0",
+      "1"
+    ],
+    "properties": {
+      "0": {
+        "type": "array",
+        "uniqueItems": true,
+        "minItems": 1,
+        "items": {
+          "required": [
+            "img",
+            "globalId",
+            "name"
+          ],
+          "properties": {
+            "img": {
+              "type": "string",
+              "minLength": 1
+            },
+            "globalId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "types": {
+              "type": "array",
+              "items": {
+                "required": [],
+                "properties": {}
+              }
+            },
+            "evolveCondition": {
+              "type": "array",
+              "items": {
+                "required": [],
+                "properties": {}
+              }
+            }
+          }
+        }
+      },
+      "1": {
+        "type": "array",
+        "uniqueItems": true,
+        "minItems": 1,
+        "items": {
+          "required": [
+            "img",
+            "globalId",
+            "name"
+          ],
+          "properties": {
+            "img": {
+              "type": "string",
+              "minLength": 1
+            },
+            "globalId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "types": {
+              "type": "array",
+              "items": {
+                "required": [],
+                "properties": {}
+              }
+            },
+            "evolveCondition": {
+              "type": "array",
+              "items": {
+                "required": [],
+                "properties": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,484 @@
+{
+  "type": "array",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "",
+  "minItems": 1,
+  "uniqueItems": true,
+  "items": {
+    "type": "object",
+    "required": [
+      "rattata"
+    ],
+    "properties": {
+      "rattata": {
+        "type": "object",
+        "properties": {
+          "redBlue": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "yellow": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "gold": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "silver": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "crystal": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "rubySapphire": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "fireRed": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "leafGreen": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "emerald": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "diamondPearlPlatinum": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "heartGold": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "soulSilver": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "blackWhite": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "black2White2": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "x": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "y": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "omegaRubyAlphaSapphire": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "sun": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "moon": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "ultraSun": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "ultraMoon": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          },
+          "letsGoPikachuLetsGoEevee": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "originalTitle": {
+                "type": "array",
+                "items": {
+                  "required": [],
+                  "properties": {}
+                }
+              }
+            },
+            "required": [
+              "text",
+              "originalTitle"
+            ]
+          }
+        },
+        "required": [
+          "redBlue",
+          "yellow",
+          "gold",
+          "silver",
+          "crystal",
+          "rubySapphire",
+          "fireRed",
+          "leafGreen",
+          "emerald",
+          "diamondPearlPlatinum",
+          "heartGold",
+          "soulSilver",
+          "blackWhite",
+          "black2White2",
+          "x",
+          "y",
+          "omegaRubyAlphaSapphire",
+          "sun",
+          "moon",
+          "ultraSun",
+          "ultraMoon",
+          "letsGoPikachuLetsGoEevee"
+        ]
+      }
+    }
+  }
+}

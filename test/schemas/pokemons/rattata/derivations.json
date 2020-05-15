@@ -1,0 +1,384 @@
+{
+  "type": "array",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "",
+  "minItems": 1,
+  "uniqueItems": true,
+  "items": {
+    "type": "object",
+    "required": [
+      "baseStats",
+      "dexdata",
+      "defenses",
+      "pokeImgs"
+    ],
+    "properties": {
+      "baseStats": {
+        "type": "object",
+        "properties": {
+          "hp": {
+            "type": "object",
+            "properties": {
+              "base": {
+                "type": "number"
+              },
+              "max": {
+                "type": "number"
+              },
+              "min": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "base",
+              "max",
+              "min"
+            ]
+          },
+          "attack": {
+            "type": "object",
+            "properties": {
+              "base": {
+                "type": "number"
+              },
+              "max": {
+                "type": "number"
+              },
+              "min": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "base",
+              "max",
+              "min"
+            ]
+          },
+          "defense": {
+            "type": "object",
+            "properties": {
+              "base": {
+                "type": "number"
+              },
+              "max": {
+                "type": "number"
+              },
+              "min": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "base",
+              "max",
+              "min"
+            ]
+          },
+          "spAtk": {
+            "type": "object",
+            "properties": {
+              "base": {
+                "type": "number"
+              },
+              "max": {
+                "type": "number"
+              },
+              "min": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "base",
+              "max",
+              "min"
+            ]
+          },
+          "spDef": {
+            "type": "object",
+            "properties": {
+              "base": {
+                "type": "number"
+              },
+              "max": {
+                "type": "number"
+              },
+              "min": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "base",
+              "max",
+              "min"
+            ]
+          },
+          "speed": {
+            "type": "object",
+            "properties": {
+              "base": {
+                "type": "number"
+              },
+              "max": {
+                "type": "number"
+              },
+              "min": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "base",
+              "max",
+              "min"
+            ]
+          },
+          "total": {
+            "type": "object",
+            "properties": {
+              "base": {
+                "type": "number"
+              },
+              "max": {},
+              "min": {}
+            },
+            "required": [
+              "base"
+            ]
+          }
+        },
+        "required": [
+          "hp",
+          "attack",
+          "defense",
+          "spAtk",
+          "spDef",
+          "speed",
+          "total"
+        ]
+      },
+      "dexdata": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "nationalId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "species": {
+            "type": "string",
+            "minLength": 1
+          },
+          "height": {
+            "type": "string",
+            "minLength": 1
+          },
+          "weight": {
+            "type": "string",
+            "minLength": 1
+          },
+          "abilities": {
+            "type": "array",
+            "items": {
+              "required": [],
+              "properties": {}
+            }
+          },
+          "localizations": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "required": [
+                "route",
+                "game"
+              ],
+              "properties": {
+                "route": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "game": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "name",
+          "nationalId",
+          "type",
+          "species",
+          "height",
+          "weight",
+          "abilities",
+          "localizations"
+        ]
+      },
+      "defenses": {
+        "type": "array",
+        "uniqueItems": true,
+        "minItems": 1,
+        "items": {
+          "required": [
+            "ability"
+          ],
+          "properties": {
+            "normal": {
+              "type": "array",
+              "items": {
+                "required": [],
+                "properties": {}
+              }
+            },
+            "fire": {
+              "type": "array",
+              "items": {
+                "required": [],
+                "properties": {}
+              }
+            },
+            "water": {
+              "type": "array",
+              "items": {
+                "required": [],
+                "properties": {}
+              }
+            },
+            "electric": {
+              "type": "array",
+              "items": {
+                "required": [],
+                "properties": {}
+              }
+            },
+            "grass": {
+              "type": "array",
+              "items": {
+                "required": [],
+                "properties": {}
+              }
+            },
+            "ice": {
+              "type": "array",
+              "items": {
+                "required": [],
+                "properties": {}
+              }
+            },
+            "fighting": {
+              "type": "array",
+              "items": {
+                "required": [],
+                "properties": {}
+              }
+            },
+            "poison": {
+              "type": "array",
+              "items": {
+                "required": [],
+                "properties": {}
+              }
+            },
+            "ground": {
+              "type": "array",
+              "items": {
+                "required": [],
+                "properties": {}
+              }
+            },
+            "ability": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      },
+      "pokeImgs": {
+        "type": "object",
+        "properties": {
+          "pokedb": {
+            "type": "string",
+            "minLength": 1
+          },
+          "zucan": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "required": [
+                "no",
+                "sub",
+                "name",
+                "sub_name",
+                "omosa",
+                "takasa",
+                "type_1",
+                "type_2",
+                "kyodai_flg",
+                "image_m",
+                "image_s",
+                "zukan_no"
+              ],
+              "properties": {
+                "no": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sub": {
+                  "type": "number"
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sub_name": {
+                  "type": "string"
+                },
+                "omosa": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "takasa": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "type_1": {
+                  "type": "number"
+                },
+                "type_2": {
+                  "type": "number"
+                },
+                "kyodai_flg": {
+                  "type": "number"
+                },
+                "image_m": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "image_s": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "zukan_no": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "pokedb",
+          "zucan"
+        ]
+      }
+    }
+  }
+}

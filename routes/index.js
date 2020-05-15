@@ -2,7 +2,7 @@ const express = require('express'),
   router = express.Router(),
   fs = require('fs');
 
-/* GET home page. */
+/* GET entry application page. */
 router.get('/', (_req, res) => {
   'use strict';
   const routeList = fs.readFileSync('./route-list.json', {
