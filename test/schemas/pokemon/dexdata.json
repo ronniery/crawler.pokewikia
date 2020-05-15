@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "required": [
+    "dexdata"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "dexdata": {
+      "$id": "#/properties/dexdata",
+      "type": "object",
+      "required": [
+        "name",
+        "nationalId",
+        "type",
+        "species",
+        "height",
+        "weight",
+        "abilities",
+        "localizations"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "$id": "#/properties/dexdata/properties/name",
+          "type": "string"
+        },
+        "nationalId": {
+          "$id": "#/properties/dexdata/properties/nationalId",
+          "type": "string"
+        },
+        "type": {
+          "$id": "#/properties/dexdata/properties/type",
+          "type": "string"
+        },
+        "species": {
+          "$id": "#/properties/dexdata/properties/species",
+          "type": "string"
+        },
+        "height": {
+          "$id": "#/properties/dexdata/properties/height",
+          "type": "string"
+        },
+        "weight": {
+          "$id": "#/properties/dexdata/properties/weight",
+          "type": "string"
+        },
+        "abilities": {
+          "$id": "#/properties/dexdata/properties/abilities",
+          "type": "array",
+          "additionalItems": true,
+          "items": {
+            "anyOf": [
+              {
+                "$id": "#/properties/dexdata/properties/abilities/items/anyOf/0",
+                "type": "string"
+              }
+            ],
+            "$id": "#/properties/dexdata/properties/abilities/items"
+          }
+        },
+        "localizations": {
+          "$id": "#/properties/dexdata/properties/localizations",
+          "type": "array",
+          "additionalItems": true,
+          "items": {
+            "anyOf": [
+              {
+                "$id": "#/properties/dexdata/properties/localizations/items/anyOf/0",
+                "type": "object",
+                "required": [
+                  "route",
+                  "game"
+                ],
+                "additionalProperties": true,
+                "properties": {
+                  "route": {
+                    "$id": "#/properties/dexdata/properties/localizations/items/anyOf/0/properties/route",
+                    "type": "string"
+                  },
+                  "game": {
+                    "$id": "#/properties/dexdata/properties/localizations/items/anyOf/0/properties/game",
+                    "type": "string"
+                  }
+                }
+              }
+            ],
+            "$id": "#/properties/dexdata/properties/localizations/items"
+          }
+        }
+      }
+    }
+  }
+}

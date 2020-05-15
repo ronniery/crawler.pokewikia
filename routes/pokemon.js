@@ -6,7 +6,6 @@ const router = express.Router();
 router.get('/', (req, res) => {
   const { name } = req.query
 
-  // Genesect bug
   crawler.getPokemon(name)
     .then(details => {
       res.json(details);
