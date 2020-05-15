@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 const { expect } = require('chai')
 const _ = require('lodash')
-const { isObject, isEmpty, isArray } = _
+const { isObject, isEmpty, isArray, isEqual } = _
 const { Validator } = require('jsonschema');
 const request = require('supertest')
 
@@ -88,11 +88,56 @@ describe('Test /card route', function () {
             const hasDiff = _(bodyPage2)
               .differenceWith(body, _.isEqual)
               .isEmpty();
-              
+
             expect(hasDiff).to.be.false
             done();
           })
       });
+  })
+
+  it('Should get /card checking for total of items on header.', done => {
+    request(app)
+      .get('/card')
+      .end((_err, { header }) => {
+        expect(header['x-total-pages']).to.be.not.null;
+        expect(+header['x-total-pages']).to.be.gt(85)
+        done();
+      });
+  })
+
+  it('Should get /card/search cards with matches of the term.', async done => {
+    await Promise.all([
+      new Promise(resolve => {
+        request(app)
+          .get('/card/search')
+          .query({ term: 'bul' })
+          .end((_err, { body }) => {
+            expect(body.length).to.be.eq(4);
+
+            const cardNames = body.map(({ name }) => name)
+            const areEqual = isEqual(cardNames, [
+              'Bulbasaur', 'Snubbull',
+              'Granbull', 'Tapu Bulu'
+            ])
+
+            expect(areEqual).to.be.true
+            resolve();
+          });
+      }),
+      new Promise(resolve => {
+        request(app)
+          .get('/card/search')
+          .query({ term: 'Rattata' })
+          .end((_err, { body }) => {
+            expect(body.length).to.be.eq(1);
+
+            const areEqual = isEqual(body.map(({ name }) => name), ['Rattata'])
+            expect(areEqual).to.be.true
+            resolve();
+          });
+      })
+    ])
+      .then(() => done())
   })
 
   it('Should get a 404 for all not mapped routes.', done => {
@@ -105,16 +150,6 @@ describe('Test /card route', function () {
         expect(isObject(body) && isEmpty(body)).to.be.true;
         expect(error).to.be.not.null;
         expect(error.message).to.be.eq(`cannot GET ${path} (404)`)
-        done();
-      });
-  })
-
-  it('Should get /card checking for total of items on header.', done => {
-    request(app)
-      .get('/card')
-      .end((_err, { header }) => {
-        expect(header['x-total-pages']).to.be.not.null;
-        expect(+header['x-total-pages']).to.be.gt(85)
         done();
       });
   })
