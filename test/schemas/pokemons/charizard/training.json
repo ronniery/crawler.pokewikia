@@ -1,84 +1,119 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "059a1387-e6c2-49f9-a1b9-333649dfd003",
   "type": "object",
-  "properties": {
-    "evYield": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        }
-      },
-      "required": [
-        "text"
-      ]
-    },
-    "catchRate": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "meta": {
-          "type": "string",
-          "minLength": 1
-        }
-      },
-      "required": [
-        "text",
-        "meta"
-      ]
-    },
-    "baseFriendship": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "meta": {
-          "type": "string",
-          "minLength": 1
-        }
-      },
-      "required": [
-        "text",
-        "meta"
-      ]
-    },
-    "baseExp": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        }
-      },
-      "required": [
-        "text"
-      ]
-    },
-    "growthRate": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        }
-      },
-      "required": [
-        "text"
-      ]
-    }
-  },
+  "default": {},
   "required": [
-    "evYield",
-    "catchRate",
-    "baseFriendship",
-    "baseExp",
-    "growthRate"
-  ]
+    "training"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "training": {
+      "$id": "#/properties/training",
+      "type": "object",
+      "default": {},
+      "required": [
+        "evYield",
+        "catchRate",
+        "baseFriendship",
+        "baseExp",
+        "growthRate"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "evYield": {
+          "$id": "#/properties/training/properties/evYield",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/training/properties/evYield/properties/text",
+              "type": "string",
+              "default": ""
+            }
+          }
+        },
+        "catchRate": {
+          "$id": "#/properties/training/properties/catchRate",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "meta"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/training/properties/catchRate/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "meta": {
+              "$id": "#/properties/training/properties/catchRate/properties/meta",
+              "type": "string",
+              "default": ""
+            }
+          }
+        },
+        "baseFriendship": {
+          "$id": "#/properties/training/properties/baseFriendship",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "meta"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/training/properties/baseFriendship/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "meta": {
+              "$id": "#/properties/training/properties/baseFriendship/properties/meta",
+              "type": "string",
+              "default": ""
+            }
+          }
+        },
+        "baseExp": {
+          "$id": "#/properties/training/properties/baseExp",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/training/properties/baseExp/properties/text",
+              "type": "string",
+              "default": ""
+            }
+          }
+        },
+        "growthRate": {
+          "$id": "#/properties/training/properties/growthRate",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/training/properties/growthRate/properties/text",
+              "type": "string",
+              "default": ""
+            }
+          }
+        }
+      }
+    }
+  }
 }

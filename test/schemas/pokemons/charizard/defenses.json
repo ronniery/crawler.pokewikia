@@ -1,87 +1,192 @@
 {
-  "type": "array",
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "",
-  "minItems": 1,
-  "uniqueItems": true,
-  "items": {
-    "type": "object",
-    "required": [
-      "normal",
-      "fire",
-      "water",
-      "electric",
-      "grass",
-      "ice",
-      "fighting",
-      "poison",
-      "ground"
-    ],
-    "properties": {
-      "normal": {
-        "type": "array",
-        "items": {
-          "required": [],
-          "properties": {}
-        }
-      },
-      "fire": {
-        "type": "array",
-        "items": {
-          "required": [],
-          "properties": {}
-        }
-      },
-      "water": {
-        "type": "array",
-        "items": {
-          "required": [],
-          "properties": {}
-        }
-      },
-      "electric": {
-        "type": "array",
-        "items": {
-          "required": [],
-          "properties": {}
-        }
-      },
-      "grass": {
-        "type": "array",
-        "items": {
-          "required": [],
-          "properties": {}
-        }
-      },
-      "ice": {
-        "type": "array",
-        "items": {
-          "required": [],
-          "properties": {}
-        }
-      },
-      "fighting": {
-        "type": "array",
-        "items": {
-          "required": [],
-          "properties": {}
-        }
-      },
-      "poison": {
-        "type": "array",
-        "items": {
-          "required": [],
-          "properties": {}
-        }
-      },
-      "ground": {
-        "type": "array",
-        "items": {
-          "required": [],
-          "properties": {}
-        }
-      },
-      "ability": {}
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "97f41cd0-ffb3-427d-8980-a5d5548c4d4c",
+  "type": "object",
+  "default": {},
+  "required": [
+    "defenses"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "defenses": {
+      "$id": "#/properties/defenses",
+      "type": "array",
+      "default": [],
+      "additionalItems": true,
+      "items": {
+        "anyOf": [
+          {
+            "$id": "#/properties/defenses/items/anyOf/0",
+            "type": "object",
+            "default": {},
+            "required": [
+              "normal",
+              "fire",
+              "water",
+              "electric",
+              "grass",
+              "ice",
+              "fighting",
+              "poison",
+              "ground",
+              "ability"
+            ],
+            "additionalProperties": true,
+            "properties": {
+              "normal": {
+                "$id": "#/properties/defenses/items/anyOf/0/properties/normal",
+                "type": "array",
+                "default": [],
+                "additionalItems": true,
+                "items": {
+                  "anyOf": [
+                    {
+                      "$id": "#/properties/defenses/items/anyOf/0/properties/normal/items/anyOf/0",
+                      "type": "string",
+                      "default": ""
+                    }
+                  ],
+                  "$id": "#/properties/defenses/items/anyOf/0/properties/normal/items"
+                }
+              },
+              "fire": {
+                "$id": "#/properties/defenses/items/anyOf/0/properties/fire",
+                "type": "array",
+                "default": [],
+                "additionalItems": true,
+                "items": {
+                  "anyOf": [
+                    {
+                      "$id": "#/properties/defenses/items/anyOf/0/properties/fire/items/anyOf/0",
+                      "type": "string",
+                      "default": ""
+                    }
+                  ],
+                  "$id": "#/properties/defenses/items/anyOf/0/properties/fire/items"
+                }
+              },
+              "water": {
+                "$id": "#/properties/defenses/items/anyOf/0/properties/water",
+                "type": "array",
+                "default": [],
+                "additionalItems": true,
+                "items": {
+                  "anyOf": [
+                    {
+                      "$id": "#/properties/defenses/items/anyOf/0/properties/water/items/anyOf/0",
+                      "type": "string",
+                      "default": ""
+                    }
+                  ],
+                  "$id": "#/properties/defenses/items/anyOf/0/properties/water/items"
+                }
+              },
+              "electric": {
+                "$id": "#/properties/defenses/items/anyOf/0/properties/electric",
+                "type": "array",
+                "default": [],
+                "additionalItems": true,
+                "items": {
+                  "anyOf": [
+                    {
+                      "$id": "#/properties/defenses/items/anyOf/0/properties/electric/items/anyOf/0",
+                      "type": "string",
+                      "default": ""
+                    }
+                  ],
+                  "$id": "#/properties/defenses/items/anyOf/0/properties/electric/items"
+                }
+              },
+              "grass": {
+                "$id": "#/properties/defenses/items/anyOf/0/properties/grass",
+                "type": "array",
+                "default": [],
+                "additionalItems": true,
+                "items": {
+                  "anyOf": [
+                    {
+                      "$id": "#/properties/defenses/items/anyOf/0/properties/grass/items/anyOf/0",
+                      "type": "string",
+                      "default": ""
+                    }
+                  ],
+                  "$id": "#/properties/defenses/items/anyOf/0/properties/grass/items"
+                }
+              },
+              "ice": {
+                "$id": "#/properties/defenses/items/anyOf/0/properties/ice",
+                "type": "array",
+                "default": [],
+                "additionalItems": true,
+                "items": {
+                  "anyOf": [
+                    {
+                      "$id": "#/properties/defenses/items/anyOf/0/properties/ice/items/anyOf/0",
+                      "type": "string",
+                      "default": ""
+                    }
+                  ],
+                  "$id": "#/properties/defenses/items/anyOf/0/properties/ice/items"
+                }
+              },
+              "fighting": {
+                "$id": "#/properties/defenses/items/anyOf/0/properties/fighting",
+                "type": "array",
+                "default": [],
+                "additionalItems": true,
+                "items": {
+                  "anyOf": [
+                    {
+                      "$id": "#/properties/defenses/items/anyOf/0/properties/fighting/items/anyOf/0",
+                      "type": "string",
+                      "default": ""
+                    }
+                  ],
+                  "$id": "#/properties/defenses/items/anyOf/0/properties/fighting/items"
+                }
+              },
+              "poison": {
+                "$id": "#/properties/defenses/items/anyOf/0/properties/poison",
+                "type": "array",
+                "default": [],
+                "additionalItems": true,
+                "items": {
+                  "anyOf": [
+                    {
+                      "$id": "#/properties/defenses/items/anyOf/0/properties/poison/items/anyOf/0",
+                      "type": "string",
+                      "default": ""
+                    }
+                  ],
+                  "$id": "#/properties/defenses/items/anyOf/0/properties/poison/items"
+                }
+              },
+              "ground": {
+                "$id": "#/properties/defenses/items/anyOf/0/properties/ground",
+                "type": "array",
+                "default": [],
+                "additionalItems": true,
+                "items": {
+                  "anyOf": [
+                    {
+                      "$id": "#/properties/defenses/items/anyOf/0/properties/ground/items/anyOf/0",
+                      "type": "string",
+                      "default": ""
+                    }
+                  ],
+                  "$id": "#/properties/defenses/items/anyOf/0/properties/ground/items"
+                }
+              },
+              "ability": {
+                "$id": "#/properties/defenses/items/anyOf/0/properties/ability",
+                "type": "null",
+                "default": null
+              }
+            }
+          }
+        ],
+        "$id": "#/properties/defenses/items"
+      }
     }
   }
 }

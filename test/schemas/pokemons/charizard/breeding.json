@@ -1,53 +1,79 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "5f5aaee9-8ea4-4325-8297-5e5ab379d864",
   "type": "object",
-  "properties": {
-    "eggGroups": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        }
-      },
-      "required": [
-        "text"
-      ]
-    },
-    "gender": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        }
-      },
-      "required": [
-        "text"
-      ]
-    },
-    "eggCycles": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "meta": {
-          "type": "string",
-          "minLength": 1
-        }
-      },
-      "required": [
-        "text",
-        "meta"
-      ]
-    }
-  },
+  "default": {},
   "required": [
-    "eggGroups",
-    "gender",
-    "eggCycles"
-  ]
+    "breeding"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "breeding": {
+      "$id": "#/properties/breeding",
+      "type": "object",
+      "default": {},
+      "required": [
+        "eggGroups",
+        "gender",
+        "eggCycles"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "eggGroups": {
+          "$id": "#/properties/breeding/properties/eggGroups",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/breeding/properties/eggGroups/properties/text",
+              "type": "string",
+              "default": ""
+            }
+          }
+        },
+        "gender": {
+          "$id": "#/properties/breeding/properties/gender",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/breeding/properties/gender/properties/text",
+              "type": "string",
+              "default": ""
+            }
+          }
+        },
+        "eggCycles": {
+          "$id": "#/properties/breeding/properties/eggCycles",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "meta"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/breeding/properties/eggCycles/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "meta": {
+              "$id": "#/properties/breeding/properties/eggCycles/properties/meta",
+              "type": "string",
+              "default": ""
+            }
+          }
+        }
+      }
+    }
+  }
 }

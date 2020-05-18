@@ -1,373 +1,674 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "f1616419-fcd8-4fe8-9340-f15ab7967898",
   "type": "object",
-  "properties": {
-    "swordShield": {
-      "type": "object",
-      "properties": {
-        "movesLearntByLevelUp": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "level",
-              "move",
-              "type",
-              "power",
-              "accuracy"
-            ],
-            "properties": {
-              "level": {
-                "type": "number"
-              },
-              "move": {
-                "type": "string",
-                "minLength": 1
-              },
-              "type": {
-                "type": "string",
-                "minLength": 1
-              },
-              "category": {
-                "type": "object",
-                "properties": {
-                  "title": {
-                    "type": "string",
-                    "minLength": 1
-                  }
-                },
-                "required": [
-                  "title"
-                ]
-              },
-              "power": {
-                "type": "string",
-                "minLength": 1
-              },
-              "accuracy": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        },
-        "movesLearntOnEvolution": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "move",
-              "type",
-              "power",
-              "accuracy"
-            ],
-            "properties": {
-              "level": {},
-              "move": {
-                "type": "string",
-                "minLength": 1
-              },
-              "type": {
-                "type": "string"
-              },
-              "category": {
-                "type": "object",
-                "properties": {},
-                "required": []
-              },
-              "power": {
-                "type": "string",
-                "minLength": 1
-              },
-              "accuracy": {
-                "type": "string"
-              }
-            }
-          }
-        },
-        "eggMoves": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "move",
-              "type",
-              "power",
-              "accuracy"
-            ],
-            "properties": {
-              "level": {},
-              "move": {
-                "type": "string",
-                "minLength": 1
-              },
-              "type": {
-                "type": "string"
-              },
-              "category": {
-                "type": "object",
-                "properties": {},
-                "required": []
-              },
-              "power": {
-                "type": "string",
-                "minLength": 1
-              },
-              "accuracy": {
-                "type": "string"
-              }
-            }
-          }
-        },
-        "movesLearntByTm": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "level",
-              "move",
-              "type",
-              "power",
-              "accuracy"
-            ],
-            "properties": {
-              "level": {
-                "type": "number"
-              },
-              "move": {
-                "type": "string",
-                "minLength": 1
-              },
-              "type": {
-                "type": "string",
-                "minLength": 1
-              },
-              "category": {
-                "type": "object",
-                "properties": {
-                  "title": {
-                    "type": "string",
-                    "minLength": 1
-                  }
-                },
-                "required": [
-                  "title"
-                ]
-              },
-              "power": {
-                "type": "string",
-                "minLength": 1
-              },
-              "accuracy": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        },
-        "movesLearntByTr": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "level",
-              "move",
-              "type",
-              "power",
-              "accuracy"
-            ],
-            "properties": {
-              "level": {
-                "type": "number"
-              },
-              "move": {
-                "type": "string",
-                "minLength": 1
-              },
-              "type": {
-                "type": "string",
-                "minLength": 1
-              },
-              "category": {
-                "type": "object",
-                "properties": {
-                  "title": {
-                    "type": "string",
-                    "minLength": 1
-                  }
-                },
-                "required": [
-                  "title"
-                ]
-              },
-              "power": {
-                "type": "string",
-                "minLength": 1
-              },
-              "accuracy": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "movesLearntByLevelUp",
-        "movesLearntOnEvolution",
-        "eggMoves",
-        "movesLearntByTm",
-        "movesLearntByTr"
-      ]
-    },
-    "letsGoPikachuLetsGoEevee": {
-      "type": "object",
-      "properties": {
-        "movesLearntByLevelUp": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "level",
-              "move",
-              "type",
-              "power",
-              "accuracy"
-            ],
-            "properties": {
-              "level": {
-                "type": "number"
-              },
-              "move": {
-                "type": "string",
-                "minLength": 1
-              },
-              "type": {
-                "type": "string",
-                "minLength": 1
-              },
-              "category": {
-                "type": "object",
-                "properties": {
-                  "title": {
-                    "type": "string",
-                    "minLength": 1
-                  }
-                },
-                "required": [
-                  "title"
-                ]
-              },
-              "power": {
-                "type": "string",
-                "minLength": 1
-              },
-              "accuracy": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        },
-        "movesLearntOnEvolution": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "move",
-              "type",
-              "power",
-              "accuracy"
-            ],
-            "properties": {
-              "level": {},
-              "move": {
-                "type": "string",
-                "minLength": 1
-              },
-              "type": {
-                "type": "string"
-              },
-              "category": {
-                "type": "object",
-                "properties": {},
-                "required": []
-              },
-              "power": {
-                "type": "string",
-                "minLength": 1
-              },
-              "accuracy": {
-                "type": "string"
-              }
-            }
-          }
-        },
-        "movesLearntByTm": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "level",
-              "move",
-              "type",
-              "power",
-              "accuracy"
-            ],
-            "properties": {
-              "level": {
-                "type": "number"
-              },
-              "move": {
-                "type": "string",
-                "minLength": 1
-              },
-              "type": {
-                "type": "string",
-                "minLength": 1
-              },
-              "category": {
-                "type": "object",
-                "properties": {
-                  "title": {
-                    "type": "string",
-                    "minLength": 1
-                  }
-                },
-                "required": [
-                  "title"
-                ]
-              },
-              "power": {
-                "type": "string",
-                "minLength": 1
-              },
-              "accuracy": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "movesLearntByLevelUp",
-        "movesLearntOnEvolution",
-        "movesLearntByTm"
-      ]
-    }
-  },
+  "default": {},
   "required": [
-    "swordShield",
-    "letsGoPikachuLetsGoEevee"
-  ]
+    "moves"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "moves": {
+      "$id": "#/properties/moves",
+      "type": "object",
+      "default": {},
+      "required": [
+        "swordShield",
+        "letsGoPikachuLetsGoEevee"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "swordShield": {
+          "$id": "#/properties/moves/properties/swordShield",
+          "type": "object",
+          "default": {},
+          "required": [
+            "movesLearntByLevelUp",
+            "movesLearntOnEvolution",
+            "eggMoves",
+            "movesLearntByTm",
+            "movesLearntByTr"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "movesLearntByLevelUp": {
+              "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByLevelUp",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByLevelUp/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "referenceTo",
+                      "move",
+                      "type",
+                      "category",
+                      "power",
+                      "accuracy",
+                      "level"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "referenceTo": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByLevelUp/items/anyOf/0/properties/referenceTo",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "move": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByLevelUp/items/anyOf/0/properties/move",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "type": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByLevelUp/items/anyOf/0/properties/type",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "category": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByLevelUp/items/anyOf/0/properties/category",
+                        "type": "object",
+                        "default": {},
+                        "required": [
+                          "img",
+                          "title"
+                        ],
+                        "additionalProperties": true,
+                        "properties": {
+                          "img": {
+                            "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByLevelUp/items/anyOf/0/properties/category/properties/img",
+                            "type": "string",
+                            "default": ""
+                          },
+                          "title": {
+                            "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByLevelUp/items/anyOf/0/properties/category/properties/title",
+                            "type": "string",
+                            "default": ""
+                          }
+                        }
+                      },
+                      "power": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByLevelUp/items/anyOf/0/properties/power",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "accuracy": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByLevelUp/items/anyOf/0/properties/accuracy",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "level": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByLevelUp/items/anyOf/0/properties/level",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByLevelUp/items"
+              }
+            },
+            "movesLearntOnEvolution": {
+              "$id": "#/properties/moves/properties/swordShield/properties/movesLearntOnEvolution",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/moves/properties/swordShield/properties/movesLearntOnEvolution/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "referenceTo",
+                      "move",
+                      "type",
+                      "category",
+                      "power",
+                      "accuracy"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "referenceTo": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntOnEvolution/items/anyOf/0/properties/referenceTo",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "move": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntOnEvolution/items/anyOf/0/properties/move",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "type": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntOnEvolution/items/anyOf/0/properties/type",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "category": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntOnEvolution/items/anyOf/0/properties/category",
+                        "type": "object",
+                        "default": {},
+                        "required": [
+                          "img",
+                          "title"
+                        ],
+                        "additionalProperties": true,
+                        "properties": {
+                          "img": {
+                            "$id": "#/properties/moves/properties/swordShield/properties/movesLearntOnEvolution/items/anyOf/0/properties/category/properties/img",
+                            "type": "string",
+                            "default": ""
+                          },
+                          "title": {
+                            "$id": "#/properties/moves/properties/swordShield/properties/movesLearntOnEvolution/items/anyOf/0/properties/category/properties/title",
+                            "type": "string",
+                            "default": ""
+                          }
+                        }
+                      },
+                      "power": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntOnEvolution/items/anyOf/0/properties/power",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "accuracy": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntOnEvolution/items/anyOf/0/properties/accuracy",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/moves/properties/swordShield/properties/movesLearntOnEvolution/items"
+              }
+            },
+            "eggMoves": {
+              "$id": "#/properties/moves/properties/swordShield/properties/eggMoves",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/moves/properties/swordShield/properties/eggMoves/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "referenceTo",
+                      "move",
+                      "type",
+                      "category",
+                      "power",
+                      "accuracy"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "referenceTo": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/eggMoves/items/anyOf/0/properties/referenceTo",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "move": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/eggMoves/items/anyOf/0/properties/move",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "type": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/eggMoves/items/anyOf/0/properties/type",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "category": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/eggMoves/items/anyOf/0/properties/category",
+                        "type": "object",
+                        "default": {},
+                        "required": [
+                          "img",
+                          "title"
+                        ],
+                        "additionalProperties": true,
+                        "properties": {
+                          "img": {
+                            "$id": "#/properties/moves/properties/swordShield/properties/eggMoves/items/anyOf/0/properties/category/properties/img",
+                            "type": "string",
+                            "default": ""
+                          },
+                          "title": {
+                            "$id": "#/properties/moves/properties/swordShield/properties/eggMoves/items/anyOf/0/properties/category/properties/title",
+                            "type": "string",
+                            "default": ""
+                          }
+                        }
+                      },
+                      "power": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/eggMoves/items/anyOf/0/properties/power",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "accuracy": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/eggMoves/items/anyOf/0/properties/accuracy",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/moves/properties/swordShield/properties/eggMoves/items"
+              }
+            },
+            "movesLearntByTm": {
+              "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTm",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTm/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "referenceTo",
+                      "move",
+                      "type",
+                      "category",
+                      "power",
+                      "accuracy",
+                      "tm"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "referenceTo": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTm/items/anyOf/0/properties/referenceTo",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "move": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTm/items/anyOf/0/properties/move",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "type": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTm/items/anyOf/0/properties/type",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "category": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTm/items/anyOf/0/properties/category",
+                        "type": "object",
+                        "default": {},
+                        "required": [
+                          "img",
+                          "title"
+                        ],
+                        "additionalProperties": true,
+                        "properties": {
+                          "img": {
+                            "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTm/items/anyOf/0/properties/category/properties/img",
+                            "type": "string",
+                            "default": ""
+                          },
+                          "title": {
+                            "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTm/items/anyOf/0/properties/category/properties/title",
+                            "type": "string",
+                            "default": ""
+                          }
+                        }
+                      },
+                      "power": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTm/items/anyOf/0/properties/power",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "accuracy": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTm/items/anyOf/0/properties/accuracy",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "tm": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTm/items/anyOf/0/properties/tm",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTm/items"
+              }
+            },
+            "movesLearntByTr": {
+              "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTr",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTr/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "referenceTo",
+                      "move",
+                      "type",
+                      "category",
+                      "power",
+                      "accuracy",
+                      "tm"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "referenceTo": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTr/items/anyOf/0/properties/referenceTo",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "move": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTr/items/anyOf/0/properties/move",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "type": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTr/items/anyOf/0/properties/type",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "category": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTr/items/anyOf/0/properties/category",
+                        "type": "object",
+                        "default": {},
+                        "required": [
+                          "img",
+                          "title"
+                        ],
+                        "additionalProperties": true,
+                        "properties": {
+                          "img": {
+                            "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTr/items/anyOf/0/properties/category/properties/img",
+                            "type": "string",
+                            "default": ""
+                          },
+                          "title": {
+                            "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTr/items/anyOf/0/properties/category/properties/title",
+                            "type": "string",
+                            "default": ""
+                          }
+                        }
+                      },
+                      "power": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTr/items/anyOf/0/properties/power",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "accuracy": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTr/items/anyOf/0/properties/accuracy",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "tm": {
+                        "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTr/items/anyOf/0/properties/tm",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/moves/properties/swordShield/properties/movesLearntByTr/items"
+              }
+            }
+          }
+        },
+        "letsGoPikachuLetsGoEevee": {
+          "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee",
+          "type": "object",
+          "default": {},
+          "required": [
+            "movesLearntByLevelUp",
+            "movesLearntOnEvolution",
+            "movesLearntByTm"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "movesLearntByLevelUp": {
+              "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "referenceTo",
+                      "move",
+                      "type",
+                      "category",
+                      "power",
+                      "accuracy",
+                      "level"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "referenceTo": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp/items/anyOf/0/properties/referenceTo",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "move": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp/items/anyOf/0/properties/move",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "type": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp/items/anyOf/0/properties/type",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "category": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp/items/anyOf/0/properties/category",
+                        "type": "object",
+                        "default": {},
+                        "required": [
+                          "img",
+                          "title"
+                        ],
+                        "additionalProperties": true,
+                        "properties": {
+                          "img": {
+                            "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp/items/anyOf/0/properties/category/properties/img",
+                            "type": "string",
+                            "default": ""
+                          },
+                          "title": {
+                            "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp/items/anyOf/0/properties/category/properties/title",
+                            "type": "string",
+                            "default": ""
+                          }
+                        }
+                      },
+                      "power": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp/items/anyOf/0/properties/power",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "accuracy": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp/items/anyOf/0/properties/accuracy",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "level": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp/items/anyOf/0/properties/level",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp/items"
+              }
+            },
+            "movesLearntOnEvolution": {
+              "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntOnEvolution",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntOnEvolution/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "referenceTo",
+                      "move",
+                      "type",
+                      "category",
+                      "power",
+                      "accuracy"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "referenceTo": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntOnEvolution/items/anyOf/0/properties/referenceTo",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "move": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntOnEvolution/items/anyOf/0/properties/move",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "type": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntOnEvolution/items/anyOf/0/properties/type",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "category": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntOnEvolution/items/anyOf/0/properties/category",
+                        "type": "object",
+                        "default": {},
+                        "required": [
+                          "img",
+                          "title"
+                        ],
+                        "additionalProperties": true,
+                        "properties": {
+                          "img": {
+                            "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntOnEvolution/items/anyOf/0/properties/category/properties/img",
+                            "type": "string",
+                            "default": ""
+                          },
+                          "title": {
+                            "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntOnEvolution/items/anyOf/0/properties/category/properties/title",
+                            "type": "string",
+                            "default": ""
+                          }
+                        }
+                      },
+                      "power": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntOnEvolution/items/anyOf/0/properties/power",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "accuracy": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntOnEvolution/items/anyOf/0/properties/accuracy",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntOnEvolution/items"
+              }
+            },
+            "movesLearntByTm": {
+              "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "referenceTo",
+                      "move",
+                      "type",
+                      "category",
+                      "power",
+                      "accuracy",
+                      "tm"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "referenceTo": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/0/properties/referenceTo",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "move": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/0/properties/move",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "type": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/0/properties/type",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "category": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/0/properties/category",
+                        "type": "object",
+                        "default": {},
+                        "required": [
+                          "img",
+                          "title"
+                        ],
+                        "additionalProperties": true,
+                        "properties": {
+                          "img": {
+                            "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/0/properties/category/properties/img",
+                            "type": "string",
+                            "default": ""
+                          },
+                          "title": {
+                            "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/0/properties/category/properties/title",
+                            "type": "string",
+                            "default": ""
+                          }
+                        }
+                      },
+                      "power": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/0/properties/power",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "accuracy": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/0/properties/accuracy",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "tm": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/0/properties/tm",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

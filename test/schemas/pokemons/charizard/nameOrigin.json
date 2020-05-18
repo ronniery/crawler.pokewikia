@@ -1,19 +1,34 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "7b6d7a9d-162d-4121-a1c6-79aa6a2456f5",
   "type": "object",
-  "properties": {
-    "char": {
-      "type": "string",
-      "minLength": 1
-    },
-    "lizard": {
-      "type": "string",
-      "minLength": 1
-    }
-  },
+  "default": {},
   "required": [
-    "char",
-    "lizard"
-  ]
+    "nameOrigin"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "nameOrigin": {
+      "$id": "#/properties/nameOrigin",
+      "type": "object",
+      "default": {},
+      "required": [
+        "char",
+        "lizard"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "char": {
+          "$id": "#/properties/nameOrigin/properties/char",
+          "type": "string",
+          "default": ""
+        },
+        "lizard": {
+          "$id": "#/properties/nameOrigin/properties/lizard",
+          "type": "string",
+          "default": ""
+        }
+      }
+    }
+  }
 }

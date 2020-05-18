@@ -1,81 +1,122 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "f51de176-ede8-49de-8636-18fc3401639d",
   "type": "object",
+  "default": {},
+  "required": [
+    "pokeImgs"
+  ],
+  "additionalProperties": true,
   "properties": {
-    "pokedb": {
-      "type": "string",
-      "minLength": 1
-    },
-    "zucan": {
-      "type": "array",
-      "uniqueItems": true,
-      "minItems": 1,
-      "items": {
-        "required": [
-          "no",
-          "sub",
-          "name",
-          "sub_name",
-          "omosa",
-          "takasa",
-          "type_1",
-          "type_2",
-          "kyodai_flg",
-          "image_m",
-          "image_s",
-          "zukan_no"
-        ],
-        "properties": {
-          "no": {
-            "type": "string",
-            "minLength": 1
-          },
-          "sub": {
-            "type": "number"
-          },
-          "name": {
-            "type": "string",
-            "minLength": 1
-          },
-          "sub_name": {
-            "type": "string"
-          },
-          "omosa": {
-            "type": "string",
-            "minLength": 1
-          },
-          "takasa": {
-            "type": "string",
-            "minLength": 1
-          },
-          "type_1": {
-            "type": "number"
-          },
-          "type_2": {
-            "type": "number"
-          },
-          "kyodai_flg": {
-            "type": "number"
-          },
-          "image_m": {
-            "type": "string",
-            "minLength": 1
-          },
-          "image_s": {
-            "type": "string",
-            "minLength": 1
-          },
-          "zukan_no": {
-            "type": "string",
-            "minLength": 1
+    "pokeImgs": {
+      "$id": "#/properties/pokeImgs",
+      "type": "object",
+      "default": {},
+      "required": [
+        "pokedb",
+        "zucan"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "pokedb": {
+          "$id": "#/properties/pokeImgs/properties/pokedb",
+          "type": "string",
+          "default": ""
+        },
+        "zucan": {
+          "$id": "#/properties/pokeImgs/properties/zucan",
+          "type": "array",
+          "default": [],
+          "additionalItems": true,
+          "items": {
+            "anyOf": [
+              {
+                "$id": "#/properties/pokeImgs/properties/zucan/items/anyOf/0",
+                "type": "object",
+                "default": {},
+                "required": [
+                  "no",
+                  "sub",
+                  "name",
+                  "sub_name",
+                  "omosa",
+                  "takasa",
+                  "type_1",
+                  "type_2",
+                  "kyodai_flg",
+                  "image_m",
+                  "image_s",
+                  "zukan_no"
+                ],
+                "additionalProperties": true,
+                "properties": {
+                  "no": {
+                    "$id": "#/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/no",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "sub": {
+                    "$id": "#/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/sub",
+                    "type": "integer",
+                    "default": 0
+                  },
+                  "name": {
+                    "$id": "#/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/name",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "sub_name": {
+                    "$id": "#/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/sub_name",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "omosa": {
+                    "$id": "#/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/omosa",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "takasa": {
+                    "$id": "#/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/takasa",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "type_1": {
+                    "$id": "#/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/type_1",
+                    "type": "integer",
+                    "default": 0
+                  },
+                  "type_2": {
+                    "$id": "#/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/type_2",
+                    "type": "integer",
+                    "default": 0
+                  },
+                  "kyodai_flg": {
+                    "$id": "#/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/kyodai_flg",
+                    "type": "integer",
+                    "default": 0
+                  },
+                  "image_m": {
+                    "$id": "#/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/image_m",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "image_s": {
+                    "$id": "#/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/image_s",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "zukan_no": {
+                    "$id": "#/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/zukan_no",
+                    "type": "string",
+                    "default": ""
+                  }
+                }
+              }
+            ],
+            "$id": "#/properties/pokeImgs/properties/zucan/items"
           }
         }
       }
     }
-  },
-  "required": [
-    "pokedb",
-    "zucan"
-  ]
+  }
 }

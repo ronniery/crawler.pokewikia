@@ -1,54 +1,95 @@
 {
-  "type": "array",
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "",
-  "minItems": 1,
-  "uniqueItems": true,
-  "items": {
-    "type": "object",
-    "required": [
-      "0"
-    ],
-    "properties": {
-      "0": {
-        "type": "array",
-        "uniqueItems": true,
-        "minItems": 1,
-        "items": {
-          "required": [
-            "img",
-            "globalId",
-            "name"
-          ],
-          "properties": {
-            "img": {
-              "type": "string",
-              "minLength": 1
-            },
-            "globalId": {
-              "type": "string",
-              "minLength": 1
-            },
-            "name": {
-              "type": "string",
-              "minLength": 1
-            },
-            "types": {
-              "type": "array",
-              "items": {
-                "required": [],
-                "properties": {}
-              }
-            },
-            "evolveCondition": {
-              "type": "array",
-              "items": {
-                "required": [],
-                "properties": {}
-              }
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "70706cff-2581-44b1-9c46-1a2beb325f24",
+  "type": "object",
+  "default": {},
+  "required": [
+    "evochart"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "evochart": {
+      "$id": "#/properties/evochart",
+      "type": "array",
+      "default": [],
+      "additionalItems": true,
+      "items": {
+        "anyOf": [
+          {
+            "$id": "#/properties/evochart/items/anyOf/0",
+            "type": "array",
+            "default": [],
+            "additionalItems": true,
+            "items": {
+              "anyOf": [
+                {
+                  "$id": "#/properties/evochart/items/anyOf/0/items/anyOf/0",
+                  "type": "object",
+                  "default": {},
+                  "required": [
+                    "img",
+                    "globalId",
+                    "name",
+                    "types",
+                    "evolveCondition"
+                  ],
+                  "additionalProperties": true,
+                  "properties": {
+                    "img": {
+                      "$id": "#/properties/evochart/items/anyOf/0/items/anyOf/0/properties/img",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "globalId": {
+                      "$id": "#/properties/evochart/items/anyOf/0/items/anyOf/0/properties/globalId",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "name": {
+                      "$id": "#/properties/evochart/items/anyOf/0/items/anyOf/0/properties/name",
+                      "type": "string",
+                      "default": ""
+                    },
+                    "types": {
+                      "$id": "#/properties/evochart/items/anyOf/0/items/anyOf/0/properties/types",
+                      "type": "array",
+                      "default": [],
+                      "additionalItems": true,
+                      "items": {
+                        "anyOf": [
+                          {
+                            "$id": "#/properties/evochart/items/anyOf/0/items/anyOf/0/properties/types/items/anyOf/0",
+                            "type": "string",
+                            "default": ""
+                          }
+                        ],
+                        "$id": "#/properties/evochart/items/anyOf/0/items/anyOf/0/properties/types/items"
+                      }
+                    },
+                    "evolveCondition": {
+                      "$id": "#/properties/evochart/items/anyOf/0/items/anyOf/0/properties/evolveCondition",
+                      "type": "array",
+                      "default": [],
+                      "additionalItems": true,
+                      "items": {
+                        "anyOf": [
+                          {
+                            "$id": "#/properties/evochart/items/anyOf/0/items/anyOf/0/properties/evolveCondition/items/anyOf/0",
+                            "type": "string",
+                            "default": ""
+                          }
+                        ],
+                        "$id": "#/properties/evochart/items/anyOf/0/items/anyOf/0/properties/evolveCondition/items"
+                      }
+                    }
+                  }
+                }
+              ],
+              "$id": "#/properties/evochart/items/anyOf/0/items"
             }
           }
-        }
+        ],
+        "$id": "#/properties/evochart/items"
       }
     }
   }

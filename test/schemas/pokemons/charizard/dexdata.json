@@ -1,69 +1,109 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "2f33f061-d372-48ff-b42d-378b0b226833",
   "type": "object",
+  "default": {},
+  "required": [
+    "dexdata"
+  ],
+  "additionalProperties": true,
   "properties": {
-    "name": {
-      "type": "string",
-      "minLength": 1
-    },
-    "nationalId": {
-      "type": "string",
-      "minLength": 1
-    },
-    "type": {
-      "type": "string",
-      "minLength": 1
-    },
-    "species": {
-      "type": "string",
-      "minLength": 1
-    },
-    "height": {
-      "type": "string",
-      "minLength": 1
-    },
-    "weight": {
-      "type": "string",
-      "minLength": 1
-    },
-    "abilities": {
-      "type": "array",
-      "items": {
-        "required": [],
-        "properties": {}
-      }
-    },
-    "localizations": {
-      "type": "array",
-      "uniqueItems": true,
-      "minItems": 1,
-      "items": {
-        "required": [
-          "route",
-          "game"
-        ],
-        "properties": {
-          "route": {
-            "type": "string",
-            "minLength": 1
-          },
-          "game": {
-            "type": "string",
-            "minLength": 1
+    "dexdata": {
+      "$id": "#/properties/dexdata",
+      "type": "object",
+      "default": {},
+      "required": [
+        "name",
+        "nationalId",
+        "type",
+        "species",
+        "height",
+        "weight",
+        "abilities",
+        "localizations"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "$id": "#/properties/dexdata/properties/name",
+          "type": "string",
+          "default": ""
+        },
+        "nationalId": {
+          "$id": "#/properties/dexdata/properties/nationalId",
+          "type": "string",
+          "default": ""
+        },
+        "type": {
+          "$id": "#/properties/dexdata/properties/type",
+          "type": "string",
+          "default": ""
+        },
+        "species": {
+          "$id": "#/properties/dexdata/properties/species",
+          "type": "string",
+          "default": ""
+        },
+        "height": {
+          "$id": "#/properties/dexdata/properties/height",
+          "type": "string",
+          "default": ""
+        },
+        "weight": {
+          "$id": "#/properties/dexdata/properties/weight",
+          "type": "string",
+          "default": ""
+        },
+        "abilities": {
+          "$id": "#/properties/dexdata/properties/abilities",
+          "type": "array",
+          "default": [],
+          "additionalItems": true,
+          "items": {
+            "anyOf": [
+              {
+                "$id": "#/properties/dexdata/properties/abilities/items/anyOf/0",
+                "type": "string",
+                "default": ""
+              }
+            ],
+            "$id": "#/properties/dexdata/properties/abilities/items"
+          }
+        },
+        "localizations": {
+          "$id": "#/properties/dexdata/properties/localizations",
+          "type": "array",
+          "default": [],
+          "additionalItems": true,
+          "items": {
+            "anyOf": [
+              {
+                "$id": "#/properties/dexdata/properties/localizations/items/anyOf/0",
+                "type": "object",
+                "default": {},
+                "required": [
+                  "route",
+                  "game"
+                ],
+                "additionalProperties": true,
+                "properties": {
+                  "route": {
+                    "$id": "#/properties/dexdata/properties/localizations/items/anyOf/0/properties/route",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "game": {
+                    "$id": "#/properties/dexdata/properties/localizations/items/anyOf/0/properties/game",
+                    "type": "string",
+                    "default": ""
+                  }
+                }
+              }
+            ],
+            "$id": "#/properties/dexdata/properties/localizations/items"
           }
         }
       }
     }
-  },
-  "required": [
-    "name",
-    "nationalId",
-    "type",
-    "species",
-    "height",
-    "weight",
-    "abilities",
-    "localizations"
-  ]
+  }
 }

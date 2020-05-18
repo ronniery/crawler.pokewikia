@@ -1,93 +1,134 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "7f3eeb38-499c-4a6e-a2b9-082c074ff9d0",
   "type": "object",
-  "properties": {
-    "english": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "items": {
-            "required": [],
-            "properties": {}
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "japanese": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "items": {
-            "required": [],
-            "properties": {}
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "german": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "items": {
-            "required": [],
-            "properties": {}
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "french": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "items": {
-            "required": [],
-            "properties": {}
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    }
-  },
+  "default": {},
   "required": [
-    "english",
-    "japanese",
-    "german",
-    "french"
-  ]
+    "otherLangs"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "otherLangs": {
+      "$id": "#/properties/otherLangs",
+      "type": "object",
+      "default": {},
+      "required": [
+        "english",
+        "japanese",
+        "german",
+        "french"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "english": {
+          "$id": "#/properties/otherLangs/properties/english",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/otherLangs/properties/english/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/otherLangs/properties/english/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [],
+                "$id": "#/properties/otherLangs/properties/english/properties/links/items"
+              }
+            }
+          }
+        },
+        "japanese": {
+          "$id": "#/properties/otherLangs/properties/japanese",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/otherLangs/properties/japanese/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/otherLangs/properties/japanese/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [],
+                "$id": "#/properties/otherLangs/properties/japanese/properties/links/items"
+              }
+            }
+          }
+        },
+        "german": {
+          "$id": "#/properties/otherLangs/properties/german",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/otherLangs/properties/german/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/otherLangs/properties/german/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [],
+                "$id": "#/properties/otherLangs/properties/german/properties/links/items"
+              }
+            }
+          }
+        },
+        "french": {
+          "$id": "#/properties/otherLangs/properties/french",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/otherLangs/properties/french/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/otherLangs/properties/french/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [],
+                "$id": "#/properties/otherLangs/properties/french/properties/links/items"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

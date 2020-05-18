@@ -103,6 +103,37 @@ describe('Test /pokemon route', function () {
           done();
         })
     })
+
+    it('Should get /pokemon Charizard data and validate it.', async done => {
+      const schemas = await Schema.load('charizard')
+
+      request(app)
+        .get('/pokemon')
+        .query({ name: 'Charizard' })
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end((_err, { body }) => {
+          const bodyKeys = Object.keys(body)
+
+          bodyKeys.forEach(key => {
+            const schema = schemas[key]
+            const target = {
+              [key]: body[key]
+            }
+
+            if (!isEmpty(schema)) {
+              // Skipp some mongo properties
+              const validator = ajv.compile(schema);
+              const result = validator(target);
+
+              expect(validator.errors).to.be.null
+              expect(result).to.be.true;
+            }
+          })
+
+          done();
+        })
+    })
   })
 
   // it('Should get /card and verify card response with schema.', done => {
