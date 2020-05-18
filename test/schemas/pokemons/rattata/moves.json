@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "ca386e66-915d-490a-a8cb-cf09a2aa140f",
+  "$id": "3a68f158-cd1c-41e3-8ca7-9fc193eafa54",
   "type": "object",
   "default": {},
   "required": [
@@ -14,9 +14,7 @@
       "default": {},
       "required": [
         "letsGoPikachuLetsGoEevee",
-        "ultraSunUltraMoon",
-        "rattata",
-        "alolanRattata"
+        "ultraSunUltraMoon"
       ],
       "additionalProperties": true,
       "properties": {
@@ -42,19 +40,20 @@
                     "type": "object",
                     "default": {},
                     "required": [
-                      "level",
+                      "referenceTo",
                       "move",
                       "type",
                       "category",
                       "power",
-                      "accuracy"
+                      "accuracy",
+                      "level"
                     ],
                     "additionalProperties": true,
                     "properties": {
-                      "level": {
-                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp/items/anyOf/0/properties/level",
-                        "type": "integer",
-                        "default": 0
+                      "referenceTo": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp/items/anyOf/0/properties/referenceTo",
+                        "type": "string",
+                        "default": ""
                       },
                       "move": {
                         "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp/items/anyOf/0/properties/move",
@@ -71,10 +70,16 @@
                         "type": "object",
                         "default": {},
                         "required": [
+                          "img",
                           "title"
                         ],
                         "additionalProperties": true,
                         "properties": {
+                          "img": {
+                            "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp/items/anyOf/0/properties/category/properties/img",
+                            "type": "string",
+                            "default": ""
+                          },
                           "title": {
                             "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp/items/anyOf/0/properties/category/properties/title",
                             "type": "string",
@@ -89,6 +94,11 @@
                       },
                       "accuracy": {
                         "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp/items/anyOf/0/properties/accuracy",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "level": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByLevelUp/items/anyOf/0/properties/level",
                         "type": "string",
                         "default": ""
                       }
@@ -110,19 +120,20 @@
                     "type": "object",
                     "default": {},
                     "required": [
-                      "level",
+                      "referenceTo",
                       "move",
                       "type",
                       "category",
                       "power",
-                      "accuracy"
+                      "accuracy",
+                      "tm"
                     ],
                     "additionalProperties": true,
                     "properties": {
-                      "level": {
-                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/0/properties/level",
-                        "type": "integer",
-                        "default": 0
+                      "referenceTo": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/0/properties/referenceTo",
+                        "type": "string",
+                        "default": ""
                       },
                       "move": {
                         "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/0/properties/move",
@@ -139,10 +150,16 @@
                         "type": "object",
                         "default": {},
                         "required": [
+                          "img",
                           "title"
                         ],
                         "additionalProperties": true,
                         "properties": {
+                          "img": {
+                            "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/0/properties/category/properties/img",
+                            "type": "string",
+                            "default": ""
+                          },
                           "title": {
                             "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/0/properties/category/properties/title",
                             "type": "string",
@@ -159,7 +176,92 @@
                         "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/0/properties/accuracy",
                         "type": "string",
                         "default": ""
+                      },
+                      "tm": {
+                        "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/0/properties/tm",
+                        "type": "string",
+                        "default": ""
                       }
+                    }
+                  },
+                  {
+                    "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/1",
+                    "type": "array",
+                    "default": [],
+                    "additionalItems": true,
+                    "items": {
+                      "anyOf": [
+                        {
+                          "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0",
+                          "type": "object",
+                          "default": {},
+                          "required": [
+                            "referenceTo",
+                            "move",
+                            "type",
+                            "category",
+                            "power",
+                            "accuracy",
+                            "tm"
+                          ],
+                          "additionalProperties": true,
+                          "properties": {
+                            "referenceTo": {
+                              "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0/properties/referenceTo",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "move": {
+                              "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0/properties/move",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "type": {
+                              "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0/properties/type",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "category": {
+                              "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0/properties/category",
+                              "type": "object",
+                              "default": {},
+                              "required": [
+                                "img",
+                                "title"
+                              ],
+                              "additionalProperties": true,
+                              "properties": {
+                                "img": {
+                                  "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0/properties/category/properties/img",
+                                  "type": "string",
+                                  "default": ""
+                                },
+                                "title": {
+                                  "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0/properties/category/properties/title",
+                                  "type": "string",
+                                  "default": ""
+                                }
+                              }
+                            },
+                            "power": {
+                              "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0/properties/power",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "accuracy": {
+                              "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0/properties/accuracy",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "tm": {
+                              "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0/properties/tm",
+                              "type": "string",
+                              "default": ""
+                            }
+                          }
+                        }
+                      ],
+                      "$id": "#/properties/moves/properties/letsGoPikachuLetsGoEevee/properties/movesLearntByTm/items/anyOf/1/items"
                     }
                   }
                 ],
@@ -193,19 +295,20 @@
                     "type": "object",
                     "default": {},
                     "required": [
-                      "level",
+                      "referenceTo",
                       "move",
                       "type",
                       "category",
                       "power",
-                      "accuracy"
+                      "accuracy",
+                      "level"
                     ],
                     "additionalProperties": true,
                     "properties": {
-                      "level": {
-                        "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByLevelUp/items/anyOf/0/properties/level",
-                        "type": "integer",
-                        "default": 0
+                      "referenceTo": {
+                        "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByLevelUp/items/anyOf/0/properties/referenceTo",
+                        "type": "string",
+                        "default": ""
                       },
                       "move": {
                         "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByLevelUp/items/anyOf/0/properties/move",
@@ -222,10 +325,16 @@
                         "type": "object",
                         "default": {},
                         "required": [
+                          "img",
                           "title"
                         ],
                         "additionalProperties": true,
                         "properties": {
+                          "img": {
+                            "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByLevelUp/items/anyOf/0/properties/category/properties/img",
+                            "type": "string",
+                            "default": ""
+                          },
                           "title": {
                             "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByLevelUp/items/anyOf/0/properties/category/properties/title",
                             "type": "string",
@@ -240,6 +349,11 @@
                       },
                       "accuracy": {
                         "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByLevelUp/items/anyOf/0/properties/accuracy",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "level": {
+                        "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByLevelUp/items/anyOf/0/properties/level",
                         "type": "string",
                         "default": ""
                       }
@@ -261,7 +375,7 @@
                     "type": "object",
                     "default": {},
                     "required": [
-                      "level",
+                      "referenceTo",
                       "move",
                       "type",
                       "category",
@@ -270,10 +384,10 @@
                     ],
                     "additionalProperties": true,
                     "properties": {
-                      "level": {
-                        "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/0/properties/level",
-                        "type": "null",
-                        "default": null
+                      "referenceTo": {
+                        "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/0/properties/referenceTo",
+                        "type": "string",
+                        "default": ""
                       },
                       "move": {
                         "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/0/properties/move",
@@ -288,7 +402,24 @@
                       "category": {
                         "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/0/properties/category",
                         "type": "object",
-                        "properties": {}
+                        "default": {},
+                        "required": [
+                          "img",
+                          "title"
+                        ],
+                        "additionalProperties": true,
+                        "properties": {
+                          "img": {
+                            "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/0/properties/category/properties/img",
+                            "type": "string",
+                            "default": ""
+                          },
+                          "title": {
+                            "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/0/properties/category/properties/title",
+                            "type": "string",
+                            "default": ""
+                          }
+                        }
                       },
                       "power": {
                         "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/0/properties/power",
@@ -300,6 +431,80 @@
                         "type": "string",
                         "default": ""
                       }
+                    }
+                  },
+                  {
+                    "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/1",
+                    "type": "array",
+                    "default": [],
+                    "additionalItems": true,
+                    "items": {
+                      "anyOf": [
+                        {
+                          "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/1/items/anyOf/0",
+                          "type": "object",
+                          "default": {},
+                          "required": [
+                            "referenceTo",
+                            "move",
+                            "type",
+                            "category",
+                            "power",
+                            "accuracy"
+                          ],
+                          "additionalProperties": true,
+                          "properties": {
+                            "referenceTo": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/1/items/anyOf/0/properties/referenceTo",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "move": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/1/items/anyOf/0/properties/move",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "type": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/1/items/anyOf/0/properties/type",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "category": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/1/items/anyOf/0/properties/category",
+                              "type": "object",
+                              "default": {},
+                              "required": [
+                                "img",
+                                "title"
+                              ],
+                              "additionalProperties": true,
+                              "properties": {
+                                "img": {
+                                  "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/1/items/anyOf/0/properties/category/properties/img",
+                                  "type": "string",
+                                  "default": ""
+                                },
+                                "title": {
+                                  "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/1/items/anyOf/0/properties/category/properties/title",
+                                  "type": "string",
+                                  "default": ""
+                                }
+                              }
+                            },
+                            "power": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/1/items/anyOf/0/properties/power",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "accuracy": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/1/items/anyOf/0/properties/accuracy",
+                              "type": "string",
+                              "default": ""
+                            }
+                          }
+                        }
+                      ],
+                      "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/1/items"
                     }
                   }
                 ],
@@ -318,7 +523,7 @@
                     "type": "object",
                     "default": {},
                     "required": [
-                      "level",
+                      "referenceTo",
                       "move",
                       "type",
                       "category",
@@ -327,10 +532,10 @@
                     ],
                     "additionalProperties": true,
                     "properties": {
-                      "level": {
-                        "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/0/properties/level",
-                        "type": "null",
-                        "default": null
+                      "referenceTo": {
+                        "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/0/properties/referenceTo",
+                        "type": "string",
+                        "default": ""
                       },
                       "move": {
                         "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/0/properties/move",
@@ -346,8 +551,23 @@
                         "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/0/properties/category",
                         "type": "object",
                         "default": {},
-                        "additionalProperties": false,
-                        "properties": {}
+                        "required": [
+                          "img",
+                          "title"
+                        ],
+                        "additionalProperties": true,
+                        "properties": {
+                          "img": {
+                            "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/0/properties/category/properties/img",
+                            "type": "string",
+                            "default": ""
+                          },
+                          "title": {
+                            "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/0/properties/category/properties/title",
+                            "type": "string",
+                            "default": ""
+                          }
+                        }
                       },
                       "power": {
                         "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/0/properties/power",
@@ -359,6 +579,80 @@
                         "type": "string",
                         "default": ""
                       }
+                    }
+                  },
+                  {
+                    "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/1",
+                    "type": "array",
+                    "default": [],
+                    "additionalItems": true,
+                    "items": {
+                      "anyOf": [
+                        {
+                          "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/1/items/anyOf/0",
+                          "type": "object",
+                          "default": {},
+                          "required": [
+                            "referenceTo",
+                            "move",
+                            "type",
+                            "category",
+                            "power",
+                            "accuracy"
+                          ],
+                          "additionalProperties": true,
+                          "properties": {
+                            "referenceTo": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/1/items/anyOf/0/properties/referenceTo",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "move": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/1/items/anyOf/0/properties/move",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "type": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/1/items/anyOf/0/properties/type",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "category": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/1/items/anyOf/0/properties/category",
+                              "type": "object",
+                              "default": {},
+                              "required": [
+                                "img",
+                                "title"
+                              ],
+                              "additionalProperties": true,
+                              "properties": {
+                                "img": {
+                                  "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/1/items/anyOf/0/properties/category/properties/img",
+                                  "type": "string",
+                                  "default": ""
+                                },
+                                "title": {
+                                  "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/1/items/anyOf/0/properties/category/properties/title",
+                                  "type": "string",
+                                  "default": ""
+                                }
+                              }
+                            },
+                            "power": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/1/items/anyOf/0/properties/power",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "accuracy": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/1/items/anyOf/0/properties/accuracy",
+                              "type": "string",
+                              "default": ""
+                            }
+                          }
+                        }
+                      ],
+                      "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/1/items"
                     }
                   }
                 ],
@@ -377,19 +671,20 @@
                     "type": "object",
                     "default": {},
                     "required": [
-                      "level",
+                      "referenceTo",
                       "move",
                       "type",
                       "category",
                       "power",
-                      "accuracy"
+                      "accuracy",
+                      "tm"
                     ],
                     "additionalProperties": true,
                     "properties": {
-                      "level": {
-                        "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/0/properties/level",
-                        "type": "integer",
-                        "default": 0
+                      "referenceTo": {
+                        "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/0/properties/referenceTo",
+                        "type": "string",
+                        "default": ""
                       },
                       "move": {
                         "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/0/properties/move",
@@ -406,10 +701,16 @@
                         "type": "object",
                         "default": {},
                         "required": [
+                          "img",
                           "title"
                         ],
                         "additionalProperties": true,
                         "properties": {
+                          "img": {
+                            "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/0/properties/category/properties/img",
+                            "type": "string",
+                            "default": ""
+                          },
                           "title": {
                             "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/0/properties/category/properties/title",
                             "type": "string",
@@ -426,7 +727,92 @@
                         "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/0/properties/accuracy",
                         "type": "string",
                         "default": ""
+                      },
+                      "tm": {
+                        "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/0/properties/tm",
+                        "type": "string",
+                        "default": ""
                       }
+                    }
+                  },
+                  {
+                    "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/1",
+                    "type": "array",
+                    "default": [],
+                    "additionalItems": true,
+                    "items": {
+                      "anyOf": [
+                        {
+                          "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0",
+                          "type": "object",
+                          "default": {},
+                          "required": [
+                            "referenceTo",
+                            "move",
+                            "type",
+                            "category",
+                            "power",
+                            "accuracy",
+                            "tm"
+                          ],
+                          "additionalProperties": true,
+                          "properties": {
+                            "referenceTo": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0/properties/referenceTo",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "move": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0/properties/move",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "type": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0/properties/type",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "category": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0/properties/category",
+                              "type": "object",
+                              "default": {},
+                              "required": [
+                                "img",
+                                "title"
+                              ],
+                              "additionalProperties": true,
+                              "properties": {
+                                "img": {
+                                  "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0/properties/category/properties/img",
+                                  "type": "string",
+                                  "default": ""
+                                },
+                                "title": {
+                                  "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0/properties/category/properties/title",
+                                  "type": "string",
+                                  "default": ""
+                                }
+                              }
+                            },
+                            "power": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0/properties/power",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "accuracy": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0/properties/accuracy",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "tm": {
+                              "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/1/items/anyOf/0/properties/tm",
+                              "type": "string",
+                              "default": ""
+                            }
+                          }
+                        }
+                      ],
+                      "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/movesLearntByTm/items/anyOf/1/items"
                     }
                   }
                 ],
@@ -445,19 +831,19 @@
                     "type": "object",
                     "default": {},
                     "required": [
-                      "level",
+                      "referenceTo",
                       "move",
                       "type",
-                      "category",
                       "power",
-                      "accuracy"
+                      "accuracy",
+                      "tm"
                     ],
                     "additionalProperties": true,
                     "properties": {
-                      "level": {
-                        "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/transferOnlyMoves/items/anyOf/0/properties/level",
-                        "type": "null",
-                        "default": null
+                      "referenceTo": {
+                        "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/transferOnlyMoves/items/anyOf/0/properties/referenceTo",
+                        "type": "string",
+                        "default": ""
                       },
                       "move": {
                         "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/transferOnlyMoves/items/anyOf/0/properties/move",
@@ -469,13 +855,6 @@
                         "type": "string",
                         "default": ""
                       },
-                      "category": {
-                        "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/transferOnlyMoves/items/anyOf/0/properties/category",
-                        "type": "object",
-                        "default": {},
-                        "additionalProperties": false,
-                        "properties": {}
-                      },
                       "power": {
                         "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/transferOnlyMoves/items/anyOf/0/properties/power",
                         "type": "string",
@@ -483,6 +862,11 @@
                       },
                       "accuracy": {
                         "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/transferOnlyMoves/items/anyOf/0/properties/accuracy",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "tm": {
+                        "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/transferOnlyMoves/items/anyOf/0/properties/tm",
                         "type": "string",
                         "default": ""
                       }
@@ -493,22 +877,6 @@
               }
             }
           }
-        },
-        "rattata": {
-          "$id": "#/properties/moves/properties/rattata",
-          "type": "object",
-          "default": {},
-          "required": [],
-          "additionalProperties": true,
-          "properties": {}
-        },
-        "alolanRattata": {
-          "$id": "#/properties/moves/properties/alolanRattata",
-          "type": "object",
-          "default": {},
-          "required": [],
-          "additionalProperties": true,
-          "properties": {}
         }
       }
     }

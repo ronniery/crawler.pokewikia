@@ -128,7 +128,7 @@ class Sprites {
 
     return {
       description: _.some(spanText) ? spanText : '',
-      image: Helpers.getImgSrc($, span)
+      image: Helpers.getImgSrc($, $(span).find('span'))
     };
   }
 

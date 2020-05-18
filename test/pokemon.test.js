@@ -24,7 +24,11 @@ describe('Test /pokemon route', function () {
       .expect('Content-Type', /html/)
       .expect(500)
       .end((_err, response) => {
-        expect(response.text).to.be.equal("Empty pokemon name, check it and try again.");
+        expect(response.body).to.eql({ 
+          status: "ERROR", 
+          message: "Empty pokemon name, check it and try again." 
+        });
+
         done();
       })
   })
@@ -81,18 +85,12 @@ describe('Test /pokemon route', function () {
           const bodyKeys = Object.keys(body)
 
           bodyKeys.forEach(key => {
-            console.log(key)
             const schema = schemas[key]
-            const target = { 
+            const target = {
               [key]: body[key]
             }
 
             if (!isEmpty(schema)) {
-
-              if(key === "moves") {
-                let x = 1
-              }
-
               // Skipp some mongo properties
               const validator = ajv.compile(schema);
               const result = validator(target);

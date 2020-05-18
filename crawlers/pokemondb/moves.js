@@ -3,37 +3,37 @@ const _ = require('lodash');
 const Helpers = require('@crawlers/helpers')
 const tabSelector = '.tabset-moves-game > .tabs-tab-list a';
 
-// TODO: There is a bug here that see Rattata and see there is 2 tabs, the parser is wrong
 class Moves {
 
-  static getMoves(cheerio, pokename) {
+  static getMoves(cheerio) {
     const $ = cheerio();
 
     return $(tabSelector)
       .toArray()
       .reduce((moves, tab) => {
-        const allMoves = Moves._getAllMovesFromTab(cheerio, pokename, tab);
+        const allMoves = Moves._getAllMovesFromTab(cheerio, tab);
         const tabName = $(tab).text();
         moves[_.camelCase(tabName)] = allMoves;
-        
+
         return moves;
       }, {});
   }
 
-  static _getAllMovesFromTab(cheerio, pokename, tab) {
+  static _getAllMovesFromTab(cheerio, tab) {
     const $ = cheerio()
-    const $content = Moves._findTabContent(cheerio, pokename, tab)
+    const $content = Moves._findTabContent(cheerio, tab)
     const titledTables = $content
       .map(elContent => {
         const $el = $(elContent);
         const nextEl = $el.next()
+        const hasWrapperTabs = $(nextEl).hasClass('tabs-wrapper')
 
         let anchor = null
         let tables = [{
-          [anchor]: $el.next().find('table')
+          [anchor]: $(nextEl).find('table')
         }]
 
-        if ($(nextEl).hasClass('tabs-wrapper')) {
+        if (hasWrapperTabs) {
           tables = $el
             .next()
             .find('.tabs-tab-list a')
@@ -58,16 +58,16 @@ class Moves {
 
   static _createTabMoves(cheerio, titledTables) {
     return titledTables
-      .reduce((tabmoves, { title, anchor, tables }) => {
+      .reduce((tabmoves, { title, tables }) => {
         tabmoves[_.camelCase(title)] = Moves._tablesToMoves(
-          cheerio, anchor, tables
+          cheerio, tables
         );
 
         return tabmoves;
       }, {});
   }
 
-  static _tablesToMoves(cheerio, anchor, tables) {
+  static _tablesToMoves(cheerio, tables) {
     const $ = cheerio();
     const moves = []
 
@@ -78,9 +78,14 @@ class Moves {
         .findArray('tbody tr')
         .map(tr => {
           const tds = $(tr).find('td');
-          const categorySpan = tds.eq(3).find('span');
           const hasSixTds = _.size(tds) === 6
           const base = hasSixTds ? 1 : 0
+          const categorySpan = tds.eq(hasSixTds ? 3 : 2).find('span');
+          
+          if("Final Gambit" === tds.eq(base).text2()) {
+            let x = 1
+          }
+
           const move = {
             referenceTo: _.isEmpty(tableKey) ? 'both' : tableKey,
             move: tds.eq(base).text2(),
@@ -108,7 +113,7 @@ class Moves {
     return _.flatten(moves)
   }
 
-  static _findTabContent(cheerio, pokename, tab) {
+  static _findTabContent(cheerio, tab) {
     const $ = cheerio();
     const $where = $($(tab).attr('href'));
 
