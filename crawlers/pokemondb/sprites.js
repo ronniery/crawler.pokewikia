@@ -101,7 +101,7 @@ class Sprites {
       captions: _.compact(rowCaptionParts).map(caption => Helpers.decodeEntities(caption)),
       images: [{
         description: '-',
-        image: undefined
+        image: ''
       }]
     };
 
@@ -127,7 +127,7 @@ class Sprites {
     const spanText = $(span).text();
 
     return {
-      description: _.some(spanText) ? spanText : undefined,
+      description: _.some(spanText) ? spanText : '',
       image: Helpers.getImgSrc($, span)
     };
   }
@@ -140,7 +140,7 @@ class Sprites {
     table.images = unlabeledSpriteList
       .map(a => {
         return {
-          description: undefined,
+          description: '',
           image: Helpers.getImgSrc($, a)
         };
       });

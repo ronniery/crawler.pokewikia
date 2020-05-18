@@ -1,383 +1,636 @@
 {
-  "type": "array",
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "",
-  "minItems": 1,
-  "uniqueItems": true,
-  "items": {
-    "type": "object",
-    "required": [
-      "baseStats",
-      "dexdata",
-      "defenses",
-      "pokeImgs"
-    ],
-    "properties": {
-      "baseStats": {
-        "type": "object",
-        "properties": {
-          "hp": {
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "5831aacc-8d50-42c4-82fd-7b6a8a05c719",
+  "type": "object",
+  "default": {},
+  "required": [
+    "derivations"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "derivations": {
+      "$id": "#/properties/derivations",
+      "type": "array",
+      "default": [],
+      "additionalItems": true,
+      "items": {
+        "anyOf": [
+          {
+            "$id": "#/properties/derivations/items/anyOf/0",
             "type": "object",
-            "properties": {
-              "base": {
-                "type": "number"
-              },
-              "max": {
-                "type": "number"
-              },
-              "min": {
-                "type": "number"
-              }
-            },
+            "default": {},
             "required": [
-              "base",
-              "max",
-              "min"
-            ]
-          },
-          "attack": {
-            "type": "object",
+              "baseStats",
+              "dexdata",
+              "defenses",
+              "pokeImgs"
+            ],
+            "additionalProperties": true,
             "properties": {
-              "base": {
-                "type": "number"
+              "baseStats": {
+                "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats",
+                "type": "object",
+                "default": {},
+                "required": [
+                  "hp",
+                  "attack",
+                  "defense",
+                  "spAtk",
+                  "spDef",
+                  "speed",
+                  "total"
+                ],
+                "additionalProperties": true,
+                "properties": {
+                  "hp": {
+                    "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/hp",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "base",
+                      "max",
+                      "min"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "base": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/hp/properties/base",
+                        "type": "integer",
+                        "default": 0
+                      },
+                      "max": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/hp/properties/max",
+                        "type": "integer",
+                        "default": 0
+                      },
+                      "min": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/hp/properties/min",
+                        "type": "integer",
+                        "default": 0
+                      }
+                    }
+                  },
+                  "attack": {
+                    "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/attack",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "base",
+                      "max",
+                      "min"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "base": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/attack/properties/base",
+                        "type": "integer",
+                        "default": 0
+                      },
+                      "max": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/attack/properties/max",
+                        "type": "integer",
+                        "default": 0
+                      },
+                      "min": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/attack/properties/min",
+                        "type": "integer",
+                        "default": 0
+                      }
+                    }
+                  },
+                  "defense": {
+                    "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/defense",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "base",
+                      "max",
+                      "min"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "base": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/defense/properties/base",
+                        "type": "integer",
+                        "default": 0
+                      },
+                      "max": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/defense/properties/max",
+                        "type": "integer",
+                        "default": 0
+                      },
+                      "min": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/defense/properties/min",
+                        "type": "integer",
+                        "default": 0
+                      }
+                    }
+                  },
+                  "spAtk": {
+                    "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/spAtk",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "base",
+                      "max",
+                      "min"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "base": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/spAtk/properties/base",
+                        "type": "integer",
+                        "default": 0
+                      },
+                      "max": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/spAtk/properties/max",
+                        "type": "integer",
+                        "default": 0
+                      },
+                      "min": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/spAtk/properties/min",
+                        "type": "integer",
+                        "default": 0
+                      }
+                    }
+                  },
+                  "spDef": {
+                    "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/spDef",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "base",
+                      "max",
+                      "min"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "base": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/spDef/properties/base",
+                        "type": "integer",
+                        "default": 0
+                      },
+                      "max": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/spDef/properties/max",
+                        "type": "integer",
+                        "default": 0
+                      },
+                      "min": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/spDef/properties/min",
+                        "type": "integer",
+                        "default": 0
+                      }
+                    }
+                  },
+                  "speed": {
+                    "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/speed",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "base",
+                      "max",
+                      "min"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "base": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/speed/properties/base",
+                        "type": "integer",
+                        "default": 0
+                      },
+                      "max": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/speed/properties/max",
+                        "type": "integer",
+                        "default": 0
+                      },
+                      "min": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/speed/properties/min",
+                        "type": "integer",
+                        "default": 0
+                      }
+                    }
+                  },
+                  "total": {
+                    "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/total",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "base",
+                      "max",
+                      "min"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "base": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/total/properties/base",
+                        "type": "integer",
+                        "default": 0
+                      },
+                      "max": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/total/properties/max",
+                        "type": "null",
+                        "default": null
+                      },
+                      "min": {
+                        "$id": "#/properties/derivations/items/anyOf/0/properties/baseStats/properties/total/properties/min",
+                        "type": "null",
+                        "default": null
+                      }
+                    }
+                  }
+                }
               },
-              "max": {
-                "type": "number"
+              "dexdata": {
+                "$id": "#/properties/derivations/items/anyOf/0/properties/dexdata",
+                "type": "object",
+                "default": {},
+                "required": [
+                  "name",
+                  "nationalId",
+                  "type",
+                  "species",
+                  "height",
+                  "weight",
+                  "abilities",
+                  "localizations"
+                ],
+                "additionalProperties": true,
+                "properties": {
+                  "name": {
+                    "$id": "#/properties/derivations/items/anyOf/0/properties/dexdata/properties/name",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "nationalId": {
+                    "$id": "#/properties/derivations/items/anyOf/0/properties/dexdata/properties/nationalId",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "type": {
+                    "$id": "#/properties/derivations/items/anyOf/0/properties/dexdata/properties/type",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "species": {
+                    "$id": "#/properties/derivations/items/anyOf/0/properties/dexdata/properties/species",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "height": {
+                    "$id": "#/properties/derivations/items/anyOf/0/properties/dexdata/properties/height",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "weight": {
+                    "$id": "#/properties/derivations/items/anyOf/0/properties/dexdata/properties/weight",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "abilities": {
+                    "$id": "#/properties/derivations/items/anyOf/0/properties/dexdata/properties/abilities",
+                    "type": "array",
+                    "default": [],
+                    "additionalItems": true,
+                    "items": {
+                      "anyOf": [
+                        {
+                          "$id": "#/properties/derivations/items/anyOf/0/properties/dexdata/properties/abilities/items/anyOf/0",
+                          "type": "string",
+                          "default": ""
+                        }
+                      ],
+                      "$id": "#/properties/derivations/items/anyOf/0/properties/dexdata/properties/abilities/items"
+                    }
+                  },
+                  "localizations": {
+                    "$id": "#/properties/derivations/items/anyOf/0/properties/dexdata/properties/localizations",
+                    "type": "array",
+                    "default": [],
+                    "additionalItems": true,
+                    "items": {
+                      "anyOf": [
+                        {
+                          "$id": "#/properties/derivations/items/anyOf/0/properties/dexdata/properties/localizations/items/anyOf/0",
+                          "type": "object",
+                          "default": {},
+                          "required": [
+                            "route",
+                            "game"
+                          ],
+                          "additionalProperties": true,
+                          "properties": {
+                            "route": {
+                              "$id": "#/properties/derivations/items/anyOf/0/properties/dexdata/properties/localizations/items/anyOf/0/properties/route",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "game": {
+                              "$id": "#/properties/derivations/items/anyOf/0/properties/dexdata/properties/localizations/items/anyOf/0/properties/game",
+                              "type": "string",
+                              "default": ""
+                            }
+                          }
+                        }
+                      ],
+                      "$id": "#/properties/derivations/items/anyOf/0/properties/dexdata/properties/localizations/items"
+                    }
+                  }
+                }
               },
-              "min": {
-                "type": "number"
-              }
-            },
-            "required": [
-              "base",
-              "max",
-              "min"
-            ]
-          },
-          "defense": {
-            "type": "object",
-            "properties": {
-              "base": {
-                "type": "number"
+              "defenses": {
+                "$id": "#/properties/derivations/items/anyOf/0/properties/defenses",
+                "type": "array",
+                "default": [],
+                "additionalItems": true,
+                "items": {
+                  "anyOf": [
+                    {
+                      "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0",
+                      "type": "object",
+                      "default": {},
+                      "required": [
+                        "normal",
+                        "fire",
+                        "water",
+                        "electric",
+                        "grass",
+                        "ice",
+                        "fighting",
+                        "poison",
+                        "ground",
+                        "ability"
+                      ],
+                      "additionalProperties": true,
+                      "properties": {
+                        "normal": {
+                          "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/normal",
+                          "type": "array",
+                          "default": [],
+                          "additionalItems": true,
+                          "items": {
+                            "anyOf": [
+                              {
+                                "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/normal/items/anyOf/0",
+                                "type": "string",
+                                "default": ""
+                              }
+                            ],
+                            "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/normal/items"
+                          }
+                        },
+                        "fire": {
+                          "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/fire",
+                          "type": "array",
+                          "default": [],
+                          "additionalItems": true,
+                          "items": {
+                            "anyOf": [
+                              {
+                                "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/fire/items/anyOf/0",
+                                "type": "string",
+                                "default": ""
+                              }
+                            ],
+                            "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/fire/items"
+                          }
+                        },
+                        "water": {
+                          "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/water",
+                          "type": "array",
+                          "default": [],
+                          "additionalItems": true,
+                          "items": {
+                            "anyOf": [
+                              {
+                                "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/water/items/anyOf/0",
+                                "type": "string",
+                                "default": ""
+                              }
+                            ],
+                            "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/water/items"
+                          }
+                        },
+                        "electric": {
+                          "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/electric",
+                          "type": "array",
+                          "default": [],
+                          "additionalItems": true,
+                          "items": {
+                            "anyOf": [
+                              {
+                                "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/electric/items/anyOf/0",
+                                "type": "string",
+                                "default": ""
+                              }
+                            ],
+                            "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/electric/items"
+                          }
+                        },
+                        "grass": {
+                          "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/grass",
+                          "type": "array",
+                          "default": [],
+                          "additionalItems": true,
+                          "items": {
+                            "anyOf": [
+                              {
+                                "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/grass/items/anyOf/0",
+                                "type": "string",
+                                "default": ""
+                              }
+                            ],
+                            "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/grass/items"
+                          }
+                        },
+                        "ice": {
+                          "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/ice",
+                          "type": "array",
+                          "default": [],
+                          "additionalItems": true,
+                          "items": {
+                            "anyOf": [
+                              {
+                                "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/ice/items/anyOf/0",
+                                "type": "string",
+                                "default": ""
+                              }
+                            ],
+                            "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/ice/items"
+                          }
+                        },
+                        "fighting": {
+                          "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/fighting",
+                          "type": "array",
+                          "default": [],
+                          "additionalItems": true,
+                          "items": {
+                            "anyOf": [
+                              {
+                                "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/fighting/items/anyOf/0",
+                                "type": "string",
+                                "default": ""
+                              }
+                            ],
+                            "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/fighting/items"
+                          }
+                        },
+                        "poison": {
+                          "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/poison",
+                          "type": "array",
+                          "default": [],
+                          "additionalItems": true,
+                          "items": {
+                            "anyOf": [
+                              {
+                                "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/poison/items/anyOf/0",
+                                "type": "string",
+                                "default": ""
+                              }
+                            ],
+                            "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/poison/items"
+                          }
+                        },
+                        "ground": {
+                          "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/ground",
+                          "type": "array",
+                          "default": [],
+                          "additionalItems": true,
+                          "items": {
+                            "anyOf": [
+                              {
+                                "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/ground/items/anyOf/0",
+                                "type": "string",
+                                "default": ""
+                              }
+                            ],
+                            "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/ground/items"
+                          }
+                        },
+                        "ability": {
+                          "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items/anyOf/0/properties/ability",
+                          "type": "string",
+                          "default": ""
+                        }
+                      }
+                    }
+                  ],
+                  "$id": "#/properties/derivations/items/anyOf/0/properties/defenses/items"
+                }
               },
-              "max": {
-                "type": "number"
-              },
-              "min": {
-                "type": "number"
-              }
-            },
-            "required": [
-              "base",
-              "max",
-              "min"
-            ]
-          },
-          "spAtk": {
-            "type": "object",
-            "properties": {
-              "base": {
-                "type": "number"
-              },
-              "max": {
-                "type": "number"
-              },
-              "min": {
-                "type": "number"
-              }
-            },
-            "required": [
-              "base",
-              "max",
-              "min"
-            ]
-          },
-          "spDef": {
-            "type": "object",
-            "properties": {
-              "base": {
-                "type": "number"
-              },
-              "max": {
-                "type": "number"
-              },
-              "min": {
-                "type": "number"
-              }
-            },
-            "required": [
-              "base",
-              "max",
-              "min"
-            ]
-          },
-          "speed": {
-            "type": "object",
-            "properties": {
-              "base": {
-                "type": "number"
-              },
-              "max": {
-                "type": "number"
-              },
-              "min": {
-                "type": "number"
-              }
-            },
-            "required": [
-              "base",
-              "max",
-              "min"
-            ]
-          },
-          "total": {
-            "type": "object",
-            "properties": {
-              "base": {
-                "type": "number"
-              },
-              "max": {},
-              "min": {}
-            },
-            "required": [
-              "base"
-            ]
-          }
-        },
-        "required": [
-          "hp",
-          "attack",
-          "defense",
-          "spAtk",
-          "spDef",
-          "speed",
-          "total"
-        ]
-      },
-      "dexdata": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "minLength": 1
-          },
-          "nationalId": {
-            "type": "string",
-            "minLength": 1
-          },
-          "type": {
-            "type": "string",
-            "minLength": 1
-          },
-          "species": {
-            "type": "string",
-            "minLength": 1
-          },
-          "height": {
-            "type": "string",
-            "minLength": 1
-          },
-          "weight": {
-            "type": "string",
-            "minLength": 1
-          },
-          "abilities": {
-            "type": "array",
-            "items": {
-              "required": [],
-              "properties": {}
-            }
-          },
-          "localizations": {
-            "type": "array",
-            "uniqueItems": true,
-            "minItems": 1,
-            "items": {
-              "required": [
-                "route",
-                "game"
-              ],
-              "properties": {
-                "route": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                "game": {
-                  "type": "string",
-                  "minLength": 1
+              "pokeImgs": {
+                "$id": "#/properties/derivations/items/anyOf/0/properties/pokeImgs",
+                "type": "object",
+                "default": {},
+                "required": [
+                  "pokedb",
+                  "zucan"
+                ],
+                "additionalProperties": true,
+                "properties": {
+                  "pokedb": {
+                    "$id": "#/properties/derivations/items/anyOf/0/properties/pokeImgs/properties/pokedb",
+                    "type": "string",
+                    "default": ""
+                  },
+                  "zucan": {
+                    "$id": "#/properties/derivations/items/anyOf/0/properties/pokeImgs/properties/zucan",
+                    "type": "array",
+                    "default": [],
+                    "additionalItems": true,
+                    "items": {
+                      "anyOf": [
+                        {
+                          "$id": "#/properties/derivations/items/anyOf/0/properties/pokeImgs/properties/zucan/items/anyOf/0",
+                          "type": "object",
+                          "default": {},
+                          "required": [
+                            "no",
+                            "sub",
+                            "name",
+                            "sub_name",
+                            "omosa",
+                            "takasa",
+                            "type_1",
+                            "type_2",
+                            "kyodai_flg",
+                            "image_m",
+                            "image_s",
+                            "zukan_no"
+                          ],
+                          "additionalProperties": true,
+                          "properties": {
+                            "no": {
+                              "$id": "#/properties/derivations/items/anyOf/0/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/no",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "sub": {
+                              "$id": "#/properties/derivations/items/anyOf/0/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/sub",
+                              "type": "integer",
+                              "default": 0
+                            },
+                            "name": {
+                              "$id": "#/properties/derivations/items/anyOf/0/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/name",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "sub_name": {
+                              "$id": "#/properties/derivations/items/anyOf/0/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/sub_name",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "omosa": {
+                              "$id": "#/properties/derivations/items/anyOf/0/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/omosa",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "takasa": {
+                              "$id": "#/properties/derivations/items/anyOf/0/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/takasa",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "type_1": {
+                              "$id": "#/properties/derivations/items/anyOf/0/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/type_1",
+                              "type": "integer",
+                              "default": 0
+                            },
+                            "type_2": {
+                              "$id": "#/properties/derivations/items/anyOf/0/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/type_2",
+                              "type": "integer",
+                              "default": 0
+                            },
+                            "kyodai_flg": {
+                              "$id": "#/properties/derivations/items/anyOf/0/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/kyodai_flg",
+                              "type": "integer",
+                              "default": 0
+                            },
+                            "image_m": {
+                              "$id": "#/properties/derivations/items/anyOf/0/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/image_m",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "image_s": {
+                              "$id": "#/properties/derivations/items/anyOf/0/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/image_s",
+                              "type": "string",
+                              "default": ""
+                            },
+                            "zukan_no": {
+                              "$id": "#/properties/derivations/items/anyOf/0/properties/pokeImgs/properties/zucan/items/anyOf/0/properties/zukan_no",
+                              "type": "string",
+                              "default": ""
+                            }
+                          }
+                        }
+                      ],
+                      "$id": "#/properties/derivations/items/anyOf/0/properties/pokeImgs/properties/zucan/items"
+                    }
+                  }
                 }
               }
             }
           }
-        },
-        "required": [
-          "name",
-          "nationalId",
-          "type",
-          "species",
-          "height",
-          "weight",
-          "abilities",
-          "localizations"
-        ]
-      },
-      "defenses": {
-        "type": "array",
-        "uniqueItems": true,
-        "minItems": 1,
-        "items": {
-          "required": [
-            "ability"
-          ],
-          "properties": {
-            "normal": {
-              "type": "array",
-              "items": {
-                "required": [],
-                "properties": {}
-              }
-            },
-            "fire": {
-              "type": "array",
-              "items": {
-                "required": [],
-                "properties": {}
-              }
-            },
-            "water": {
-              "type": "array",
-              "items": {
-                "required": [],
-                "properties": {}
-              }
-            },
-            "electric": {
-              "type": "array",
-              "items": {
-                "required": [],
-                "properties": {}
-              }
-            },
-            "grass": {
-              "type": "array",
-              "items": {
-                "required": [],
-                "properties": {}
-              }
-            },
-            "ice": {
-              "type": "array",
-              "items": {
-                "required": [],
-                "properties": {}
-              }
-            },
-            "fighting": {
-              "type": "array",
-              "items": {
-                "required": [],
-                "properties": {}
-              }
-            },
-            "poison": {
-              "type": "array",
-              "items": {
-                "required": [],
-                "properties": {}
-              }
-            },
-            "ground": {
-              "type": "array",
-              "items": {
-                "required": [],
-                "properties": {}
-              }
-            },
-            "ability": {
-              "type": "string",
-              "minLength": 1
-            }
-          }
-        }
-      },
-      "pokeImgs": {
-        "type": "object",
-        "properties": {
-          "pokedb": {
-            "type": "string",
-            "minLength": 1
-          },
-          "zucan": {
-            "type": "array",
-            "uniqueItems": true,
-            "minItems": 1,
-            "items": {
-              "required": [
-                "no",
-                "sub",
-                "name",
-                "sub_name",
-                "omosa",
-                "takasa",
-                "type_1",
-                "type_2",
-                "kyodai_flg",
-                "image_m",
-                "image_s",
-                "zukan_no"
-              ],
-              "properties": {
-                "no": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                "sub": {
-                  "type": "number"
-                },
-                "name": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                "sub_name": {
-                  "type": "string"
-                },
-                "omosa": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                "takasa": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                "type_1": {
-                  "type": "number"
-                },
-                "type_2": {
-                  "type": "number"
-                },
-                "kyodai_flg": {
-                  "type": "number"
-                },
-                "image_m": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                "image_s": {
-                  "type": "string",
-                  "minLength": 1
-                },
-                "zukan_no": {
-                  "type": "string",
-                  "minLength": 1
-                }
-              }
-            }
-          }
-        },
-        "required": [
-          "pokedb",
-          "zucan"
-        ]
+        ],
+        "$id": "#/properties/derivations/items"
       }
     }
   }

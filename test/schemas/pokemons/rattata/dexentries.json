@@ -1,483 +1,982 @@
 {
-  "type": "array",
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "",
-  "minItems": 1,
-  "uniqueItems": true,
-  "items": {
-    "type": "object",
-    "required": [
-      "rattata"
-    ],
-    "properties": {
-      "rattata": {
-        "type": "object",
-        "properties": {
-          "redBlue": {
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "ce1fbc20-daa0-4e12-be79-2762e2a846e2",
+  "type": "object",
+  "default": {},
+  "required": [
+    "dexentries"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "dexentries": {
+      "$id": "#/properties/dexentries",
+      "type": "array",
+      "default": [],
+      "additionalItems": true,
+      "items": {
+        "anyOf": [
+          {
+            "$id": "#/properties/dexentries/items/anyOf/0",
             "type": "object",
+            "default": {},
+            "required": [
+              "rattata"
+            ],
+            "additionalProperties": true,
             "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
+              "rattata": {
+                "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata",
+                "type": "object",
+                "default": {},
+                "required": [
+                  "redBlue",
+                  "yellow",
+                  "gold",
+                  "silver",
+                  "crystal",
+                  "rubySapphire",
+                  "fireRed",
+                  "leafGreen",
+                  "emerald",
+                  "diamondPearlPlatinum",
+                  "heartGold",
+                  "soulSilver",
+                  "blackWhite",
+                  "black2White2",
+                  "x",
+                  "y",
+                  "omegaRubyAlphaSapphire",
+                  "sun",
+                  "moon",
+                  "ultraSun",
+                  "ultraMoon",
+                  "letsGoPikachuLetsGoEevee"
+                ],
+                "additionalProperties": true,
+                "properties": {
+                  "redBlue": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/redBlue",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/redBlue/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/redBlue/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/redBlue/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/redBlue/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "yellow": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/yellow",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/yellow/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/yellow/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/yellow/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/yellow/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "gold": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/gold",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/gold/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/gold/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/gold/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/gold/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "silver": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/silver",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/silver/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/silver/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/silver/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/silver/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "crystal": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/crystal",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/crystal/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/crystal/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/crystal/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/crystal/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "rubySapphire": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/rubySapphire",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/rubySapphire/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/rubySapphire/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/rubySapphire/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/rubySapphire/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "fireRed": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/fireRed",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/fireRed/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/fireRed/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/fireRed/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/fireRed/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "leafGreen": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/leafGreen",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/leafGreen/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/leafGreen/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/leafGreen/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/leafGreen/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "emerald": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/emerald",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/emerald/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/emerald/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/emerald/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/emerald/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "diamondPearlPlatinum": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/diamondPearlPlatinum",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/diamondPearlPlatinum/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/diamondPearlPlatinum/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/diamondPearlPlatinum/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/diamondPearlPlatinum/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "heartGold": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/heartGold",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/heartGold/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/heartGold/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/heartGold/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/heartGold/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "soulSilver": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/soulSilver",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/soulSilver/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/soulSilver/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/soulSilver/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/soulSilver/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "blackWhite": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/blackWhite",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/blackWhite/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/blackWhite/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/blackWhite/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/blackWhite/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "black2White2": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/black2White2",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/black2White2/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/black2White2/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/black2White2/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/black2White2/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "x": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/x",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/x/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/x/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/x/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/x/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "y": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/y",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/y/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/y/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/y/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/y/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "omegaRubyAlphaSapphire": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/omegaRubyAlphaSapphire",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/omegaRubyAlphaSapphire/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/omegaRubyAlphaSapphire/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/omegaRubyAlphaSapphire/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/omegaRubyAlphaSapphire/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "sun": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/sun",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/sun/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/sun/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/sun/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/sun/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "moon": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/moon",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/moon/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/moon/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/moon/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/moon/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "ultraSun": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/ultraSun",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/ultraSun/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/ultraSun/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/ultraSun/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/ultraSun/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "ultraMoon": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/ultraMoon",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/ultraMoon/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/ultraMoon/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/ultraMoon/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/ultraMoon/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "letsGoPikachuLetsGoEevee": {
+                    "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/letsGoPikachuLetsGoEevee",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/letsGoPikachuLetsGoEevee/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/letsGoPikachuLetsGoEevee/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/letsGoPikachuLetsGoEevee/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/0/properties/rattata/properties/letsGoPikachuLetsGoEevee/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  }
                 }
               }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
+            }
           },
-          "yellow": {
+          {
+            "$id": "#/properties/dexentries/items/anyOf/1",
             "type": "object",
+            "default": {},
+            "required": [
+              "alolanRattata"
+            ],
+            "additionalProperties": true,
             "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
+              "alolanRattata": {
+                "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata",
+                "type": "object",
+                "default": {},
+                "required": [
+                  "sun",
+                  "moon",
+                  "ultraSun",
+                  "ultraMoon",
+                  "letsGoPikachuLetsGoEevee"
+                ],
+                "additionalProperties": true,
+                "properties": {
+                  "sun": {
+                    "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/sun",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/sun/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/sun/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/sun/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/sun/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "moon": {
+                    "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/moon",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/moon/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/moon/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/moon/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/moon/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "ultraSun": {
+                    "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/ultraSun",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/ultraSun/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/ultraSun/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/ultraSun/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/ultraSun/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "ultraMoon": {
+                    "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/ultraMoon",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/ultraMoon/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/ultraMoon/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/ultraMoon/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/ultraMoon/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  },
+                  "letsGoPikachuLetsGoEevee": {
+                    "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/letsGoPikachuLetsGoEevee",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "text",
+                      "originalTitle"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "text": {
+                        "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/letsGoPikachuLetsGoEevee/properties/text",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "originalTitle": {
+                        "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/letsGoPikachuLetsGoEevee/properties/originalTitle",
+                        "type": "array",
+                        "default": [],
+                        "additionalItems": true,
+                        "items": {
+                          "anyOf": [
+                            {
+                              "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/letsGoPikachuLetsGoEevee/properties/originalTitle/items/anyOf/0",
+                              "type": "string",
+                              "default": ""
+                            }
+                          ],
+                          "$id": "#/properties/dexentries/items/anyOf/1/properties/alolanRattata/properties/letsGoPikachuLetsGoEevee/properties/originalTitle/items"
+                        }
+                      }
+                    }
+                  }
                 }
               }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "gold": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "silver": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "crystal": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "rubySapphire": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "fireRed": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "leafGreen": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "emerald": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "diamondPearlPlatinum": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "heartGold": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "soulSilver": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "blackWhite": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "black2White2": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "x": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "y": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "omegaRubyAlphaSapphire": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "sun": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "moon": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "ultraSun": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "ultraMoon": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
-          },
-          "letsGoPikachuLetsGoEevee": {
-            "type": "object",
-            "properties": {
-              "text": {
-                "type": "string",
-                "minLength": 1
-              },
-              "originalTitle": {
-                "type": "array",
-                "items": {
-                  "required": [],
-                  "properties": {}
-                }
-              }
-            },
-            "required": [
-              "text",
-              "originalTitle"
-            ]
+            }
           }
-        },
-        "required": [
-          "redBlue",
-          "yellow",
-          "gold",
-          "silver",
-          "crystal",
-          "rubySapphire",
-          "fireRed",
-          "leafGreen",
-          "emerald",
-          "diamondPearlPlatinum",
-          "heartGold",
-          "soulSilver",
-          "blackWhite",
-          "black2White2",
-          "x",
-          "y",
-          "omegaRubyAlphaSapphire",
-          "sun",
-          "moon",
-          "ultraSun",
-          "ultraMoon",
-          "letsGoPikachuLetsGoEevee"
-        ]
+        ],
+        "$id": "#/properties/dexentries/items"
       }
     }
   }

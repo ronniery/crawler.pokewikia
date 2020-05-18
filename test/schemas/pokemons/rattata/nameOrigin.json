@@ -1,19 +1,34 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "7f52f178-8b08-4937-bf11-032ab0abad5f",
   "type": "object",
-  "properties": {
-    "rat": {
-      "type": "string",
-      "minLength": 1
-    },
-    "ratATatTat": {
-      "type": "string",
-      "minLength": 1
-    }
-  },
+  "default": {},
   "required": [
-    "rat",
-    "ratATatTat"
-  ]
+    "nameOrigin"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "nameOrigin": {
+      "$id": "#/properties/nameOrigin",
+      "type": "object",
+      "default": {},
+      "required": [
+        "rat",
+        "ratATatTat"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "rat": {
+          "$id": "#/properties/nameOrigin/properties/rat",
+          "type": "string",
+          "default": ""
+        },
+        "ratATatTat": {
+          "$id": "#/properties/nameOrigin/properties/ratATatTat",
+          "type": "string",
+          "default": ""
+        }
+      }
+    }
+  }
 }

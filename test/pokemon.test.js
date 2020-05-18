@@ -1,19 +1,21 @@
 /* eslint-disable no-undef */
-const { expect } = require('chai')
-const _ = require('lodash')
-const { isObject, isEmpty, isArray } = _
-const { Validator } = require('jsonschema');
-const request = require('supertest')
+const { expect } = require('chai');
+const fs = require('fs');
+const path = require('path');
+const _ = require('lodash');
+const { isObject, isEmpty, isArray } = _;
+const Ajv = require('ajv');
+const request = require('supertest');
 
 describe('Test /pokemon route', function () {
   this.timeout(10000);
 
   let app;
-  let validator;
+  let ajv;
 
   beforeEach(() => {
     app = require('../app')
-    validator = new Validator()
+    ajv = new Ajv();
   });
 
   it('Should get /pokemon with empty pokename.', done => {
@@ -65,9 +67,44 @@ describe('Test /pokemon route', function () {
         done();
       });
   })
-  
-  describe('Test the pokemon api response.', function() {
-    
+
+  describe('Test the pokemon api response.', function () {
+    it('Should get /pokemon Rattata data and validate it.', async done => {
+      const schemas = await Schema.load('rattata')
+
+      request(app)
+        .get('/pokemon')
+        .query({ name: 'Rattata' })
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end((_err, { body }) => {
+          const bodyKeys = Object.keys(body)
+
+          bodyKeys.forEach(key => {
+            console.log(key)
+            const schema = schemas[key]
+            const target = { 
+              [key]: body[key]
+            }
+
+            if (!isEmpty(schema)) {
+
+              if(key === "whereFind") {
+                let x = 1
+              }
+
+              // Skipp some mongo properties
+              const validator = ajv.compile(schema);
+              const result = validator(target);
+
+              expect(validator.errors).to.be.null
+              expect(result).to.be.true;
+            }
+          })
+
+          done();
+        })
+    })
   })
 
   // it('Should get /card and verify card response with schema.', done => {
@@ -165,3 +202,27 @@ describe('Test /pokemon route', function () {
   //     });
   // })
 })
+
+class Schema {
+  static async load(schemeName) {
+    return new Promise((resolve, reject) => {
+      const schemaPath = path.join(__dirname, `./schemas/pokemons/${schemeName}`)
+
+      fs.readdir(schemaPath, (err, files) => {
+        if (err) reject(err)
+
+        const schemas = files.reduce((reducer, schema) => {
+          const content = fs.readFileSync(`${schemaPath}/${schema}`)
+
+          reducer[
+            schema.replace('.json', '')
+          ] = JSON.parse(content.toString())
+
+          return reducer
+        }, {})
+
+        resolve(schemas)
+      })
+    })
+  }
+}

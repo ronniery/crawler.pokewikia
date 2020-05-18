@@ -1,143 +1,225 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "29b83bbd-4df4-4be9-adf6-1f05809eebc2",
   "type": "object",
-  "properties": {
-    "hp": {
-      "type": "object",
-      "properties": {
-        "base": {
-          "type": "number"
-        },
-        "max": {
-          "type": "number"
-        },
-        "min": {
-          "type": "number"
-        }
-      },
-      "required": [
-        "base",
-        "max",
-        "min"
-      ]
-    },
-    "attack": {
-      "type": "object",
-      "properties": {
-        "base": {
-          "type": "number"
-        },
-        "max": {
-          "type": "number"
-        },
-        "min": {
-          "type": "number"
-        }
-      },
-      "required": [
-        "base",
-        "max",
-        "min"
-      ]
-    },
-    "defense": {
-      "type": "object",
-      "properties": {
-        "base": {
-          "type": "number"
-        },
-        "max": {
-          "type": "number"
-        },
-        "min": {
-          "type": "number"
-        }
-      },
-      "required": [
-        "base",
-        "max",
-        "min"
-      ]
-    },
-    "spAtk": {
-      "type": "object",
-      "properties": {
-        "base": {
-          "type": "number"
-        },
-        "max": {
-          "type": "number"
-        },
-        "min": {
-          "type": "number"
-        }
-      },
-      "required": [
-        "base",
-        "max",
-        "min"
-      ]
-    },
-    "spDef": {
-      "type": "object",
-      "properties": {
-        "base": {
-          "type": "number"
-        },
-        "max": {
-          "type": "number"
-        },
-        "min": {
-          "type": "number"
-        }
-      },
-      "required": [
-        "base",
-        "max",
-        "min"
-      ]
-    },
-    "speed": {
-      "type": "object",
-      "properties": {
-        "base": {
-          "type": "number"
-        },
-        "max": {
-          "type": "number"
-        },
-        "min": {
-          "type": "number"
-        }
-      },
-      "required": [
-        "base",
-        "max",
-        "min"
-      ]
-    },
-    "total": {
-      "type": "object",
-      "properties": {
-        "base": {
-          "type": "number"
-        },
-        "max": {},
-        "min": {}
-      },
-      "required": [
-        "base"
-      ]
-    }
-  },
+  "default": {},
   "required": [
-    "hp",
-    "attack",
-    "defense",
-    "spAtk",
-    "spDef",
-    "speed",
-    "total"
-  ]
+    "baseStats"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "baseStats": {
+      "$id": "#/properties/baseStats",
+      "type": "object",
+      "default": {},
+      "required": [
+        "hp",
+        "attack",
+        "defense",
+        "spAtk",
+        "spDef",
+        "speed",
+        "total"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "hp": {
+          "$id": "#/properties/baseStats/properties/hp",
+          "type": "object",
+          "default": {},
+          "required": [
+            "base",
+            "max",
+            "min"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "base": {
+              "$id": "#/properties/baseStats/properties/hp/properties/base",
+              "type": "integer",
+              "default": 0
+            },
+            "max": {
+              "$id": "#/properties/baseStats/properties/hp/properties/max",
+              "type": "integer",
+              "default": 0
+            },
+            "min": {
+              "$id": "#/properties/baseStats/properties/hp/properties/min",
+              "type": "integer",
+              "default": 0
+            }
+          }
+        },
+        "attack": {
+          "$id": "#/properties/baseStats/properties/attack",
+          "type": "object",
+          "default": {},
+          "required": [
+            "base",
+            "max",
+            "min"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "base": {
+              "$id": "#/properties/baseStats/properties/attack/properties/base",
+              "type": "integer",
+              "default": 0
+            },
+            "max": {
+              "$id": "#/properties/baseStats/properties/attack/properties/max",
+              "type": "integer",
+              "default": 0
+            },
+            "min": {
+              "$id": "#/properties/baseStats/properties/attack/properties/min",
+              "type": "integer",
+              "default": 0
+            }
+          }
+        },
+        "defense": {
+          "$id": "#/properties/baseStats/properties/defense",
+          "type": "object",
+          "default": {},
+          "required": [
+            "base",
+            "max",
+            "min"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "base": {
+              "$id": "#/properties/baseStats/properties/defense/properties/base",
+              "type": "integer",
+              "default": 0
+            },
+            "max": {
+              "$id": "#/properties/baseStats/properties/defense/properties/max",
+              "type": "integer",
+              "default": 0
+            },
+            "min": {
+              "$id": "#/properties/baseStats/properties/defense/properties/min",
+              "type": "integer",
+              "default": 0
+            }
+          }
+        },
+        "spAtk": {
+          "$id": "#/properties/baseStats/properties/spAtk",
+          "type": "object",
+          "default": {},
+          "required": [
+            "base",
+            "max",
+            "min"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "base": {
+              "$id": "#/properties/baseStats/properties/spAtk/properties/base",
+              "type": "integer",
+              "default": 0
+            },
+            "max": {
+              "$id": "#/properties/baseStats/properties/spAtk/properties/max",
+              "type": "integer",
+              "default": 0
+            },
+            "min": {
+              "$id": "#/properties/baseStats/properties/spAtk/properties/min",
+              "type": "integer",
+              "default": 0
+            }
+          }
+        },
+        "spDef": {
+          "$id": "#/properties/baseStats/properties/spDef",
+          "type": "object",
+          "default": {},
+          "required": [
+            "base",
+            "max",
+            "min"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "base": {
+              "$id": "#/properties/baseStats/properties/spDef/properties/base",
+              "type": "integer",
+              "default": 0
+            },
+            "max": {
+              "$id": "#/properties/baseStats/properties/spDef/properties/max",
+              "type": "integer",
+              "default": 0
+            },
+            "min": {
+              "$id": "#/properties/baseStats/properties/spDef/properties/min",
+              "type": "integer",
+              "default": 0
+            }
+          }
+        },
+        "speed": {
+          "$id": "#/properties/baseStats/properties/speed",
+          "type": "object",
+          "default": {},
+          "required": [
+            "base",
+            "max",
+            "min"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "base": {
+              "$id": "#/properties/baseStats/properties/speed/properties/base",
+              "type": "integer",
+              "default": 0
+            },
+            "max": {
+              "$id": "#/properties/baseStats/properties/speed/properties/max",
+              "type": "integer",
+              "default": 0
+            },
+            "min": {
+              "$id": "#/properties/baseStats/properties/speed/properties/min",
+              "type": "integer",
+              "default": 0
+            }
+          }
+        },
+        "total": {
+          "$id": "#/properties/baseStats/properties/total",
+          "type": "object",
+          "default": {},
+          "required": [
+            "base",
+            "max",
+            "min"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "base": {
+              "$id": "#/properties/baseStats/properties/total/properties/base",
+              "type": "integer",
+              "default": 0
+            },
+            "max": {
+              "$id": "#/properties/baseStats/properties/total/properties/max",
+              "type": "null",
+              "default": null
+            },
+            "min": {
+              "$id": "#/properties/baseStats/properties/total/properties/min",
+              "type": "null",
+              "default": null
+            }
+          }
+        }
+      }
+    }
+  }
 }

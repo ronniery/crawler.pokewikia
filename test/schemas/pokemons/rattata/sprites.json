@@ -1,68 +1,139 @@
 {
-  "type": "array",
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "",
-  "minItems": 1,
-  "uniqueItems": true,
-  "items": {
-    "type": "object",
-    "required": [
-      "section",
-      "table"
-    ],
-    "properties": {
-      "section": {
-        "type": "string",
-        "minLength": 1
-      },
-      "table": {
-        "type": "array",
-        "uniqueItems": true,
-        "minItems": 1,
-        "items": {
-          "required": [
-            "name"
-          ],
-          "properties": {
-            "name": {
-              "type": "string",
-              "minLength": 1
-            },
-            "rows": {
-              "type": "array",
-              "uniqueItems": true,
-              "minItems": 1,
-              "items": {
-                "required": [],
-                "properties": {
-                  "captions": {
-                    "type": "array",
-                    "items": {
-                      "required": [],
-                      "properties": {}
-                    }
-                  },
-                  "images": {
-                    "type": "array",
-                    "uniqueItems": true,
-                    "minItems": 1,
-                    "items": {
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "befe2640-6cd1-4f6c-a122-acb60fc31358",
+  "type": "object",
+  "default": {},
+  "required": [
+    "sprites"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "sprites": {
+      "$id": "#/properties/sprites",
+      "type": "array",
+      "default": [],
+      "additionalItems": true,
+      "items": {
+        "anyOf": [
+          {
+            "$id": "#/properties/sprites/items/anyOf/0",
+            "type": "object",
+            "default": {},
+            "required": [
+              "section",
+              "table"
+            ],
+            "additionalProperties": true,
+            "properties": {
+              "section": {
+                "$id": "#/properties/sprites/items/anyOf/0/properties/section",
+                "type": "string",
+                "default": ""
+              },
+              "table": {
+                "$id": "#/properties/sprites/items/anyOf/0/properties/table",
+                "type": "array",
+                "default": [],
+                "additionalItems": true,
+                "items": {
+                  "anyOf": [
+                    {
+                      "$id": "#/properties/sprites/items/anyOf/0/properties/table/items/anyOf/0",
+                      "type": "object",
+                      "default": {},
                       "required": [
-                        "image"
+                        "name",
+                        "rows"
                       ],
+                      "additionalProperties": true,
                       "properties": {
-                        "image": {
+                        "name": {
+                          "$id": "#/properties/sprites/items/anyOf/0/properties/table/items/anyOf/0/properties/name",
                           "type": "string",
-                          "minLength": 1
+                          "default": ""
+                        },
+                        "rows": {
+                          "$id": "#/properties/sprites/items/anyOf/0/properties/table/items/anyOf/0/properties/rows",
+                          "type": "array",
+                          "default": [],
+                          "additionalItems": true,
+                          "items": {
+                            "anyOf": [
+                              {
+                                "$id": "#/properties/sprites/items/anyOf/0/properties/table/items/anyOf/0/properties/rows/items/anyOf/0",
+                                "type": "object",
+                                "default": {},
+                                "required": [
+                                  "captions",
+                                  "images"
+                                ],
+                                "additionalProperties": true,
+                                "properties": {
+                                  "captions": {
+                                    "$id": "#/properties/sprites/items/anyOf/0/properties/table/items/anyOf/0/properties/rows/items/anyOf/0/properties/captions",
+                                    "type": "array",
+                                    "default": [],
+                                    "additionalItems": true,
+                                    "items": {
+                                      "anyOf": [
+                                        {
+                                          "$id": "#/properties/sprites/items/anyOf/0/properties/table/items/anyOf/0/properties/rows/items/anyOf/0/properties/captions/items/anyOf/0",
+                                          "type": "string",
+                                          "default": ""
+                                        }
+                                      ],
+                                      "$id": "#/properties/sprites/items/anyOf/0/properties/table/items/anyOf/0/properties/rows/items/anyOf/0/properties/captions/items"
+                                    }
+                                  },
+                                  "images": {
+                                    "$id": "#/properties/sprites/items/anyOf/0/properties/table/items/anyOf/0/properties/rows/items/anyOf/0/properties/images",
+                                    "type": "array",
+                                    "default": [],
+                                    "additionalItems": true,
+                                    "items": {
+                                      "anyOf": [
+                                        {
+                                          "$id": "#/properties/sprites/items/anyOf/0/properties/table/items/anyOf/0/properties/rows/items/anyOf/0/properties/images/items/anyOf/0",
+                                          "type": "object",
+                                          "default": {},
+                                          "required": [
+                                            "description",
+                                            "image"
+                                          ],
+                                          "additionalProperties": true,
+                                          "properties": {
+                                            "description": {
+                                              "$id": "#/properties/sprites/items/anyOf/0/properties/table/items/anyOf/0/properties/rows/items/anyOf/0/properties/images/items/anyOf/0/properties/description",
+                                              "type": ["string"],
+                                              "default": null
+                                            },
+                                            "image": {
+                                              "$id": "#/properties/sprites/items/anyOf/0/properties/table/items/anyOf/0/properties/rows/items/anyOf/0/properties/images/items/anyOf/0/properties/image",
+                                              "type": "string",
+                                              "default": ""
+                                            }
+                                          }
+                                        }
+                                      ],
+                                      "$id": "#/properties/sprites/items/anyOf/0/properties/table/items/anyOf/0/properties/rows/items/anyOf/0/properties/images/items"
+                                    }
+                                  }
+                                }
+                              }
+                            ],
+                            "$id": "#/properties/sprites/items/anyOf/0/properties/table/items/anyOf/0/properties/rows/items"
+                          }
                         }
                       }
                     }
-                  }
+                  ],
+                  "$id": "#/properties/sprites/items/anyOf/0/properties/table/items"
                 }
               }
             }
           }
-        }
+        ],
+        "$id": "#/properties/sprites/items"
       }
     }
   }

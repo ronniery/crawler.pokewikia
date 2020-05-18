@@ -2,7 +2,7 @@
 const { expect } = require('chai')
 const _ = require('lodash')
 const { isObject, isEmpty, isArray, isEqual } = _
-const { Validator } = require('jsonschema');
+const Ajv = require('ajv');
 const request = require('supertest')
 
 // describe('Test /card route', function () {

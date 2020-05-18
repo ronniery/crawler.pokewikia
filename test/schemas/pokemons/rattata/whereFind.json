@@ -1,653 +1,951 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "cc91785a-268a-40b5-896f-9a3a782c45a1",
   "type": "object",
-  "properties": {
-    "redBlue": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "link",
-              "text"
-            ],
-            "properties": {
-              "link": {
-                "type": "string",
-                "minLength": 1
-              },
-              "text": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "yellow": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "link",
-              "text"
-            ],
-            "properties": {
-              "link": {
-                "type": "string",
-                "minLength": 1
-              },
-              "text": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "gold": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "link",
-              "text"
-            ],
-            "properties": {
-              "link": {
-                "type": "string",
-                "minLength": 1
-              },
-              "text": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "silver": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "link",
-              "text"
-            ],
-            "properties": {
-              "link": {
-                "type": "string",
-                "minLength": 1
-              },
-              "text": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "crystal": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "link",
-              "text"
-            ],
-            "properties": {
-              "link": {
-                "type": "string",
-                "minLength": 1
-              },
-              "text": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "rubySapphire": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "items": {
-            "required": [],
-            "properties": {}
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "fireRedLeafGreen": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "link",
-              "text"
-            ],
-            "properties": {
-              "link": {
-                "type": "string",
-                "minLength": 1
-              },
-              "text": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "emerald": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "items": {
-            "required": [],
-            "properties": {}
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "diamondPearlPlatinum": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "link",
-              "text"
-            ],
-            "properties": {
-              "link": {
-                "type": "string",
-                "minLength": 1
-              },
-              "text": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "heartGold": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "link",
-              "text"
-            ],
-            "properties": {
-              "link": {
-                "type": "string",
-                "minLength": 1
-              },
-              "text": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "soulSilver": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "link",
-              "text"
-            ],
-            "properties": {
-              "link": {
-                "type": "string",
-                "minLength": 1
-              },
-              "text": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "blackWhite": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "link",
-              "text"
-            ],
-            "properties": {
-              "link": {
-                "type": "string",
-                "minLength": 1
-              },
-              "text": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "black2White2": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "link",
-              "text"
-            ],
-            "properties": {
-              "link": {
-                "type": "string",
-                "minLength": 1
-              },
-              "text": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "xy": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "items": {
-            "required": [],
-            "properties": {}
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "omegaRubyAlphaSapphire": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "link",
-              "text"
-            ],
-            "properties": {
-              "link": {
-                "type": "string",
-                "minLength": 1
-              },
-              "text": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "sunMoon": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "link",
-              "text"
-            ],
-            "properties": {
-              "link": {
-                "type": "string",
-                "minLength": 1
-              },
-              "text": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "ultraSun": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "link",
-              "text"
-            ],
-            "properties": {
-              "link": {
-                "type": "string",
-                "minLength": 1
-              },
-              "text": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "ultraMoon": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "link",
-              "text"
-            ],
-            "properties": {
-              "link": {
-                "type": "string",
-                "minLength": 1
-              },
-              "text": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "letsGoPikachuLetsGoEevee": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "uniqueItems": true,
-          "minItems": 1,
-          "items": {
-            "required": [
-              "link",
-              "text"
-            ],
-            "properties": {
-              "link": {
-                "type": "string",
-                "minLength": 1
-              },
-              "text": {
-                "type": "string",
-                "minLength": 1
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    },
-    "swordShield": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "minLength": 1
-        },
-        "links": {
-          "type": "array",
-          "items": {
-            "required": [],
-            "properties": {}
-          }
-        }
-      },
-      "required": [
-        "text",
-        "links"
-      ]
-    }
-  },
+  "default": {},
   "required": [
-    "redBlue",
-    "yellow",
-    "gold",
-    "silver",
-    "crystal",
-    "rubySapphire",
-    "fireRedLeafGreen",
-    "emerald",
-    "diamondPearlPlatinum",
-    "heartGold",
-    "soulSilver",
-    "blackWhite",
-    "black2White2",
-    "xy",
-    "omegaRubyAlphaSapphire",
-    "sunMoon",
-    "ultraSun",
-    "ultraMoon",
-    "letsGoPikachuLetsGoEevee",
-    "swordShield"
-  ]
+    "whereFind"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "whereFind": {
+      "$id": "#/properties/whereFind",
+      "type": "object",
+      "default": {},
+      "required": [
+        "redBlue",
+        "yellow",
+        "gold",
+        "silver",
+        "crystal",
+        "rubySapphire",
+        "fireRedLeafGreen",
+        "emerald",
+        "diamondPearlPlatinum",
+        "heartGold",
+        "soulSilver",
+        "blackWhite",
+        "black2White2",
+        "xy",
+        "omegaRubyAlphaSapphire",
+        "sunMoon",
+        "ultraSun",
+        "ultraMoon",
+        "letsGoPikachuLetsGoEevee",
+        "swordShield"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "redBlue": {
+          "$id": "#/properties/whereFind/properties/redBlue",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/redBlue/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/redBlue/properties/links",
+              "type": "array",
+              "default": [],
+              "minItems": 0,
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/whereFind/properties/redBlue/properties/links/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "link",
+                      "text"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "link": {
+                        "$id": "#/properties/whereFind/properties/redBlue/properties/links/items/anyOf/0/properties/link",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "text": {
+                        "$id": "#/properties/whereFind/properties/redBlue/properties/links/items/anyOf/0/properties/text",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/whereFind/properties/redBlue/properties/links/items"
+              }
+            }
+          }
+        },
+        "yellow": {
+          "$id": "#/properties/whereFind/properties/yellow",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/yellow/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/yellow/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/whereFind/properties/yellow/properties/links/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "link",
+                      "text"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "link": {
+                        "$id": "#/properties/whereFind/properties/yellow/properties/links/items/anyOf/0/properties/link",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "text": {
+                        "$id": "#/properties/whereFind/properties/yellow/properties/links/items/anyOf/0/properties/text",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/whereFind/properties/yellow/properties/links/items"
+              }
+            }
+          }
+        },
+        "gold": {
+          "$id": "#/properties/whereFind/properties/gold",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/gold/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/gold/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/whereFind/properties/gold/properties/links/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "link",
+                      "text"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "link": {
+                        "$id": "#/properties/whereFind/properties/gold/properties/links/items/anyOf/0/properties/link",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "text": {
+                        "$id": "#/properties/whereFind/properties/gold/properties/links/items/anyOf/0/properties/text",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/whereFind/properties/gold/properties/links/items"
+              }
+            }
+          }
+        },
+        "silver": {
+          "$id": "#/properties/whereFind/properties/silver",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/silver/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/silver/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/whereFind/properties/silver/properties/links/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "link",
+                      "text"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "link": {
+                        "$id": "#/properties/whereFind/properties/silver/properties/links/items/anyOf/0/properties/link",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "text": {
+                        "$id": "#/properties/whereFind/properties/silver/properties/links/items/anyOf/0/properties/text",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/whereFind/properties/silver/properties/links/items"
+              }
+            }
+          }
+        },
+        "crystal": {
+          "$id": "#/properties/whereFind/properties/crystal",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/crystal/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/crystal/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/whereFind/properties/crystal/properties/links/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "link",
+                      "text"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "link": {
+                        "$id": "#/properties/whereFind/properties/crystal/properties/links/items/anyOf/0/properties/link",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "text": {
+                        "$id": "#/properties/whereFind/properties/crystal/properties/links/items/anyOf/0/properties/text",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/whereFind/properties/crystal/properties/links/items"
+              }
+            }
+          }
+        },
+        "rubySapphire": {
+          "$id": "#/properties/whereFind/properties/rubySapphire",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/rubySapphire/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/rubySapphire/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [],
+                "$id": "#/properties/whereFind/properties/rubySapphire/properties/links/items"
+              }
+            }
+          }
+        },
+        "fireRedLeafGreen": {
+          "$id": "#/properties/whereFind/properties/fireRedLeafGreen",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/fireRedLeafGreen/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/fireRedLeafGreen/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/whereFind/properties/fireRedLeafGreen/properties/links/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "link",
+                      "text"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "link": {
+                        "$id": "#/properties/whereFind/properties/fireRedLeafGreen/properties/links/items/anyOf/0/properties/link",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "text": {
+                        "$id": "#/properties/whereFind/properties/fireRedLeafGreen/properties/links/items/anyOf/0/properties/text",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/whereFind/properties/fireRedLeafGreen/properties/links/items"
+              }
+            }
+          }
+        },
+        "emerald": {
+          "$id": "#/properties/whereFind/properties/emerald",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/emerald/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/emerald/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [],
+                "$id": "#/properties/whereFind/properties/emerald/properties/links/items"
+              }
+            }
+          }
+        },
+        "diamondPearlPlatinum": {
+          "$id": "#/properties/whereFind/properties/diamondPearlPlatinum",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/diamondPearlPlatinum/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/diamondPearlPlatinum/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/whereFind/properties/diamondPearlPlatinum/properties/links/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "link",
+                      "text"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "link": {
+                        "$id": "#/properties/whereFind/properties/diamondPearlPlatinum/properties/links/items/anyOf/0/properties/link",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "text": {
+                        "$id": "#/properties/whereFind/properties/diamondPearlPlatinum/properties/links/items/anyOf/0/properties/text",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/whereFind/properties/diamondPearlPlatinum/properties/links/items"
+              }
+            }
+          }
+        },
+        "heartGold": {
+          "$id": "#/properties/whereFind/properties/heartGold",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/heartGold/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/heartGold/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/whereFind/properties/heartGold/properties/links/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "link",
+                      "text"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "link": {
+                        "$id": "#/properties/whereFind/properties/heartGold/properties/links/items/anyOf/0/properties/link",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "text": {
+                        "$id": "#/properties/whereFind/properties/heartGold/properties/links/items/anyOf/0/properties/text",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/whereFind/properties/heartGold/properties/links/items"
+              }
+            }
+          }
+        },
+        "soulSilver": {
+          "$id": "#/properties/whereFind/properties/soulSilver",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/soulSilver/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/soulSilver/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/whereFind/properties/soulSilver/properties/links/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "link",
+                      "text"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "link": {
+                        "$id": "#/properties/whereFind/properties/soulSilver/properties/links/items/anyOf/0/properties/link",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "text": {
+                        "$id": "#/properties/whereFind/properties/soulSilver/properties/links/items/anyOf/0/properties/text",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/whereFind/properties/soulSilver/properties/links/items"
+              }
+            }
+          }
+        },
+        "blackWhite": {
+          "$id": "#/properties/whereFind/properties/blackWhite",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/blackWhite/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/blackWhite/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/whereFind/properties/blackWhite/properties/links/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "link",
+                      "text"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "link": {
+                        "$id": "#/properties/whereFind/properties/blackWhite/properties/links/items/anyOf/0/properties/link",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "text": {
+                        "$id": "#/properties/whereFind/properties/blackWhite/properties/links/items/anyOf/0/properties/text",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/whereFind/properties/blackWhite/properties/links/items"
+              }
+            }
+          }
+        },
+        "black2White2": {
+          "$id": "#/properties/whereFind/properties/black2White2",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/black2White2/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/black2White2/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/whereFind/properties/black2White2/properties/links/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "link",
+                      "text"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "link": {
+                        "$id": "#/properties/whereFind/properties/black2White2/properties/links/items/anyOf/0/properties/link",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "text": {
+                        "$id": "#/properties/whereFind/properties/black2White2/properties/links/items/anyOf/0/properties/text",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/whereFind/properties/black2White2/properties/links/items"
+              }
+            }
+          }
+        },
+        "xy": {
+          "$id": "#/properties/whereFind/properties/xy",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/xy/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/xy/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [],
+                "$id": "#/properties/whereFind/properties/xy/properties/links/items"
+              }
+            }
+          }
+        },
+        "omegaRubyAlphaSapphire": {
+          "$id": "#/properties/whereFind/properties/omegaRubyAlphaSapphire",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/omegaRubyAlphaSapphire/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/omegaRubyAlphaSapphire/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/whereFind/properties/omegaRubyAlphaSapphire/properties/links/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "link",
+                      "text"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "link": {
+                        "$id": "#/properties/whereFind/properties/omegaRubyAlphaSapphire/properties/links/items/anyOf/0/properties/link",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "text": {
+                        "$id": "#/properties/whereFind/properties/omegaRubyAlphaSapphire/properties/links/items/anyOf/0/properties/text",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/whereFind/properties/omegaRubyAlphaSapphire/properties/links/items"
+              }
+            }
+          }
+        },
+        "sunMoon": {
+          "$id": "#/properties/whereFind/properties/sunMoon",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/sunMoon/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/sunMoon/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/whereFind/properties/sunMoon/properties/links/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "link",
+                      "text"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "link": {
+                        "$id": "#/properties/whereFind/properties/sunMoon/properties/links/items/anyOf/0/properties/link",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "text": {
+                        "$id": "#/properties/whereFind/properties/sunMoon/properties/links/items/anyOf/0/properties/text",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/whereFind/properties/sunMoon/properties/links/items"
+              }
+            }
+          }
+        },
+        "ultraSun": {
+          "$id": "#/properties/whereFind/properties/ultraSun",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/ultraSun/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/ultraSun/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/whereFind/properties/ultraSun/properties/links/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "link",
+                      "text"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "link": {
+                        "$id": "#/properties/whereFind/properties/ultraSun/properties/links/items/anyOf/0/properties/link",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "text": {
+                        "$id": "#/properties/whereFind/properties/ultraSun/properties/links/items/anyOf/0/properties/text",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/whereFind/properties/ultraSun/properties/links/items"
+              }
+            }
+          }
+        },
+        "ultraMoon": {
+          "$id": "#/properties/whereFind/properties/ultraMoon",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/ultraMoon/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/ultraMoon/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/whereFind/properties/ultraMoon/properties/links/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "link",
+                      "text"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "link": {
+                        "$id": "#/properties/whereFind/properties/ultraMoon/properties/links/items/anyOf/0/properties/link",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "text": {
+                        "$id": "#/properties/whereFind/properties/ultraMoon/properties/links/items/anyOf/0/properties/text",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/whereFind/properties/ultraMoon/properties/links/items"
+              }
+            }
+          }
+        },
+        "letsGoPikachuLetsGoEevee": {
+          "$id": "#/properties/whereFind/properties/letsGoPikachuLetsGoEevee",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/letsGoPikachuLetsGoEevee/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/letsGoPikachuLetsGoEevee/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [
+                  {
+                    "$id": "#/properties/whereFind/properties/letsGoPikachuLetsGoEevee/properties/links/items/anyOf/0",
+                    "type": "object",
+                    "default": {},
+                    "required": [
+                      "link",
+                      "text"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "link": {
+                        "$id": "#/properties/whereFind/properties/letsGoPikachuLetsGoEevee/properties/links/items/anyOf/0/properties/link",
+                        "type": "string",
+                        "default": ""
+                      },
+                      "text": {
+                        "$id": "#/properties/whereFind/properties/letsGoPikachuLetsGoEevee/properties/links/items/anyOf/0/properties/text",
+                        "type": "string",
+                        "default": ""
+                      }
+                    }
+                  }
+                ],
+                "$id": "#/properties/whereFind/properties/letsGoPikachuLetsGoEevee/properties/links/items"
+              }
+            }
+          }
+        },
+        "swordShield": {
+          "$id": "#/properties/whereFind/properties/swordShield",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/whereFind/properties/swordShield/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/whereFind/properties/swordShield/properties/links",
+              "type": "array",
+              "default": [],
+              "additionalItems": true,
+              "items": {
+                "anyOf": [],
+                "$id": "#/properties/whereFind/properties/swordShield/properties/links/items"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
