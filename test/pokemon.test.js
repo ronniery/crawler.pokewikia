@@ -89,7 +89,7 @@ describe('Test /pokemon route', function () {
 
             if (!isEmpty(schema)) {
 
-              if(key === "whereFind") {
+              if(key === "moves") {
                 let x = 1
               }
 

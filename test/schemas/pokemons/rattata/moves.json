@@ -288,9 +288,6 @@
                       "category": {
                         "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/eggMoves/items/anyOf/0/properties/category",
                         "type": "object",
-                        "default": {},
-                        "required": [],
-                        "additionalProperties": true,
                         "properties": {}
                       },
                       "power": {
@@ -349,8 +346,7 @@
                         "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/moveTutorMoves/items/anyOf/0/properties/category",
                         "type": "object",
                         "default": {},
-                        "required": [],
-                        "additionalProperties": true,
+                        "additionalProperties": false,
                         "properties": {}
                       },
                       "power": {
@@ -477,8 +473,7 @@
                         "$id": "#/properties/moves/properties/ultraSunUltraMoon/properties/transferOnlyMoves/items/anyOf/0/properties/category",
                         "type": "object",
                         "default": {},
-                        "required": [],
-                        "additionalProperties": true,
+                        "additionalProperties": false,
                         "properties": {}
                       },
                       "power": {

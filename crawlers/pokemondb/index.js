@@ -345,9 +345,9 @@ class PokemonDB {
     return cries;
   }
 
-  _getBorder(cheerio, selector) {
+  _getBorder(cheerio, borderSelector) {
     const $ = cheerio();
-    const $el = $(selector).first()
+    const $el = $(borderSelector).first()
 
     if (_.isEmpty($el)) return {}
 

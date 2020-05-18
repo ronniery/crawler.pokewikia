@@ -4,131 +4,131 @@
   "type": "object",
   "default": {},
   "required": [
-      "otherLangs"
+    "otherLangs"
   ],
   "additionalProperties": true,
   "properties": {
-      "otherLangs": {
-          "$id": "#/properties/otherLangs",
+    "otherLangs": {
+      "$id": "#/properties/otherLangs",
+      "type": "object",
+      "default": {},
+      "required": [
+        "english",
+        "japanese",
+        "german",
+        "french"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "english": {
+          "$id": "#/properties/otherLangs/properties/english",
           "type": "object",
           "default": {},
           "required": [
-              "english",
-              "japanese",
-              "german",
-              "french"
+            "text",
+            "links"
           ],
           "additionalProperties": true,
           "properties": {
-              "english": {
-                  "$id": "#/properties/otherLangs/properties/english",
-                  "type": "object",
-                  "default": {},
-                  "required": [
-                      "text",
-                      "links"
-                  ],
-                  "additionalProperties": true,
-                  "properties": {
-                      "text": {
-                          "$id": "#/properties/otherLangs/properties/english/properties/text",
-                          "type": "string",
-                          "default": ""
-                      },
-                      "links": {
-                          "$id": "#/properties/otherLangs/properties/english/properties/links",
-                          "type": "array",
-                          "default": [],
-                          "additionalItems": true,
-                          "items": {
-                              "anyOf": [],
-                              "$id": "#/properties/otherLangs/properties/english/properties/links/items"
-                          }
-                      }
-                  }
-              },
-              "japanese": {
-                  "$id": "#/properties/otherLangs/properties/japanese",
-                  "type": "object",
-                  "default": {},
-                  "required": [
-                      "text",
-                      "links"
-                  ],
-                  "additionalProperties": true,
-                  "properties": {
-                      "text": {
-                          "$id": "#/properties/otherLangs/properties/japanese/properties/text",
-                          "type": "string",
-                          "default": ""
-                      },
-                      "links": {
-                          "$id": "#/properties/otherLangs/properties/japanese/properties/links",
-                          "type": "array",
-                          "default": [],
-                          "additionalItems": true,
-                          "items": {
-                              "anyOf": [],
-                              "$id": "#/properties/otherLangs/properties/japanese/properties/links/items"
-                          }
-                      }
-                  }
-              },
-              "german": {
-                  "$id": "#/properties/otherLangs/properties/german",
-                  "type": "object",
-                  "default": {},
-                  "required": [
-                      "text",
-                      "links"
-                  ],
-                  "additionalProperties": true,
-                  "properties": {
-                      "text": {
-                          "$id": "#/properties/otherLangs/properties/german/properties/text",
-                          "type": "string",
-                          "default": ""
-                      },
-                      "links": {
-                          "$id": "#/properties/otherLangs/properties/german/properties/links",
-                          "type": "array",
-                          "default": [],
-                          "additionalItems": true,
-                          "items": {
-                              "anyOf": [],
-                              "$id": "#/properties/otherLangs/properties/german/properties/links/items"
-                          }
-                      }
-                  }
-              },
-              "french": {
-                  "$id": "#/properties/otherLangs/properties/french",
-                  "type": "object",
-                  "default": {},
-                  "required": [
-                      "text",
-                      "links"
-                  ],
-                  "additionalProperties": true,
-                  "properties": {
-                      "text": {
-                          "$id": "#/properties/otherLangs/properties/french/properties/text",
-                          "type": "string",
-                          "default": ""
-                      },
-                      "links": {
-                          "$id": "#/properties/otherLangs/properties/french/properties/links",
-                          "type": "array",
-                          "default": [],
-                          "additionalItems": true,
-                          "items": {
-                              "anyOf": [],
-                              "$id": "#/properties/otherLangs/properties/french/properties/links/items"
-                          }
-                      }
-                  }
+            "text": {
+              "$id": "#/properties/otherLangs/properties/english/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/otherLangs/properties/english/properties/links",
+              "type": "array",
+              "default": [],
+              "minItems": 0,
+              "additionalItems": false,
+              "items": {
+                "$id": "#/properties/otherLangs/properties/english/properties/links/items"
               }
+            }
           }
+        },
+        "japanese": {
+          "$id": "#/properties/otherLangs/properties/japanese",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/otherLangs/properties/japanese/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/otherLangs/properties/japanese/properties/links",
+              "type": "array",
+              "default": [],
+              "minItems": 0,
+              "additionalItems": false,
+              "items": {
+                "$id": "#/properties/otherLangs/properties/japanese/properties/links/items"
+              }
+            }
+          }
+        },
+        "german": {
+          "$id": "#/properties/otherLangs/properties/german",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/otherLangs/properties/german/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/otherLangs/properties/german/properties/links",
+              "type": "array",
+              "default": [],
+              "minItems": 0,
+              "additionalItems": false,
+              "items": {
+                "$id": "#/properties/otherLangs/properties/german/properties/links/items"
+              }
+            }
+          }
+        },
+        "french": {
+          "$id": "#/properties/otherLangs/properties/french",
+          "type": "object",
+          "default": {},
+          "required": [
+            "text",
+            "links"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "text": {
+              "$id": "#/properties/otherLangs/properties/french/properties/text",
+              "type": "string",
+              "default": ""
+            },
+            "links": {
+              "$id": "#/properties/otherLangs/properties/french/properties/links",
+              "type": "array",
+              "default": [],
+              "minItems": 0,
+              "additionalItems": false,
+              "items": {
+                "$id": "#/properties/otherLangs/properties/french/properties/links/items"
+              }
+            }
+          }
+        }
       }
+    }
   }
 }

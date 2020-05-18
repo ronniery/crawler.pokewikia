@@ -7,7 +7,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
+      "name": "Launch Crawler",
       "skipFiles": [
         "<node_internals>/**"
       ],
@@ -17,7 +17,7 @@
       "program": "${workspaceFolder}/bin/www"
     },
     {
-      "name": "Run mocha",
+      "name": "Run Mocha",
       "type": "node",
       "request": "launch",
       "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",

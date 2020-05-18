@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "cc91785a-268a-40b5-896f-9a3a782c45a1",
+  "$id": "http://example.com/example.json",
   "type": "object",
   "default": {},
   "required": [
@@ -55,7 +55,6 @@
               "$id": "#/properties/whereFind/properties/redBlue/properties/links",
               "type": "array",
               "default": [],
-              "minItems": 0,
               "additionalItems": true,
               "items": {
                 "anyOf": [
@@ -306,9 +305,9 @@
               "$id": "#/properties/whereFind/properties/rubySapphire/properties/links",
               "type": "array",
               "default": [],
-              "additionalItems": true,
+              "minItems": 0,
+              "additionalItems": false,
               "items": {
-                "anyOf": [],
                 "$id": "#/properties/whereFind/properties/rubySapphire/properties/links/items"
               }
             }
@@ -383,9 +382,9 @@
               "$id": "#/properties/whereFind/properties/emerald/properties/links",
               "type": "array",
               "default": [],
-              "additionalItems": true,
+              "minItems": 0,
+              "additionalItems": false,
               "items": {
-                "anyOf": [],
                 "$id": "#/properties/whereFind/properties/emerald/properties/links/items"
               }
             }
@@ -660,9 +659,9 @@
               "$id": "#/properties/whereFind/properties/xy/properties/links",
               "type": "array",
               "default": [],
-              "additionalItems": true,
+              "minItems": 0,
+              "additionalItems": false,
               "items": {
-                "anyOf": [],
                 "$id": "#/properties/whereFind/properties/xy/properties/links/items"
               }
             }
@@ -937,9 +936,9 @@
               "$id": "#/properties/whereFind/properties/swordShield/properties/links",
               "type": "array",
               "default": [],
-              "additionalItems": true,
+              "minItems": 0,
+              "additionalItems": false,
               "items": {
-                "anyOf": [],
                 "$id": "#/properties/whereFind/properties/swordShield/properties/links/items"
               }
             }

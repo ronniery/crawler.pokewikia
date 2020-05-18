@@ -80,11 +80,11 @@ class Helpers {
   }
 
   static getImgSrc($, el) {
-    const $span = $(el).find('span')
+    const dataSrc = $(el).attr('data-src')
 
     // Try get img from lazy loading
-    if (_.some($span)) {
-      return $span.attr('data-src');
+    if (_.some(dataSrc)) {
+      return dataSrc;
     }
 
     // Fallback to default <img> tag
