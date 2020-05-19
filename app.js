@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
-require('dotenv').config();
 require('module-alias/register');
 
-const express = require('express'),
+const dotenv = require('dotenv'),
+  express = require('express'),
   mongoose = require('mongoose'),
   cookieParser = require('cookie-parser'),
   descriptor = require('express-list-endpoints-descriptor')(express),
@@ -11,6 +11,12 @@ const express = require('express'),
   fs = require('fs'),
   cors = require('cors'),
   hpp = require('hpp');
+
+if (process.env && process.env.NODE_ENV) {
+  dotenv.config({ path: '.env.test' });
+} else {
+  dotenv.config({ path: '.env' });
+}
 
 const corsOptions = {
   exposedHeaders: 'X-Total-Pages',
@@ -28,7 +34,7 @@ const pokeRouter = require('./routes/pokemon');
 const cardRouter = require('./routes/card');
 const app = express();
 
-// setup route middlewares
+// setup route middleware
 app.disable('x-powered-by');
 app.use(cors(corsOptions));
 app.use(helmet());

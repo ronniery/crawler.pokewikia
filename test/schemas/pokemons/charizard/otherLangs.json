@@ -41,7 +41,6 @@
               "default": [],
               "additionalItems": true,
               "items": {
-                "anyOf": [],
                 "$id": "#/properties/otherLangs/properties/english/properties/links/items"
               }
             }
@@ -68,7 +67,6 @@
               "default": [],
               "additionalItems": true,
               "items": {
-                "anyOf": [],
                 "$id": "#/properties/otherLangs/properties/japanese/properties/links/items"
               }
             }
@@ -95,7 +93,6 @@
               "default": [],
               "additionalItems": true,
               "items": {
-                "anyOf": [],
                 "$id": "#/properties/otherLangs/properties/german/properties/links/items"
               }
             }
@@ -122,7 +119,6 @@
               "default": [],
               "additionalItems": true,
               "items": {
-                "anyOf": [],
                 "$id": "#/properties/otherLangs/properties/french/properties/links/items"
               }
             }

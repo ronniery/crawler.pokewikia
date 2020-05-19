@@ -37,12 +37,12 @@ class Sprites {
    * |  type   |  img  | img + desc | ... |
    * |  type   |  img  | no img/desc| ... |
    * 
-   * The row can has cells with images + description, that isn't obrigatory any of 
+   * The row can has cells with images with description, that isn't required any of 
    * those items, to handle that the code is divided to parse the expected 
-   * structure on separete methods, combining the head title content with row content.   
+   * structure on separate methods, combining the head title content with row content.   
    *
    * @static
-   * @param {() => Cheerio} cheerio Referente to sprite html page already parsed with `cheerio.load`.
+   * @param {() => Cheerio} cheerio Reference to sprite html page already parsed with `cheerio.load`.
    * @returns {{ section: string, table: any[] }[]} The list of entire sprites inside the cheerio reference.
    * @memberof Sprites
    */

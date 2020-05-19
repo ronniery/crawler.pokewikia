@@ -101,7 +101,6 @@
               "default": [],
               "additionalItems": true,
               "items": {
-                "anyOf": [],
                 "$id": "#/properties/whereFind/properties/goldSilverCrystal/properties/links/items"
               }
             }
@@ -128,7 +127,6 @@
               "default": [],
               "additionalItems": true,
               "items": {
-                "anyOf": [],
                 "$id": "#/properties/whereFind/properties/rubySapphire/properties/links/items"
               }
             }
@@ -205,7 +203,6 @@
               "default": [],
               "additionalItems": true,
               "items": {
-                "anyOf": [],
                 "$id": "#/properties/whereFind/properties/emerald/properties/links/items"
               }
             }
@@ -232,7 +229,6 @@
               "default": [],
               "additionalItems": true,
               "items": {
-                "anyOf": [],
                 "$id": "#/properties/whereFind/properties/diamondPearlPlatinum/properties/links/items"
               }
             }
@@ -309,7 +305,6 @@
               "default": [],
               "additionalItems": true,
               "items": {
-                "anyOf": [],
                 "$id": "#/properties/whereFind/properties/blackWhiteBlack2White2/properties/links/items"
               }
             }
@@ -386,7 +381,6 @@
               "default": [],
               "additionalItems": true,
               "items": {
-                "anyOf": [],
                 "$id": "#/properties/whereFind/properties/omegaRubyAlphaSapphire/properties/links/items"
               }
             }
@@ -413,7 +407,6 @@
               "default": [],
               "additionalItems": true,
               "items": {
-                "anyOf": [],
                 "$id": "#/properties/whereFind/properties/sunMoon/properties/links/items"
               }
             }
@@ -540,7 +533,6 @@
               "default": [],
               "additionalItems": true,
               "items": {
-                "anyOf": [],
                 "$id": "#/properties/whereFind/properties/swordShield/properties/links/items"
               }
             }

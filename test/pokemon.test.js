@@ -1,32 +1,33 @@
 /* eslint-disable no-undef */
 const { expect } = require('chai');
-const fs = require('fs');
-const path = require('path');
 const _ = require('lodash');
-const { isObject, isEmpty, isArray } = _;
+const { isObject, isEmpty } = _;
+const Schema = require('./utils/schema')
 const Ajv = require('ajv');
 const request = require('supertest');
+const Pokemon = require('../models/pokemon')
 
 describe('Test /pokemon route', function () {
-  this.timeout(10000);
+  this.timeout(20000);
 
   let app;
   let ajv;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     app = require('../app')
     ajv = new Ajv();
   });
+
 
   it('Should get /pokemon with empty pokename.', done => {
     request(app)
       .get('/pokemon')
       .expect('Content-Type', /html/)
       .expect(500)
-      .end((_err, response) => {
-        expect(response.body).to.eql({ 
-          status: "ERROR", 
-          message: "Empty pokemon name, check it and try again." 
+      .end((_err, { body }) => {
+        expect(body).to.eql({
+          status: "ERROR",
+          message: "Empty pokemon name, check it and try again."
         });
 
         done();
@@ -36,7 +37,7 @@ describe('Test /pokemon route', function () {
   it('Should get /pokemon with invalid pokename.', done => {
     request(app)
       .get('/pokemon')
-      .query({ name: 'Hommer simpson ' })
+      .query({ name: 'Homer simpson ' })
       .expect('Content-Type', /html/)
       .expect(200)
       .end((_err, { statusCode, text }) => {
@@ -58,6 +59,22 @@ describe('Test /pokemon route', function () {
       })
   })
 
+  it('Should get /pokemon at borders.', done => {
+    Pokemon
+      .deleteMany({})
+      .then(() => {
+        request(app)
+          .get('/pokemon')
+          .query({ name: 'Rattata' })
+          .expect('Content-Type', /json/)
+          .expect(200)
+          .end((_err, { body }) => {
+            expect(isObject(body)).to.be.true
+            done();
+          })
+      })
+  })
+
   it('Should get a 404 for all not mapped routes.', done => {
     const path = '/pokemon/404'
 
@@ -73,12 +90,12 @@ describe('Test /pokemon route', function () {
   })
 
   describe('Test the pokemon api response.', function () {
-    it('Should get /pokemon Rattata data and validate it.', async done => {
-      const schemas = await Schema.load('rattata')
+    const validateWithSchemaFor = async (pokename, testComplete) => {
+      const schemas = await Schema.load(pokename)
 
       request(app)
         .get('/pokemon')
-        .query({ name: 'Rattata' })
+        .query({ name: pokename })
         .expect('Content-Type', /json/)
         .expect(200)
         .end((_err, { body }) => {
@@ -91,7 +108,7 @@ describe('Test /pokemon route', function () {
             }
 
             if (!isEmpty(schema)) {
-              // Skipp some mongo properties
+              // Skip some mongo properties
               const validator = ajv.compile(schema);
               const result = validator(target);
 
@@ -100,158 +117,16 @@ describe('Test /pokemon route', function () {
             }
           })
 
-          done();
+          testComplete();
         })
+    }
+
+    it('Should get /pokemon Rattata data and validate it with schema.', done => {
+      validateWithSchemaFor('rattata', done)
     })
 
-    it('Should get /pokemon Charizard data and validate it.', async done => {
-      const schemas = await Schema.load('charizard')
-
-      request(app)
-        .get('/pokemon')
-        .query({ name: 'Charizard' })
-        .expect('Content-Type', /json/)
-        .expect(200)
-        .end((_err, { body }) => {
-          const bodyKeys = Object.keys(body)
-
-          bodyKeys.forEach(key => {
-            const schema = schemas[key]
-            const target = {
-              [key]: body[key]
-            }
-
-            if (!isEmpty(schema)) {
-              // Skipp some mongo properties
-              const validator = ajv.compile(schema);
-              const result = validator(target);
-
-              expect(validator.errors).to.be.null
-              expect(result).to.be.true;
-            }
-          })
-
-          done();
-        })
+    it('Should get /pokemon Charizard data and validate it with schema.', done => {
+      validateWithSchemaFor('charizard', done)
     })
   })
-
-  // it('Should get /card and verify card response with schema.', done => {
-  //   const schema = require('./schemas/card/raw-cards.json')
-
-  //   request(app)
-  //     .get('/card')
-  //     .set('Accept', 'application/json')
-  //     .expect('Content-Type', /json/)
-  //     .end((_err, { statusCode, body }) => {
-  //       expect(statusCode).to.equal(200);
-  //       expect(isArray(body)).to.be.true;
-  //       expect(body.length).to.be.eq(10);
-
-  //       const { errors } = validator.validate(body, schema);
-  //       expect(isEmpty(errors)).to.be.true;
-  //       done();
-  //     });
-  // })
-
-  // it('Should get /card first 15 items with limit parameter.', done => {
-  //   request(app)
-  //     .get('/card')
-  //     .query({ limit: 15 })
-  //     .set('Accept', 'application/json')
-  //     .expect('Content-Type', /json/)
-  //     .end((_err, { statusCode, body }) => {
-  //       expect(statusCode).to.equal(200);
-  //       expect(isArray(body)).to.be.true;
-  //       expect(body.length).to.be.eq(15);
-  //       done();
-  //     });
-  // })
-
-  // it('Should get /card 25 items with limit parameter.', done => {
-  //   const totalOfItems = 25
-
-  //   request(app)
-  //     .get('/card')
-  //     .query({ limit: totalOfItems })
-  //     .set('Accept', 'application/json')
-  //     .expect('Content-Type', /json/)
-  //     .end((_err, { statusCode, body }) => {
-  //       expect(statusCode).to.equal(200);
-  //       expect(isArray(body)).to.be.true;
-  //       expect(body.length).to.be.eq(totalOfItems);
-  //       done();
-  //     });
-  // })
-
-  // it('Should get /card using page parameter.', done => {
-  //   request(app)
-  //     .get('/card')
-  //     .query({ page: 2 })
-  //     .set('Accept', 'application/json')
-  //     .expect('Content-Type', /json/)
-  //     .end((_err, { body }) => {
-  //       const bodyPage2 = body;
-
-  //       request(app)
-  //         .get('/card')
-  //         .query({ page: 3 })
-  //         .end((_err, { body }) => {
-  //           const hasDiff = _(bodyPage2)
-  //             .differenceWith(body, _.isEqual)
-  //             .isEmpty();
-
-  //           expect(hasDiff).to.be.false
-  //           done();
-  //         })
-  //     });
-  // })
-
-  // it('Should get a 404 for all not mapped routes.', done => {
-  //   const path = '/card/404'
-
-  //   request(app)
-  //     .get(path)
-  //     .end((_err, { statusCode, body, error }) => {
-  //       expect(statusCode).to.equal(404);
-  //       expect(isObject(body) && isEmpty(body)).to.be.true;
-  //       expect(error).to.be.not.null;
-  //       expect(error.message).to.be.eq(`cannot GET ${path} (404)`)
-  //       done();
-  //     });
-  // })
-
-  // it('Should get /card checking for total of items on header.', done => {
-  //   request(app)
-  //     .get('/card')
-  //     .end((_err, { header }) => {
-  //       expect(header['x-total-pages']).to.be.not.null;
-  //       expect(+header['x-total-pages']).to.be.gt(85)
-  //       done();
-  //     });
-  // })
 })
-
-class Schema {
-  static async load(schemeName) {
-    return new Promise((resolve, reject) => {
-      const schemaPath = path.join(__dirname, `./schemas/pokemons/${schemeName}`)
-
-      fs.readdir(schemaPath, (err, files) => {
-        if (err) reject(err)
-
-        const schemas = files.reduce((reducer, schema) => {
-          const content = fs.readFileSync(`${schemaPath}/${schema}`)
-
-          reducer[
-            schema.replace('.json', '')
-          ] = JSON.parse(content.toString())
-
-          return reducer
-        }, {})
-
-        resolve(schemas)
-      })
-    })
-  }
-}

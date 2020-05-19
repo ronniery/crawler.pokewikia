@@ -97,8 +97,6 @@ class PokemonDB {
   //#region Private methods  
 
   async _createPokemon(pokename, { initBorders = true, borderUrl = null } = {}) {
-    if (_.isEmpty(pokename)) return {}
-
     const {
       cheerio,
       activeTab,
