@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon --config ./nodemon.json ./bin/www",
     "snyk-test": "snyk test",
-    "unity-test": "cross-env NODE_ENV=test && mocha --exit --reporter dot",
+    "unity-test": "cross-env NODE_ENV=test mocha --exit --reporter dot",
     "coverage-test": "nyc --verbose --reporter html npm run unity-test",
     "test": "npm run unity-test"
   },
