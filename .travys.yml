@@ -1,0 +1,13 @@
+language: node_js
+branches:
+  only: master
+cache: npm
+deploy:
+  provider: heroku
+  api_key:
+    secure: TpapAgZY2PsYMF6C2Z8NSlprPInfvuFGWRZTDDHZpbLwITwjBVNwOctg4EBo5/Zoc03qQiUwWhgT9s4EO/hSRAEoPJRUH0tFoEyj3w1IrRAYXJlgcOkdG2iuPZJG7XkBjbLfS5UZiDEVy4cPKU/HAB5fNWHo9Gg1XMOcVRv9eo1avVDvqbBO++4SwqirpfWUrOCTSlD4NSQkIbfq2gGvWpY8cS7lHHBfTkFD2Oq2o3Sdx5djzHtQhDqNkAHkgLWR+20OnzzRXb0koWpwkUEYaSvwwKAR15gcVdI9bIWsWK4t99NQ4szMdfEjI7/+uTbVSZ0GKl6hXXPNPxuWMIuJpWm9jTebQsbuRCupG9SDULmbUN4AiBANuBeR8z+NrHlngOf1om4k/P/1X8uN0r2gyAC7rtQmE08SjLGtEXFaB5mK7jdq/NG9gkfvM/mJ39KhghPKdHaNh6i/AVrtUutTVM1q7i2/dTqxAiArnFtwZE2zdJgXYwDbFMyzi7ds1LvaxL+CyNTmaxWGuis5jNUNkjn/uxMIKOiwxMCsD2nMFxVxAArV0thkNQv+VU0W34px5gsCw39iUUOesxM1yYHCKWiqzr02wchaePG7ElYWl2Xwvo/vf8HKc7dHnjS/HdDmv6SxECgKq0PMc+WdrDSldyB4Ghhug32BqUJSXUrfQZc=
+  app: arcane-earth-04756
+  on:
+    repo: ronniery/crawler.pokewikia
+notifications:
+  - email: false
