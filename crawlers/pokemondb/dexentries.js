@@ -4,7 +4,9 @@ const Helpers = require('@crawlers/helpers')
 
 class DexEntries {
   static getPokedexEntries(cheerio) {
-    const tables = Helpers.searchTableOnDocument(cheerio, { tableHeader: 'Pokédex entries' });
+    const tables = Helpers.searchTableOnDocument(cheerio, { 
+      h2Header: 'Pokédex entries' 
+    });
 
     return tables
       .map(({ table, title }) => DexEntries._trToPokeDexEntry(

@@ -13,13 +13,13 @@ class BaseStats {
    *
    * @static
    * @param {CheerioStatic} cheerio Function with page as `Cheerio` library reference.
-   * @param {String} anchor Anchor tab reference to extract the table from correct location.
+   * @param {CheerioElement} anchor Anchor tab reference to extract the table from correct location.
    * @returns {any} The pokemon base status object.
    * @memberof BaseStats
    */
   static getBaseStats(cheerio, anchor) {
     const foundEl = Helpers.searchTableOnDocument(cheerio, {
-      tableHeader: 'Base stats',
+      h2Header: 'Base stats',
       anchor
     });
 

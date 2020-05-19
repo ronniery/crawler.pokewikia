@@ -3,8 +3,8 @@ const _ = require('lodash')
 const Helpers = require('@crawlers/helpers')
 
 class FooterTable {
-  static getFooterTable(cheerio, tableHeader, baseUrl) {
-    const foundEl = Helpers.searchTableOnDocument(cheerio, { tableHeader });
+  static getFooterTable(cheerio, h2Header, baseUrl) {
+    const foundEl = Helpers.searchTableOnDocument(cheerio, { h2Header });
 
     if (_.isEmpty(foundEl)) return {}
 
