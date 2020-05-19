@@ -20,6 +20,7 @@ router.get('/', (req, res) => {
     });
 }).descriptor({
   description: 'Get all pokemon details.',
+  usageExample: 'https://arcane-earth-04756.herokuapp.com/pokemon?name=<text>',
   params: [
     {
       on: 'query',

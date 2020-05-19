@@ -21,6 +21,7 @@ router.get('/', (req, res) => {
     })
 }).descriptor({
   description: 'Get all pokemon cards with given pagination configuration.',
+  usageExample: 'https://arcane-earth-04756.herokuapp.com/card?page=<number>&limit=<number>',
   params: [
     {
       on: 'query',
@@ -68,6 +69,7 @@ router.get('/search', async (req, res) => {
   }
 }).descriptor({
   description: 'Search cards using the given term as matcher.',
+  usageExample: 'https://arcane-earth-04756.herokuapp.com/card/search?term=<text>',
   params: [
     {
       on: 'query',
