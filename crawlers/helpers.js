@@ -163,7 +163,6 @@ class Helpers {
    * @memberof Helpers
    */
   static _getElementsAheadOfTextMatch(cheerio, { h2Header, anchor }) {
-    require('fs').writeFileSync('./h.html', cheerio().html())
     const elements = Helpers._getElementsFrom(cheerio, anchor);
     const h2Position = Helpers._findHeadPosition(cheerio, elements, h2Header);
     return elements.slice(h2Position + 1, elements.length) || [{}];
