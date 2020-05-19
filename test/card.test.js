@@ -17,6 +17,11 @@ describe('Test /card route', function () {
     ajv = new Ajv();
   });
 
+  after(async function () {
+    await Card
+      .deleteMany({})
+  })
+
   it('Should get /card with json response.', done => {
     request(app)
       .get('/card')

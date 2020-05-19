@@ -6,10 +6,11 @@ class Pokedex {
 
   static getPokedex(cheerio, anchor) {
     const $ = cheerio();
-    const [{ table }] = Helpers.searchTableOnDocument(cheerio, { 
+    const found = Helpers.searchTableOnDocument(cheerio, { 
       h2Header: 'Pokédex data', 
       anchor 
     });
+    const [{ table }] = found;
     const $table = $(table);
 
     return $table

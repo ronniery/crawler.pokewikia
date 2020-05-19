@@ -103,6 +103,10 @@ class PokemonDB {
       allTabs
     } = await this._createParseableElements(pokename, borderUrl);
 
+    if(_.isEmpty(pokename)) {
+      return {}
+    }
+
     const pokedex = Pokedex.getPokedex(cheerio, activeTab);
     const $ = cheerio();
 

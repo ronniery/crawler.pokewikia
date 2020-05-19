@@ -18,6 +18,10 @@ describe('Test /pokemon route', function () {
     ajv = new Ajv();
   });
 
+  after(async function () {
+    await Pokemon
+      .deleteMany({})
+  })
 
   it('Should get /pokemon with empty pokename.', done => {
     request(app)
@@ -127,6 +131,40 @@ describe('Test /pokemon route', function () {
 
     it('Should get /pokemon Charizard data and validate it with schema.', done => {
       validateWithSchemaFor('charizard', done)
+    })
+
+    it('Should get /pokemon at with borders, but without left border.', done => {
+      Pokemon
+        .deleteMany({})
+        .then(() => {
+          request(app)
+            .get('/pokemon')
+            .query({ name: 'Bulbasaur' })
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .end((_err, { body }) => {
+              expect(isObject(body)).to.be.true
+              expect(isEmpty(body.border.prev)).to.be.true
+              done();
+            })
+        })
+    })
+
+    it('Should get /pokemon at with borders, but without right border.', done => {
+      Pokemon
+        .deleteMany({})
+        .then(() => {
+          request(app)
+            .get('/pokemon')
+            .query({ name: 'Eternatus' })
+            .expect('Content-Type', /json/)
+            .expect(200)
+            .end((_err, { body }) => {
+              expect(isObject(body)).to.be.true
+              expect(isEmpty(body.border.next)).to.be.true
+              done();
+            })
+        })
     })
   })
 })
