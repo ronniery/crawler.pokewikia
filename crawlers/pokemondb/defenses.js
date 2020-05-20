@@ -1,26 +1,44 @@
 const _ = require('lodash');
 
 /**
- * 
+ * Get all pokemon defenses.
  * 
  * @class Defenses
  */
 class Defenses {
+
+  /**
+   * Parse all typed defenses for the given anchor.
+   *
+   * @static
+   * @public
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
+   * @param {String} anchor Element reference to extract the typed defenses.
+   * @returns {any[]} List of parsed defenses.
+   * @memberof Defenses
+   */
   static getTypeDefenses(cheerio, anchor) {
-    const tables = Defenses._getTablesToParse(cheerio, anchor);
-    const content = Defenses._tableToDefenses(cheerio, tables);
+    const tables = Defenses._getDefenseListToParse(cheerio, anchor);
+    const content = Defenses._tablesToDefenses(cheerio, tables);
     return content;
   }
 
   /**
+   * Prepare the structure to be parsed for the crawler, because the defenses
+   * are structure with two tables, first table is the heading and the second
+   * table is the table that contain all defense data and there is some tables
+   * for specific abilities. So that function will order the structure, 
+   * something like that `[ability, [table, table]]`. 
    * 
    * @static
-   * @param  {any} cheerio 
-   * @param  {any} anchor 
-   * @return 
+   * @private
+   * @param  {Function} cheerio Function with page as `Cheerio` library reference.
+   * @param  {String} anchor Element reference to extract the typed defenses.
+   * @return {[String, [CheerioElement, CheerioElement]]} {[ability, [description, effect]]}
+   * The list of defenses to be parsed.
    * @memberof Defenses
    */
-  static _getTablesToParse(cheerio, anchor) {
+  static _getDefenseListToParse(cheerio, anchor) {
     const $ = cheerio();
     const anchorHref = $(anchor).attr('href')
     const $anchor = $(anchorHref);
@@ -43,14 +61,16 @@ class Defenses {
   }
 
   /**
-   * 
+   * Convert the tables to a list of defenses. 
+   *  
    * @static
-   * @param  {any} cheerio 
-   * @param  {any} tables 
-   * @return 
+   * @private
+   * @param  {Function} cheerio Function with page as `Cheerio` library reference.
+   * @param  {CheerioElement[]} tables Table collection with all pokemon defenses.
+   * @return {{[title: String]: String[], ability: String}[]} List of parsed defenses.
    * @memberof Defenses
    */
-  static _tableToDefenses(cheerio, tables) {
+  static _tablesToDefenses(cheerio, tables) {
     const $ = cheerio();
 
     return tables

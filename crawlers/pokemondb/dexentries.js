@@ -2,7 +2,22 @@ const _ = require('lodash');
 
 const Helpers = require('@crawlers/helpers')
 
+/**
+ * Get all pokedex entries.
+ *
+ * @class DexEntries
+ */
 class DexEntries {
+
+  /**
+   *
+   *
+   * @static
+   * @public
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
+   * @returns
+   * @memberof DexEntries
+   */
   static getPokedexEntries(cheerio) {
     const tables = Helpers.searchTableOnDocument(cheerio, { 
       h2Header: 'Pokédex entries' 
@@ -14,6 +29,17 @@ class DexEntries {
       ));
   }
 
+  /**
+   *
+   *
+   * @static
+   * @private
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
+   * @param {*} table
+   * @param {*} title
+   * @returns
+   * @memberof DexEntries
+   */
   static _trToPokeDexEntry(cheerio, table, title) {
     const $ = cheerio();
     const $table = $(table);

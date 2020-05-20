@@ -21,7 +21,7 @@
             "default": {},
             "required": [
               "section",
-              "sprites"
+              "table"
             ],
             "additionalProperties": true,
             "properties": {
@@ -30,15 +30,15 @@
                 "type": "string",
                 "default": ""
               },
-              "sprites": {
-                "$id": "#/properties/sprites/items/anyOf/0/properties/sprites",
+              "table": {
+                "$id": "#/properties/sprites/items/anyOf/0/properties/table",
                 "type": "array",
                 "default": [],
                 "additionalItems": true,
                 "items": {
                   "anyOf": [
                     {
-                      "$id": "#/properties/sprites/items/anyOf/0/properties/sprites/items/anyOf/0",
+                      "$id": "#/properties/sprites/items/anyOf/0/properties/table/items/anyOf/0",
                       "type": "object",
                       "default": {},
                       "required": [
@@ -48,19 +48,19 @@
                       "additionalProperties": true,
                       "properties": {
                         "name": {
-                          "$id": "#/properties/sprites/items/anyOf/0/properties/sprites/items/anyOf/0/properties/name",
+                          "$id": "#/properties/sprites/items/anyOf/0/properties/table/items/anyOf/0/properties/name",
                           "type": "string",
                           "default": ""
                         },
                         "rows": {
-                          "$id": "#/properties/sprites/items/anyOf/0/properties/sprites/items/anyOf/0/properties/rows",
+                          "$id": "#/properties/sprites/items/anyOf/0/properties/table/items/anyOf/0/properties/rows",
                           "type": "array",
                           "default": [],
                           "additionalItems": true,
                           "items": {
                             "anyOf": [
                               {
-                                "$id": "#/properties/sprites/items/anyOf/0/properties/sprites/items/anyOf/0/properties/rows/items/anyOf/0",
+                                "$id": "#/properties/sprites/items/anyOf/0/properties/table/items/anyOf/0/properties/rows/items/anyOf/0",
                                 "type": "object",
                                 "default": {},
                                 "required": [

@@ -12,7 +12,7 @@ class BaseStats {
    * Get the base status.
    *
    * @static
-   * @param {CheerioStatic} cheerio Function with page as `Cheerio` library reference.
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
    * @param {CheerioElement} anchor Anchor tab reference to extract the table from correct location.
    * @returns {any} The pokemon base status object.
    * @memberof BaseStats
@@ -34,7 +34,7 @@ class BaseStats {
    * 
    * @static
    * @private
-   * @param {CheerioStatic} cheerio Function with page as `Cheerio` library reference.
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
    * @param {CheerioElement} table Table element to be converted as base status.
    * @returns {any} The pokemon base status object.
    * @memberof BaseStats
@@ -54,7 +54,7 @@ class BaseStats {
    *
    * @static
    * @private
-   * @param {CheerioStatic} cheerio Function with page as `Cheerio` library reference.
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
    * @param {Object} baseStatus Container, that will retain all created base status when parse the given table row.
    * @param {CheerioElement} tableRow The table row (<tr>) to be parsed.
    * @returns {any} The reference container with parsed data inside it.
