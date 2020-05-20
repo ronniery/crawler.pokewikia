@@ -3,8 +3,22 @@ const _ = require('lodash');
 const Helpers = require('@crawlers/helpers')
 const tabSelector = '.tabset-moves-game > .tabs-tab-list a';
 
+/**
+ * Get all moves from the pokemon.
+ *
+ * @class Moves
+ */
 class Moves {
 
+  /**
+   * Get all moves from the move section.
+   *
+   * @static
+   * @public
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
+   * @returns {any} All pokemon moves.
+   * @memberof Moves
+   */
   static getMoves(cheerio) {
     const $ = cheerio();
 
@@ -19,10 +33,20 @@ class Moves {
       }, {});
   }
 
+  /**
+   * Parse all content from the given tab
+   *
+   * @static
+   * @private
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
+   * @param {CheerioSelector} tab Tab with all moves to be parsed.
+   * @returns {any} All pokemon moves.
+   * @memberof Moves
+   */
   static _getAllMovesFromTab(cheerio, tab) {
     const $ = cheerio()
     const $content = Moves._findTabContent(cheerio, tab)
-    const titledTables = $content
+    const moveTables = $content
       .map(elContent => {
         const $el = $(elContent);
         const nextEl = $el.next()
@@ -53,20 +77,51 @@ class Moves {
         };
       })
 
-    return Moves._createTabMoves(cheerio, titledTables)
+    return Moves._createTabMoves(cheerio, moveTables)
   }
 
-  static _createTabMoves(cheerio, titledTables) {
-    return titledTables
-      .reduce((tabmoves, { title, tables }) => {
-        tabmoves[_.camelCase(title)] = Moves._tablesToMoves(
+  /**
+   * Create the object representation from the given tables.
+   * 
+   * @static
+   * @private
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
+   * @param {{title: String, tables: CheerioElement[]}[]} moveTables List of tables
+   * found on the document with pokemon moves.
+   * @returns {any} All pokemon moves.
+   * @memberof Moves
+   */
+  static _createTabMoves(cheerio, moveTables) {
+    return moveTables
+      .reduce((moves, { title, tables }) => {
+        moves[_.camelCase(title)] = Moves._tablesToMoves(
           cheerio, tables
         );
 
-        return tabmoves;
+        return moves;
       }, {});
   }
 
+  /**
+   * Run over all table rows <tr> parsing each element as an move object.
+   *
+   * @static
+   * @private
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
+   * @param {CheerioElement[]} tables Tables with all moves from that current pokemon.
+   * @returns {{
+   *  referenceTo: String,
+   *  move: String,
+   *  type: String,
+   *  category: {
+   *    img: String,
+   *    title: String
+   *  },
+   *  power: String,
+   *  accuracy: String
+   * }[]} All pokemon moves.
+   * @memberof Moves
+   */
   static _tablesToMoves(cheerio, tables) {
     const $ = cheerio();
     const moves = []
@@ -81,11 +136,6 @@ class Moves {
           const hasSixTds = _.size(tds) === 6
           const base = hasSixTds ? 1 : 0
           const categorySpan = tds.eq(hasSixTds ? 3 : 2).find('span');
-          
-          if("Final Gambit" === tds.eq(base).text2()) {
-            let x = 1
-          }
-
           const move = {
             referenceTo: _.isEmpty(tableKey) ? 'both' : tableKey,
             move: tds.eq(base).text2(),
@@ -113,6 +163,16 @@ class Moves {
     return _.flatten(moves)
   }
 
+  /**
+   * Search on document (inside `cheerio` function) for the content of *tab*.
+   *
+   * @static
+   * @private
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
+   * @param {CheerioElement} tab Tab reference.
+   * @returns {CheerioElement[]} All tab content.
+   * @memberof Moves
+   */
   static _findTabContent(cheerio, tab) {
     const $ = cheerio();
     const $where = $($(tab).attr('href'));
