@@ -7,16 +7,41 @@ const _ = require('lodash');
 
 const Helpers = require('@crawlers/helpers');
 
+/**
+ * Fetch the entire sprite page for a given pokemon and parse it.
+ *
+ * @class Sprites
+ */
 class Sprites {
 
-  static async getSpritesFor(spriteUrl) {
-    const cheerio = await Sprites._getParsedHtml(spriteUrl);
+  /**
+   * Get the entire collection sprites for the given url.
+   *
+   * @static
+   * @public
+   * @param {String} url URL to fetch all sprites.
+   * @returns {{section: String, table: any[]}} Collection of sprites with 
+   * the name of sprite section name and all sprites inside that section.
+   * @memberof Sprites
+   */
+  static async getSpritesFor(url) {
+    const cheerio = await Sprites._getParsedHtml(url);
     return Sprites._extractAllSprites(cheerio);
   }
 
-  static async _getParsedHtml(spriteUrl) {
+  /**
+   * Get the sprite page.
+   *
+   * @static
+   * @private
+   * @param {String} url URL to fetch sprite page.
+   * @returns {Promise<any>} The `request` promise with the *Cheerio* 
+   * reference for the fetched HTML page.
+   * @memberof Sprites
+   */
+  static async _getParsedHtml(url) {
     return request({
-      url: spriteUrl,
+      url: url,
       method: 'GET',
       transform: html => {
         const $ = Helpers
@@ -28,8 +53,8 @@ class Sprites {
   }
 
   /**
-   * This will extract all sprites from the passed cheerio reference. But the html
-   * of that page is a complicated situation, the table that contains all sprites
+   * That function will extract all sprites from the passed cheerio reference. But the HTML
+   * of that page is a complicated situation, the table that contains all sprites has
    * the following structure:
    * 
    * | (empty) | Gen 1 | Gen 2      | ... |
@@ -42,8 +67,10 @@ class Sprites {
    * structure on separate methods, combining the head title content with row content.   
    *
    * @static
-   * @param {() => Cheerio} cheerio Reference to sprite html page already parsed with `cheerio.load`.
-   * @returns {{ section: string, table: any[] }[]} The list of entire sprites inside the cheerio reference.
+   * @private
+   * @param {() => Cheerio} cheerio Reference to sprite HTML page already parsed with `cheerio.load`.
+   * @returns {{ section: string, table: any[] }[]} The list of sprites, with the
+   * section name from where the sprite is and the list of sprites from it.
    * @memberof Sprites
    */
   static _extractAllSprites(cheerio) {
@@ -57,30 +84,55 @@ class Sprites {
         const table = $h2.next().find('table');
         const allHeads = $(table).findArray('thead th');
         const usableHeads = allHeads.slice(1, allHeads.length);
-        const allTrs = $(table).findArray('tbody tr');
+        const tableRowList = $(table).findArray('tbody tr');
 
         return {
           section: $h2.text2(),
-          table: Sprites._parseAllSpriteTables(cheerio, usableHeads, allTrs)
+          table: Sprites._tableRowsToSpriteList(cheerio, usableHeads, tableRowList)
         };
       });
   }
 
-  static _parseAllSpriteTables(cheerio, usableHeads, allTs) {
+  /**
+   * Convert the sprite table as a sprite object list.
+   *
+   * @static
+   * @private
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
+   * @param {CheerioElement[]} usableHeads All element heads on the table, to extract
+   *  your text, setting from where the *rows* are parsed.
+   * @param {CheerioElement[]} tableRowList All table <tr> rows.
+   * @returns {{name: String, rows: any[]}[]}
+   * @memberof Sprites
+   */
+  static _tableRowsToSpriteList(cheerio, usableHeads, tableRowList) {
     const $ = cheerio();
 
     return usableHeads
       .map((head, idx) => {
         const data = {
           name: $(head).text(),
-          rows: allTs.map(tr => Sprites._trToSpriteRow(cheerio, tr, idx))
+          rows: tableRowList.map(spriteTr =>
+            Sprites._tableRowToSprite(cheerio, spriteTr, idx)
+          )
         };
 
         return data;
       });
   }
 
-  static _trToSpriteRow(cheerio, spriteTr, headIdx) {
+  /**
+   * Convert the table row <tr> as sprite list.
+   *
+   * @static
+   * @private
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
+   * @param {CheerioElement} spriteTr Spite table row <tr> to be parsed.
+   * @param {Number} headIdx Header index to search on list which <td> should be parsed.
+   * @returns {any[]} Sprite list
+   * @memberof Sprites
+   */
+  static _tableRowToSprite(cheerio, spriteTr, headIdx) {
     const $ = cheerio();
     const allTds = $(spriteTr).findArray('td');
     const $selectedTd = $($(allTds).eq(headIdx + 1));
@@ -88,40 +140,70 @@ class Sprites {
     const captionParts = htmlContent.replace(/\n+/g, '')
       .split(/<[^>]*>/g);
 
-    return Sprites._getSpritesInTableRow(cheerio, $selectedTd, captionParts);
+    return Sprites._getSpriteDataFromTableCell(cheerio, $selectedTd, captionParts);
   }
 
-  static _getSpritesInTableRow(cheerio, row, rowCaptionParts) {
+  /**
+   * Extract exact sprite data from table cell <tr> -> <td>. The sprites 
+   * could has label and doesn't have label and the 
+   *
+   * @static
+   * @private
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
+   * @param {CheerioElement} cell The <td> with sprite data.
+   * @param {String[]} rowCaptions Text caption inside <tr>.
+   * @returns
+   * @memberof Sprites
+   */
+  static _getSpriteDataFromTableCell(cheerio, cell, rowCaptions) {
     const $ = cheerio();
-    const $row = $(row);
-    const labeledSprites = $row.findArray('> span');
-    const unlabeledSprites = $row.findArray('> a');
+    const $cell = $(cell);
+    const labeledSprites = $cell.findArray('> span');
+    const unlabeledSprites = $cell.findArray('> a');
 
-    const table = {
-      captions: _.compact(rowCaptionParts).map(caption => Helpers.decodeEntities(caption)),
+    const dataCell = {
+      captions: _.compact(rowCaptions).map(caption => Helpers.decodeEntities(caption)),
       images: [{
         description: '-',
         image: ''
       }]
     };
 
-    Sprites._getLabeledSprites(cheerio, table, labeledSprites);
-    Sprites._getUnlabeledSprites(cheerio, table, unlabeledSprites);
+    Sprites._getLabeledSprites(cheerio, dataCell, labeledSprites);
+    Sprites._getUnlabeledSprites(cheerio, dataCell, unlabeledSprites);
 
-    return table;
+    return dataCell;
   }
 
-
-  static _getLabeledSprites(cheerio, table, labeledSpriteList) {
+  /**
+   * Get all sprites that has a label.
+   *
+   * @static
+   * @private
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
+   * @param {Object} dataCell Reference to previous object created to store sprites.
+   * @param {CheerioElement[]} labeledSpriteList All labeled sprite list items.
+   * @memberof Sprites
+   */
+  static _getLabeledSprites(cheerio, dataCell, labeledSpriteList) {
     if (_.isEmpty(labeledSpriteList)) return;
 
-    table.images = labeledSpriteList
+    dataCell.images = labeledSpriteList
       .map(span => {
         return Sprites._createLabeledSpriteLine(cheerio, span);
       });
   }
 
-
+  /**
+   * Create the object that represent a sprite with his description and image.
+   *
+   * @static
+   * @private
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
+   * @param {CheerioElement} span Element with sprite data.
+   * @returns {{description: String, image: String}} The object with sprite data.
+   * @memberof Sprites
+   */
   static _createLabeledSpriteLine(cheerio, span) {
     const $ = cheerio()
     const spanText = $(span).text();
@@ -132,12 +214,22 @@ class Sprites {
     };
   }
 
-  static _getUnlabeledSprites(cheerio, table, unlabeledSpriteList) {
+  /**
+   * Get all sprites that doesn't has a label.
+   *
+   * @static
+   * @private
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
+   * @param {Object} dataCell Reference to previous object created to store sprites.
+   * @param {CheerioElement[]} unlabeledSpriteList All unlabeled sprite list items.
+   * @memberof Sprites
+   */
+  static _getUnlabeledSprites(cheerio, dataCell, unlabeledSpriteList) {
     const $ = cheerio();
 
     if (_.isEmpty(unlabeledSpriteList)) return;
 
-    table.images = unlabeledSpriteList
+    dataCell.images = unlabeledSpriteList
       .map(a => {
         return {
           description: '',
