@@ -49,11 +49,11 @@ class CardSchema {
   }
 
   /**
-   * 
+   * Search all cards that matches with the given search term.
    *
-   * @param {string} searchTerm
-   * @param {number} limit
-   * @returns {Promise<Card[]>}
+   * @param {String} searchTerm The term to be searched inside the database.
+   * @param {Number} limit The maximum items that will be returned on this search query.
+   * @returns {Promise<Card[]>} All found cards.
    * @memberof CardSchema
    */
   async getMatchCards(searchTerm, limit) {
@@ -74,11 +74,11 @@ class CardSchema {
   }
 
   /**
+   * Get all paginated cards.
    *
-   *
-   * @param {number} page
-   * @param {number} limit
-   * @returns {Promise<Card[]>}
+   * @param {Number} page The page number that will be returned.
+   * @param {Number} limit The maximum items that will be returned on this search query.
+   * @returns {Promise<Card[]>} All paginated cards.
    * @memberof CardSchema
    */
   async getPaginatedCards(page, limit) {
@@ -104,10 +104,10 @@ class CardSchema {
   }
 
   /**
+   * Set static functions on `statics` mongoose property.
    *
-   *
-   * @param {Schema<Card>} schema
-   * @returns
+   * @param {Schema<Card>} schema Schema that will be injected the functions.
+   * @returns {Schema<Card>} Schema with functions injected on the property `statics`.
    * @memberof CardSchema
    */
   setStatics(schema) {
