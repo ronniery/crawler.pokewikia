@@ -1,6 +1,21 @@
 const _ = require('lodash');
 
+/**
+ * Get all evolution data for the current pokemon.
+ *
+ * @class EvoChart
+ */
 class EvoChart {
+
+  /**
+   * Get the evolution chart.
+   *
+   * @static
+   * @public
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
+   * @returns 
+   * @memberof EvoChart
+   */
   static getEvoChart(cheerio) {
     const $ = cheerio();
 
@@ -9,18 +24,55 @@ class EvoChart {
       .map(listEvo => EvoChart._listToEvoChart(cheerio, listEvo))
   }
 
-  static _listToEvoChart(cheerio, listEvo) {
+  /**
+   * Convert evolution list to an object with all evolution entries.
+   *
+   * @static
+   * @private
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
+   * @param {CheerioElement} evoList Evolution list with data from the current evolution.
+   * @returns {{
+   *  img: String, 
+   *  globalId: String,
+   *  name: String,
+   *  types: String[],
+   *  evolveCondition?: String[]
+   * }[]} Evolution chart
+   * @memberof EvoChart
+   */
+  static _listToEvoChart(cheerio, evoList) {
     const $ = cheerio();
-    const chunks = _.chunk($(listEvo).find('> *'), 2);
+    const chunks = _.chunk($(evoList).find('> *'), 2);
 
     return chunks
-      .map(([card, evo]) => EvoChart._createEvoChart(cheerio, card, evo));
+      .map(([card, condition]) =>
+        EvoChart._createEvoChart(
+          cheerio, card, condition
+        )
+      );
   }
 
-  static _createEvoChart(cheerio, card, evo) {
+  /**
+   * Create a evochart object from the given card and condition.
+   *
+   * @static
+   * @private
+   * @param {Function} cheerio Function with page as `Cheerio` library reference.
+   * @param {CheerioElement} card Element that contains the data from the pokemon that will evolve.
+   * @param {CheerioElement} condition Element that contains the evolution condition.
+   * @returns {{
+   *  img: String, 
+   *  globalId: String,
+   *  name: String,
+   *  types: String[],
+   *  evolveCondition?: String[]
+   * }} Evolution chart.
+   * @memberof EvoChart
+   */
+  static _createEvoChart(cheerio, card, condition) {
     const $ = cheerio();
     const $data = $(card).find('.infocard-lg-data');
-    const condition = $(evo).find('small').text2();
+    const conditionText = $(condition).find('small').text2();
     const rawTypes = $data.find('small').last().findArray('a');
 
     return {
@@ -28,7 +80,7 @@ class EvoChart {
       globalId: $data.find('small').first().text2(),
       name: $data.find('a.ent-name').text2(),
       types: rawTypes.map(a => $(a).text2()),
-      evolveCondition: _.isEmpty(condition) ? [] : condition.replace(/[(|)]/g, '').split(/\W\s/)
+      evolveCondition: _.isEmpty(conditionText) ? [] : conditionText.replace(/[(|)]/g, '').split(/\W\s/)
     }
   }
 }
