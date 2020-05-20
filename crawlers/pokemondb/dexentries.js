@@ -10,12 +10,12 @@ const Helpers = require('@crawlers/helpers')
 class DexEntries {
 
   /**
-   *
+   * Get all registers inside 'Pokédex entries' area.
    *
    * @static
    * @public
    * @param {Function} cheerio Function with page as `Cheerio` library reference.
-   * @returns
+   * @returns {any[]} List of all entries found on 'Pokédex' area.
    * @memberof DexEntries
    */
   static getPokedexEntries(cheerio) {
@@ -24,23 +24,23 @@ class DexEntries {
     });
 
     return tables
-      .map(({ table, title }) => DexEntries._trToPokeDexEntry(
+      .map(({ table, title }) => DexEntries._tableToPokeDexEntry(
         cheerio, table, title
       ));
   }
 
   /**
-   *
+   * Convert the given table as a pokedex object entry.
    *
    * @static
    * @private
    * @param {Function} cheerio Function with page as `Cheerio` library reference.
-   * @param {*} table
-   * @param {*} title
-   * @returns
+   * @param {CheerioElement} table Table with all pokedex entries.
+   * @param {String} title Table title.
+   * @returns {any[]} Pokedex object entry.
    * @memberof DexEntries
    */
-  static _trToPokeDexEntry(cheerio, table, title) {
+  static _tableToPokeDexEntry(cheerio, table, title) {
     const $ = cheerio();
     const $table = $(table);
     const rawName = _.isEmpty(title) ? $('main > h1').text2() : title;
