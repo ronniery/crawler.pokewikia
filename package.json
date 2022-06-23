@@ -32,7 +32,7 @@
     "module-alias": "^2.2.2",
     "mongoose": "^5.9.15",
     "morgan": "~1.10.0",
-    "nodemon": "^2.0.4",
+    "nodemon": "^2.0.17",
     "nyc": "^15.0.1",
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
