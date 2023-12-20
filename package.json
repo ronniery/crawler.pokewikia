@@ -36,7 +36,7 @@
     "nyc": "^15.0.1",
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
-    "supertest": "^4.0.2"
+    "supertest": "^6.2.0"
   },
   "devDependencies": {
     "@types/lodash.first": "^3.0.6",
